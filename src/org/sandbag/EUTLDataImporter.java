@@ -1,21 +1,27 @@
 package org.sandbag;
 
 import org.neo4j.cypher.internal.compiler.v2_2.planner.logical.plans.Strictness;
+import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+import org.neo4j.graphdb.schema.IndexDefinition;
+import org.neo4j.graphdb.schema.Schema;
 import org.sandbag.model.Country;
 import org.sandbag.model.Installation;
+import org.sandbag.model.InstallationModel;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class EUTLDataImporter {
 
     private static GraphDatabaseService graphDb;
+    private static Schema schema;
 
     public static void main(String[] args) {
 
@@ -57,7 +63,7 @@ public class EUTLDataImporter {
 
                 lineCounter++;
 
-                String[] columns = line.split(",");
+                String[] columns = line.split("\t");
                 String countryName = columns[0];
                 String parentCompany = columns[1];
                 String accountHolder = columns[2];
@@ -76,8 +82,10 @@ public class EUTLDataImporter {
                     tempInstallation.setId(installationKey);
                     tempInstallation.setName(installationName);
                     tempInstallation.setOpen(installationOpen.equals("OPEN"));
+
                     Country tempCountry = new Country();
                     tempCountry.setName(countryName);
+
                     tempInstallation.setCountry(tempCountry);
                     tempInstallation.setCity(installationCity);
                     tempInstallation.setPostCode(installationPostCode);
@@ -92,22 +100,23 @@ public class EUTLDataImporter {
 
             System.out.println("Storing installations...");
 
-            Transaction tx = graphDb.beginTx();
-            int installationCounter = 0;
+            try(Transaction tx = graphDb.beginTx()){
 
-            for(Installation installation : installationsMap.values()){
+                int installationCounter = 0;
 
-                createInstallation(installation);
-                installationCounter++;
+                for(Installation installation : installationsMap.values()){
 
-                if(installationCounter % 100 == 0){
-                    System.out.println(installationCounter + " installations stored...");
-                    tx.success();
-                    tx = graphDb.beginTx();
+                    createInstallation(installation);
+                    installationCounter++;
+
+                    if(installationCounter % 100 == 0){
+                        System.out.println(installationCounter + " installations stored...");
+                    }
                 }
-            }
 
-            tx.success();
+                tx.success();
+
+            }
 
             System.out.println("Done!");
             System.out.println("There were " + lineCounter + " lines parsed");
@@ -123,16 +132,40 @@ public class EUTLDataImporter {
     }
 
     private void initDatabase(String dbFolder){
+
         graphDb = new GraphDatabaseFactory().newEmbeddedDatabase( new File(dbFolder) );
+
+        try {
+
+            try(Transaction tx = graphDb.beginTx()){
+
+                System.out.println("Creating indices...");
+
+                schema = graphDb.schema();
+                IndexDefinition indexDefinition = schema.indexFor(DynamicLabel.label(Installation.LABEL))
+                        .on(InstallationModel.id)
+                        .create();
+
+                tx.success();
+
+                System.out.println("Done!");
+            }
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 
     private void createInstallation(Installation installation){
-        Node installationNode = graphDb.createNode();
-        installationNode.setProperty( "id", installation.getId() );
-        installationNode.setProperty( "name", installation.getName() );
-        installationNode.setProperty( "city", installation.getCity() );
-        installationNode.setProperty( "post_code", installation.getPostCode() );
+
+        Node installationNode = graphDb.createNode(installation);
+        installationNode.setProperty( InstallationModel.id, installation.getId() );
+        installationNode.setProperty( InstallationModel.name, installation.getName() );
+        installationNode.setProperty( InstallationModel.city, installation.getCity() );
+        installationNode.setProperty( InstallationModel.postCode, installation.getPostCode() );
     }
 
 }

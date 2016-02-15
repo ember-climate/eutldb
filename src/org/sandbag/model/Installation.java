@@ -1,16 +1,18 @@
 package org.sandbag.model;
 
+import org.neo4j.graphdb.Node;
+
 /**
  * Created by pablo on 14/02/16.
  */
 public class Installation implements InstallationModel{
 
-    protected String id;
-    protected Country country;
-    protected boolean open;
-    protected String name;
-    protected String city;
-    protected String postCode;
+    Node node = null;
+
+    public Installation(Node node){
+        node = node;
+    }
+
 
 
     @Override
@@ -20,7 +22,7 @@ public class Installation implements InstallationModel{
 
     @Override
     public void setId(String id) {
-        this.id = id;
+        node.setProperty(InstallationModel.id, id);
     }
 
     @Override
@@ -40,7 +42,7 @@ public class Installation implements InstallationModel{
 
     @Override
     public void setName(String name) {
-        this.name = name;
+        node.setProperty(InstallationModel.name, name);
     }
 
     @Override
@@ -75,6 +77,6 @@ public class Installation implements InstallationModel{
 
     @Override
     public String name() {
-        return null;
+        return LABEL;
     }
 }

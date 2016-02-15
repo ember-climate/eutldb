@@ -1,11 +1,18 @@
 package org.sandbag.model;
 
+import org.neo4j.graphdb.Label;
+
 /**
  * Created by pablo on 15/02/16.
  */
-public interface InstallationModel {
+public interface InstallationModel extends Label{
 
-    static final String LABEL = "installation";
+    String LABEL = "INSTALLATION";
+    String id = "id";
+    String name = "name";
+    String city = "city";
+    String postCode = "post_code";
+    String open = "open";
 
     String getId();
     Country getCountry();

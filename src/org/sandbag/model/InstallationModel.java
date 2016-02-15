@@ -29,5 +29,4 @@ public interface InstallationModel extends Label{
     void setPostCode(String postCode);
     void setName(String name);
 
-    String name();
 }

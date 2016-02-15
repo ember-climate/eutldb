@@ -33,7 +33,7 @@ public class Installation implements InstallationModel{
 
     @Override
     public void setCountry(Country country) {
-
+        node.createRelationshipTo(country.node, new InstallationCountry());
     }
 
     @Override

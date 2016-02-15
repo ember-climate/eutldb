@@ -5,11 +5,11 @@ import org.neo4j.graphdb.Node;
 /**
  * Created by root on 15/02/16.
  */
-public class ParentCompany implements ParentCompanyModel{
+public class Company implements CompanyModel {
 
     Node node = null;
 
-    public ParentCompany(Node node){
+    public Company(Node node){
         node = node;
     }
 
@@ -22,7 +22,7 @@ public class ParentCompany implements ParentCompanyModel{
 
     @Override
     public void setName(String name) {
-        node.setProperty(ParentCompanyModel.name, name);
+        node.setProperty(CompanyModel.name, name);
     }
 
     @Override

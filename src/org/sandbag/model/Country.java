@@ -1,26 +1,37 @@
 package org.sandbag.model;
 
+import org.neo4j.graphdb.Node;
+
 /**
  * Created by pablo on 14/02/16.
  */
-public class Country {
+public class Country implements CountryModel{
 
-    public String name;
-    public String id;
+    Node node = null;
+
+    public Country(Node node){
+        node = node;
+    }
 
     public String getId() {
-        return id;
+        return String.valueOf(node.getProperty(CountryModel.id));
     }
 
     public void setId(String id) {
-        this.id = id;
+        node.setProperty(CountryModel.name, id);
+
     }
 
     public String getName() {
-        return name;
+        return String.valueOf(node.getProperty(CountryModel.name));
     }
 
     public void setName(String name) {
-        this.name = name;
+        node.setProperty(CountryModel.name, name);
+    }
+
+    @Override
+    public String name() {
+        return LABEL;
     }
 }

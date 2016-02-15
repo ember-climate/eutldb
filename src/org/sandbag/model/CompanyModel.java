@@ -5,9 +5,9 @@ import org.neo4j.graphdb.Label;
 /**
  * Created by root on 15/02/16.
  */
-public interface SectorModel extends Label {
+public interface CompanyModel extends Label {
 
-    String LABEL = "SECTOR";
+    String LABEL = "PARENT_COMPANY";
     String name = "name";
 
     String getName();

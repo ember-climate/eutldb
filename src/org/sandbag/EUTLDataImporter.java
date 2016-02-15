@@ -9,6 +9,7 @@ import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.schema.IndexDefinition;
 import org.neo4j.graphdb.schema.Schema;
 import org.sandbag.model.Country;
+import org.sandbag.model.CountryModel;
 import org.sandbag.model.Installation;
 import org.sandbag.model.InstallationModel;
 
@@ -54,6 +55,7 @@ public class EUTLDataImporter {
             reader.readLine(); //skipping the header
 
             HashMap<String,Installation> installationsMap = new HashMap<>();
+            HashMap<String,Country> countriesMap = new HashMap<>();
 
             int lineCounter = 0;
 
@@ -78,47 +80,34 @@ public class EUTLDataImporter {
 
                 if(tempValue == null){
 
-                    Installation tempInstallation = new Installation();
+                    Node installationNode = graphDb.createNode(DynamicLabel.label(InstallationModel.LABEL));
+
+                    Installation tempInstallation = new Installation(installationNode);
                     tempInstallation.setId(installationKey);
                     tempInstallation.setName(installationName);
                     tempInstallation.setOpen(installationOpen.equals("OPEN"));
-
-                    Country tempCountry = new Country();
-                    tempCountry.setName(countryName);
-
-                    tempInstallation.setCountry(tempCountry);
                     tempInstallation.setCity(installationCity);
                     tempInstallation.setPostCode(installationPostCode);
+
+                    Country tempCountry = countriesMap.get(countryName);
+
+                    if(tempCountry == null){
+                        Node countryNode = graphDb.createNode(DynamicLabel.label(CountryModel.LABEL));
+                        tempCountry.setName(countryName);
+                        tempCountry = new Country(countryNode);
+                        countriesMap.put(countryName, tempCountry);
+                    }
+
+                    tempInstallation.setCountry(tempCountry);
+
                     installationsMap.put(installationKey, tempInstallation);
 
                 }
 
             }
 
-
             reader.close();
 
-            System.out.println("Storing installations...");
-
-            try(Transaction tx = graphDb.beginTx()){
-
-                int installationCounter = 0;
-
-                for(Installation installation : installationsMap.values()){
-
-                    createInstallation(installation);
-                    installationCounter++;
-
-                    if(installationCounter % 100 == 0){
-                        System.out.println(installationCounter + " installations stored...");
-                    }
-                }
-
-                tx.success();
-
-            }
-
-            System.out.println("Done!");
             System.out.println("There were " + lineCounter + " lines parsed");
 
             graphDb.shutdown();
@@ -159,13 +148,5 @@ public class EUTLDataImporter {
     }
 
 
-    private void createInstallation(Installation installation){
-
-        Node installationNode = graphDb.createNode(installation);
-        installationNode.setProperty( InstallationModel.id, installation.getId() );
-        installationNode.setProperty( InstallationModel.name, installation.getName() );
-        installationNode.setProperty( InstallationModel.city, installation.getCity() );
-        installationNode.setProperty( InstallationModel.postCode, installation.getPostCode() );
-    }
 
 }

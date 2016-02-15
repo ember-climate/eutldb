@@ -1,6 +1,7 @@
 package org.sandbag.model;
 
 import org.neo4j.graphdb.Node;
+import org.neo4j.unsafe.impl.batchimport.cache.idmapping.string.Radix;
 
 /**
  * Created by pablo on 14/02/16.
@@ -14,10 +15,9 @@ public class Installation implements InstallationModel{
     }
 
 
-
     @Override
     public String getId() {
-        return id;
+        return String.valueOf(node.getProperty(InstallationModel.id));
     }
 
     @Override
@@ -27,17 +27,18 @@ public class Installation implements InstallationModel{
 
     @Override
     public Country getCountry() {
-        return country;
+        //node.getProperty()
+        return null;
     }
 
     @Override
     public void setCountry(Country country) {
-        this.country = country;
+
     }
 
     @Override
     public String getName() {
-        return name;
+        return String.valueOf(node.getProperty(InstallationModel.name));
     }
 
     @Override
@@ -47,32 +48,32 @@ public class Installation implements InstallationModel{
 
     @Override
     public void setOpen(boolean open) {
-        this.open = open;
+        node.setProperty(InstallationModel.open, open);
     }
 
     @Override
     public String getCity() {
-        return city;
+        return String.valueOf(node.getProperty(InstallationModel.city));
     }
 
     @Override
     public void setCity(String city) {
-        this.city = city;
+        node.setProperty(InstallationModel.city, city);
     }
 
     @Override
     public String getPostCode() {
-        return postCode;
+        return String.valueOf(node.getProperty(InstallationModel.postCode));
     }
 
     @Override
     public boolean getOpen() {
-        return false;
+        return Boolean.valueOf(String.valueOf(node.getProperty(InstallationModel.open)));
     }
 
     @Override
     public void setPostCode(String postCode) {
-        this.postCode = postCode;
+        node.setProperty(InstallationModel.postCode, postCode);
     }
 
     @Override

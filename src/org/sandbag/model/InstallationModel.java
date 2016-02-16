@@ -32,5 +32,6 @@ public interface InstallationModel extends Label{
     void setPostCode(String postCode);
     void setName(String name);
     void setSector(Sector sector);
+    void setVerifiedEmissionsForPeriod(Period period, double value);
 
 }

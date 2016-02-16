@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1d95b43a-1bd1-418a-95e4-7ed98cc42f7f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/sandbag/EUTLDataImporter.java" afterPath="$PROJECT_DIR$/src/org/sandbag/EUTLDataImporter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/sandbag/model/CompanyModel.java" afterPath="$PROJECT_DIR$/src/org/sandbag/model/CompanyModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/sandbag/model/Installation.java" afterPath="$PROJECT_DIR$/src/org/sandbag/model/Installation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/sandbag/model/InstallationModel.java" afterPath="$PROJECT_DIR$/src/org/sandbag/model/InstallationModel.java" />
     </list>
     <ignored path="eutldb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,29 +26,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="VerifiedEmissions.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/sandbag/model/VerifiedEmissions.java">
+      <file leaf-file-name="EUTLDataImporter.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/org/sandbag/EUTLDataImporter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.56613755">
+              <caret line="167" column="98" selection-start-line="167" selection-start-column="98" selection-end-line="167" selection-end-column="98" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Installation.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/sandbag/model/Installation.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="52" selection-start-line="7" selection-start-column="52" selection-end-line="7" selection-end-column="52" />
+              <caret line="99" column="40" selection-start-line="99" selection-start-column="40" selection-end-line="99" selection-end-column="40" />
               <folding>
-                <element signature="e#273#274#0" expanded="true" />
-                <element signature="e#321#322#0" expanded="true" />
-                <element signature="e#641#642#0" expanded="true" />
-                <element signature="e#734#735#0" expanded="true" />
-                <element signature="e#790#791#0" expanded="true" />
-                <element signature="e#867#868#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VerifiedEmissionsModel.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/sandbag/model/VerifiedEmissionsModel.java">
+      <file leaf-file-name="InstallationModel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/sandbag/model/InstallationModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3864492">
-              <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="34" column="68" selection-start-line="34" selection-start-column="68" selection-end-line="34" selection-end-column="68" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Period.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/sandbag/model/Period.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+              <folding>
+                <element signature="e#401#402#0" expanded="true" />
+                <element signature="e#457#458#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -85,17 +104,17 @@
         <option value="$PROJECT_DIR$/src/org/sandbag/model/InstallationSector.java" />
         <option value="$PROJECT_DIR$/src/org/sandbag/model/InstallationCompanyModel.java" />
         <option value="$PROJECT_DIR$/src/org/sandbag/model/InstallationCompany.java" />
-        <option value="$PROJECT_DIR$/src/org/sandbag/model/InstallationModel.java" />
         <option value="$PROJECT_DIR$/src/org/sandbag/model/ParentCompanyModel.java" />
         <option value="$PROJECT_DIR$/src/org/sandbag/model/ParentCompany.java" />
-        <option value="$PROJECT_DIR$/src/org/sandbag/model/Installation.java" />
         <option value="$PROJECT_DIR$/src/org/sandbag/model/Company.java" />
         <option value="$PROJECT_DIR$/src/org/sandbag/model/CompanyModel.java" />
-        <option value="$PROJECT_DIR$/src/org/sandbag/EUTLDataImporter.java" />
         <option value="$PROJECT_DIR$/src/org/sandbag/model/PeriodModel.java" />
         <option value="$PROJECT_DIR$/src/org/sandbag/model/Period.java" />
         <option value="$PROJECT_DIR$/src/org/sandbag/model/VerifiedEmissions.java" />
         <option value="$PROJECT_DIR$/src/org/sandbag/model/VerifiedEmissionsModel.java" />
+        <option value="$PROJECT_DIR$/src/org/sandbag/model/Installation.java" />
+        <option value="$PROJECT_DIR$/src/org/sandbag/model/InstallationModel.java" />
+        <option value="$PROJECT_DIR$/src/org/sandbag/EUTLDataImporter.java" />
       </list>
     </option>
   </component>
@@ -564,8 +583,8 @@
             <element signature="e#2398#2399#0" expanded="true" />
             <element signature="e#2460#2461#0" expanded="true" />
             <element signature="e#2530#2531#0" expanded="true" />
-            <element signature="e#2572#2573#0" expanded="true" />
-            <element signature="e#2600#2601#0" expanded="true" />
+            <element signature="e#2850#2851#0" expanded="true" />
+            <element signature="e#2878#2879#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -635,8 +654,8 @@
             <element signature="e#2398#2399#0" expanded="true" />
             <element signature="e#2460#2461#0" expanded="true" />
             <element signature="e#2530#2531#0" expanded="true" />
-            <element signature="e#2572#2573#0" expanded="true" />
-            <element signature="e#2600#2601#0" expanded="true" />
+            <element signature="e#2850#2851#0" expanded="true" />
+            <element signature="e#2878#2879#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -706,8 +725,8 @@
             <element signature="e#2398#2399#0" expanded="true" />
             <element signature="e#2460#2461#0" expanded="true" />
             <element signature="e#2530#2531#0" expanded="true" />
-            <element signature="e#2572#2573#0" expanded="true" />
-            <element signature="e#2600#2601#0" expanded="true" />
+            <element signature="e#2850#2851#0" expanded="true" />
+            <element signature="e#2878#2879#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -769,8 +788,8 @@
             <element signature="e#2398#2399#0" expanded="true" />
             <element signature="e#2460#2461#0" expanded="true" />
             <element signature="e#2530#2531#0" expanded="true" />
-            <element signature="e#2572#2573#0" expanded="true" />
-            <element signature="e#2600#2601#0" expanded="true" />
+            <element signature="e#2850#2851#0" expanded="true" />
+            <element signature="e#2878#2879#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -832,8 +851,8 @@
             <element signature="e#2398#2399#0" expanded="true" />
             <element signature="e#2460#2461#0" expanded="true" />
             <element signature="e#2530#2531#0" expanded="true" />
-            <element signature="e#2572#2573#0" expanded="true" />
-            <element signature="e#2600#2601#0" expanded="true" />
+            <element signature="e#2850#2851#0" expanded="true" />
+            <element signature="e#2878#2879#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -909,14 +928,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/sandbag/model/InstallationModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="10" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/sandbag/model/InstallationCountryModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -955,18 +966,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/sandbag/model/Installation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="17" selection-start-line="72" selection-start-column="17" selection-end-line="72" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1512#1513#0" expanded="true" />
-            <element signature="e#1596#1597#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/sandbag/model/Company.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -989,14 +988,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/sandbag/EUTLDataImporter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.0731707">
-          <caret line="111" column="59" selection-start-line="111" selection-start-column="59" selection-end-line="111" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/sandbag/model/Country.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1005,14 +996,6 @@
             <element signature="e#261#262#0" expanded="true" />
             <element signature="e#333#334#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/sandbag/model/Period.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1064,6 +1047,43 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3864492">
           <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/sandbag/model/Period.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+          <folding>
+            <element signature="e#401#402#0" expanded="true" />
+            <element signature="e#457#458#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/sandbag/model/Installation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="99" column="40" selection-start-line="99" selection-start-column="40" selection-end-line="99" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/sandbag/model/InstallationModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="68" selection-start-line="34" selection-start-column="68" selection-end-line="34" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/sandbag/EUTLDataImporter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.56613755">
+          <caret line="167" column="98" selection-start-line="167" selection-start-column="98" selection-end-line="167" selection-end-column="98" />
           <folding />
         </state>
       </provider>

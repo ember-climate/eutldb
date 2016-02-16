@@ -95,6 +95,12 @@ public class Installation implements InstallationModel{
     }
 
     @Override
+    public void setVerifiedEmissionsForPeriod(Period period, double value){
+        VerifiedEmissions verifiedEmissions = new VerifiedEmissions(node.createRelationshipTo(period.node, new VerifiedEmissions(null)));
+        verifiedEmissions.setValue(value);
+    }
+
+    @Override
     public String name() {
         return LABEL;
     }

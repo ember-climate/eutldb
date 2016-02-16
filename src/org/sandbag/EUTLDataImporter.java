@@ -55,6 +55,8 @@ public class EUTLDataImporter {
             HashMap<String,Country> countriesMap = new HashMap<>();
             HashMap<String, Sector> sectorsMap = new HashMap<>();
             HashMap<String, Company> companiesMap = new HashMap<>();
+            HashMap<String, Period> periodsMap = new HashMap<>();
+
 
             int lineCounter = 0;
 
@@ -76,12 +78,16 @@ public class EUTLDataImporter {
                     String installationPostCode = columns[6];
                     String installationOpen = columns[7];
                     String sectorCategory = columns[8];
+                    String typeSt = columns[9];
+                    String subTypeSt = columns[10];
+                    String periodSt = columns[11];
+                    String tonesCO2 = columns[12];
 
                     if(installationKey != null){
 
-                        Installation tempValue = installationsMap.get(installationKey);
+                        Installation installation = installationsMap.get(installationKey);
 
-                        if(tempValue == null){
+                        if(installation == null){
 
                             Node installationNode = graphDb.createNode(DynamicLabel.label(InstallationModel.LABEL));
 
@@ -142,6 +148,25 @@ public class EUTLDataImporter {
                                     sectorsMap.put(sectorCategory, sector);
                                 }
                                 tempInstallation.setSector(sector);
+                            }
+
+                            Period period = null;
+
+                            if(periodSt != null){
+                                period = periodsMap.get(periodSt);
+                                if(period == null){
+                                    Node periodNode = graphDb.createNode(DynamicLabel.label(PeriodModel.LABEL));
+                                    period = new Period(periodNode);
+                                    period.setName(periodSt);
+                                    periodsMap.put(periodSt, period);
+                                }
+                            }
+
+                            if(typeSt.equals("Emissions") && subTypeSt.equals("EM Verified")){
+                                if(period != null){
+                                    double tempValue = Double.parseDouble(tonesCO2);
+                                    installation.setVerifiedEmissionsForPeriod(period, tempValue);
+                                }
                             }
 
 

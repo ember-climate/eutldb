@@ -1,5 +1,6 @@
 package org.sandbag;
 
+import org.neo4j.csv.reader.SourceTraceability;
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
@@ -62,127 +63,159 @@ public class EUTLDataImporter {
 
             System.out.println("Reading installations...");
 
-            try(Transaction tx = graphDb.beginTx()){
+            Transaction tx = graphDb.beginTx();
 
-                while((line = reader.readLine()) != null ){
+            while((line = reader.readLine()) != null ){
 
-                    lineCounter++;
+                lineCounter++;
 
-                    String[] columns = line.split("\t");
-                    String countryName = columns[0];
-                    String parentCompanySt = columns[1];
-                    String accountHolderSt = columns[2];
-                    String installationName = columns[3];
-                    String installationKey = columns[4];
-                    String installationCity = columns[5];
-                    String installationPostCode = columns[6];
-                    String installationOpen = columns[7];
-                    String sectorCategory = columns[8];
-                    String typeSt = columns[9];
-                    String subTypeSt = columns[10];
-                    String periodSt = columns[11];
-                    String tonesCO2 = columns[12];
+                String[] columns = line.split("\t");
+                String countryName = columns[0];
+                String parentCompanySt = columns[1];
+                String accountHolderSt = columns[2];
+                String installationName = columns[3];
+                String installationKey = columns[4];
+                String installationCity = columns[5];
+                String installationPostCode = columns[6];
+                String installationOpen = columns[7];
+                String sectorCategory = columns[8];
+                String typeSt = columns[9];
+                String subTypeSt = columns[10];
+                String periodSt = columns[11];
+                String tonesCO2 = columns[12];
 
-                    if(installationKey != null){
+                if(installationKey != null){
 
-                        Installation installation = installationsMap.get(installationKey);
+                    Country country = null;
+                    Company parentCompany = null;
+                    Company accountHolder = null;
+                    Sector sector = null;
 
-                        if(installation == null){
+                    if(countryName != null){
+                        country = countriesMap.get(countryName);
 
-                            Node installationNode = graphDb.createNode(DynamicLabel.label(InstallationModel.LABEL));
+                        if(country == null){
 
-                            Installation tempInstallation = new Installation(installationNode);
-                            tempInstallation.setId(installationKey);
-                            tempInstallation.setName(installationName);
-                            tempInstallation.setOpen(installationOpen.equals("OPEN"));
-                            tempInstallation.setCity(installationCity);
-                            tempInstallation.setPostCode(installationPostCode);
-
-                            if(countryName != null){
-                                Country tempCountry = countriesMap.get(countryName);
-
-                                if(tempCountry == null){
-
-                                    Node countryNode = graphDb.createNode(DynamicLabel.label(CountryModel.LABEL));
-                                    tempCountry = new Country(countryNode);
-                                    tempCountry.setName(countryName);
-                                    countriesMap.put(countryName, tempCountry);
-                                }
-
-                                tempInstallation.setCountry(tempCountry);
-                            }else {
-                                System.out.println("No country found for installation: " + installationKey);
-                            }
-
-                            Company parentCompany = null;
-                            if(parentCompanySt != null && !parentCompanySt.isEmpty()){
-                                parentCompany = companiesMap.get(parentCompanySt);
-                                if(parentCompany == null){
-                                    Node companyNode = graphDb.createNode(DynamicLabel.label(CompanyModel.LABEL));
-                                    parentCompany = new Company(companyNode);
-                                    parentCompany.setName(parentCompanySt);
-                                    companiesMap.put(parentCompanySt, parentCompany);
-                                }
-                            }
-
-                            if(accountHolderSt != null){
-                                Company accountHolder = companiesMap.get(accountHolderSt);
-                                if(accountHolder == null){
-                                    Node companyNode = graphDb.createNode(DynamicLabel.label(CompanyModel.LABEL));
-                                    accountHolder = new Company(companyNode);
-                                    accountHolder.setName(accountHolderSt);
-                                    companiesMap.put(accountHolderSt, accountHolder);
-                                    if(parentCompany != null){
-                                        accountHolder.setParentCompany(parentCompany);
-                                    }
-                                }
-                                tempInstallation.setCompany(accountHolder);
-                            }
-
-                            if(sectorCategory != null){
-                                Sector sector = sectorsMap.get(sectorCategory);
-                                if(sector == null){
-                                    Node sectorNode = graphDb.createNode(DynamicLabel.label(SectorModel.LABEL));
-                                    sector = new Sector(sectorNode);
-                                    sector.setName(sectorCategory);
-                                    sectorsMap.put(sectorCategory, sector);
-                                }
-                                tempInstallation.setSector(sector);
-                            }
-
-                            Period period = null;
-
-                            if(periodSt != null){
-                                period = periodsMap.get(periodSt);
-                                if(period == null){
-                                    Node periodNode = graphDb.createNode(DynamicLabel.label(PeriodModel.LABEL));
-                                    period = new Period(periodNode);
-                                    period.setName(periodSt);
-                                    periodsMap.put(periodSt, period);
-                                }
-                            }
-
-                            if(typeSt.equals("Emissions") && subTypeSt.equals("EM Verified")){
-                                if(period != null){
-                                    double tempValue = Double.parseDouble(tonesCO2);
-                                    installation.setVerifiedEmissionsForPeriod(period, tempValue);
-                                }
-                            }
-
-
-                            installationsMap.put(installationKey, tempInstallation);
-
+                            Node countryNode = graphDb.createNode(DynamicLabel.label(CountryModel.LABEL));
+                            country = new Country(countryNode);
+                            country.setName(countryName);
+                            countriesMap.put(countryName, country);
                         }
 
+
                     }else {
-                        System.out.println("Installation found with no key: " + line);
+                        System.out.println("No country found for installation: " + installationKey);
+                    }
+
+                    if(parentCompanySt != null && !parentCompanySt.isEmpty()){
+                        parentCompany = companiesMap.get(parentCompanySt);
+                        if(parentCompany == null){
+                            Node companyNode = graphDb.createNode(DynamicLabel.label(CompanyModel.LABEL));
+                            parentCompany = new Company(companyNode);
+                            parentCompany.setName(parentCompanySt);
+                            companiesMap.put(parentCompanySt, parentCompany);
+                        }
+                    }
+
+                    if(accountHolderSt != null){
+                        accountHolder = companiesMap.get(accountHolderSt);
+                        if(accountHolder == null){
+                            Node companyNode = graphDb.createNode(DynamicLabel.label(CompanyModel.LABEL));
+                            accountHolder = new Company(companyNode);
+                            accountHolder.setName(accountHolderSt);
+                            companiesMap.put(accountHolderSt, accountHolder);
+                            if(parentCompany != null){
+                                accountHolder.setParentCompany(parentCompany);
+                            }
+                        }
+                    }
+
+                    if(sectorCategory != null){
+                        sector = sectorsMap.get(sectorCategory);
+                        if(sector == null){
+                            Node sectorNode = graphDb.createNode(DynamicLabel.label(SectorModel.LABEL));
+                            sector = new Sector(sectorNode);
+                            sector.setName(sectorCategory);
+                            sectorsMap.put(sectorCategory, sector);
+                        }
+                    }
+
+                    Period period = null;
+
+                    if(periodSt != null){
+                        period = periodsMap.get(periodSt);
+                        if(period == null){
+                            Node periodNode = graphDb.createNode(DynamicLabel.label(PeriodModel.LABEL));
+                            period = new Period(periodNode);
+                            period.setName(periodSt);
+                            periodsMap.put(periodSt, period);
+                        }
+                    }
+
+                    Installation installation = installationsMap.get(installationKey);
+
+                    if(installation == null){
+
+                        Node installationNode = graphDb.createNode(DynamicLabel.label(InstallationModel.LABEL));
+
+                        installation = new Installation(installationNode);
+                        installation.setId(installationKey);
+                        installation.setName(installationName);
+                        installation.setOpen(installationOpen.equals("OPEN"));
+                        installation.setCity(installationCity);
+                        installation.setPostCode(installationPostCode);
+
+                        if(sector != null){
+                            installation.setSector(sector);
+                        }
+                        if(accountHolder != null){
+                            installation.setCompany(accountHolder);
+                        }
+                        if(country != null){
+                            installation.setCountry(country);
+                        }
+
+                        installationsMap.put(installationKey, installation);
+
                     }
 
 
+
+                    if(typeSt.trim().equals("Emissions")){
+
+                        if(subTypeSt.equals("EM Verified")){
+                            if(period != null){
+                                //System.out.println("Storing emissions info!");
+                                double tempValue;
+                                try{
+                                    tempValue = Double.parseDouble(tonesCO2.replaceAll(",",""));
+                                    installation.setVerifiedEmissionsForPeriod(period, tempValue);
+                                }catch (Exception e){
+                                    System.out.println("Problem parsing CO2 value: " + tonesCO2 + " for line:\n" + line);
+                                }
+                            }
+                        }
+
+                    }
+
+
+
+                }else {
+                    System.out.println("Installation found with no key: " + line);
                 }
 
-                tx.success();
+
+                if(lineCounter % 1000 == 0){
+                    System.out.println(lineCounter + " lines parsed...");
+                    tx.success();
+                    tx.close();
+                    tx = graphDb.beginTx();
+                }
+
             }
+
+            tx.success();
+            tx.close();
 
             reader.close();
 

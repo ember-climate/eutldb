@@ -1,6 +1,5 @@
 package org.sandbag.model;
 
-import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.RelationshipType;
 
 /**

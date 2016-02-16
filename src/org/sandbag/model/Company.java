@@ -10,7 +10,7 @@ public class Company implements CompanyModel {
     Node node = null;
 
     public Company(Node node){
-        node = node;
+        this.node = node;
     }
 
     protected String name;

@@ -1,5 +1,6 @@
 package org.sandbag.model;
 
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
 import org.neo4j.unsafe.impl.batchimport.cache.idmapping.string.Radix;
 
@@ -11,7 +12,7 @@ public class Installation implements InstallationModel{
     Node node = null;
 
     public Installation(Node node){
-        node = node;
+        this.node = node;
     }
 
 
@@ -27,14 +28,21 @@ public class Installation implements InstallationModel{
 
     @Override
     public Country getCountry() {
-        //node.getProperty()
-        return null;
+        return new Country(node.getSingleRelationship(new InstallationCountry(null), Direction.OUTGOING).getEndNode());
+    }
+
+    @Override
+    public Company getCompany() {
+        return new Company(node.getSingleRelationship(new InstallationCompany(null), Direction.OUTGOING).getEndNode());
     }
 
     @Override
     public void setCountry(Country country) {
-        node.createRelationshipTo(country.node, new InstallationCountry());
+        node.createRelationshipTo(country.node, new InstallationCountry(null));
     }
+
+    @Override
+    public void setCompany(Company company) { node.createRelationshipTo(company.node, new InstallationCompany(null));}
 
     @Override
     public String getName() {

@@ -10,7 +10,7 @@ public class Country implements CountryModel{
     Node node = null;
 
     public Country(Node node){
-        node = node;
+        this.node = node;
     }
 
     public String getId() {

@@ -1,6 +1,5 @@
 package org.sandbag;
 
-import org.neo4j.cypher.internal.compiler.v2_2.planner.logical.plans.Strictness;
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
@@ -8,10 +7,7 @@ import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.schema.IndexDefinition;
 import org.neo4j.graphdb.schema.Schema;
-import org.sandbag.model.Country;
-import org.sandbag.model.CountryModel;
-import org.sandbag.model.Installation;
-import org.sandbag.model.InstallationModel;
+import org.sandbag.model.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -56,54 +52,89 @@ public class EUTLDataImporter {
 
             HashMap<String,Installation> installationsMap = new HashMap<>();
             HashMap<String,Country> countriesMap = new HashMap<>();
+            HashMap<String, Sector> sectorsMap = new HashMap<>();
+            HashMap<String, Company> companiesMap = new HashMap<>();
 
             int lineCounter = 0;
 
             System.out.println("Reading installations...");
 
-            while((line = reader.readLine()) != null ){
+            try(Transaction tx = graphDb.beginTx()){
 
-                lineCounter++;
+                while((line = reader.readLine()) != null ){
 
-                String[] columns = line.split("\t");
-                String countryName = columns[0];
-                String parentCompany = columns[1];
-                String accountHolder = columns[2];
-                String installationName = columns[3];
-                String installationKey = columns[4];
-                String installationCity = columns[5];
-                String installationPostCode = columns[6];
-                String installationOpen = columns[7];
-                String sectorCategory = columns[8];
+                    lineCounter++;
 
-                Installation tempValue = installationsMap.get(installationKey);
+                    String[] columns = line.split("\t");
+                    String countryName = columns[0];
+                    String parentCompany = columns[1];
+                    String accountHolder = columns[2];
+                    String installationName = columns[3];
+                    String installationKey = columns[4];
+                    String installationCity = columns[5];
+                    String installationPostCode = columns[6];
+                    String installationOpen = columns[7];
+                    String sectorCategory = columns[8];
 
-                if(tempValue == null){
+                    if(installationKey != null){
 
-                    Node installationNode = graphDb.createNode(DynamicLabel.label(InstallationModel.LABEL));
+                        Installation tempValue = installationsMap.get(installationKey);
 
-                    Installation tempInstallation = new Installation(installationNode);
-                    tempInstallation.setId(installationKey);
-                    tempInstallation.setName(installationName);
-                    tempInstallation.setOpen(installationOpen.equals("OPEN"));
-                    tempInstallation.setCity(installationCity);
-                    tempInstallation.setPostCode(installationPostCode);
+                        if(tempValue == null){
 
-                    Country tempCountry = countriesMap.get(countryName);
+                            Node installationNode = graphDb.createNode(DynamicLabel.label(InstallationModel.LABEL));
 
-                    if(tempCountry == null){
-                        Node countryNode = graphDb.createNode(DynamicLabel.label(CountryModel.LABEL));
-                        tempCountry.setName(countryName);
-                        tempCountry = new Country(countryNode);
-                        countriesMap.put(countryName, tempCountry);
+                            Installation tempInstallation = new Installation(installationNode);
+                            tempInstallation.setId(installationKey);
+                            tempInstallation.setName(installationName);
+                            tempInstallation.setOpen(installationOpen.equals("OPEN"));
+                            tempInstallation.setCity(installationCity);
+                            tempInstallation.setPostCode(installationPostCode);
+
+                            if(countryName != null){
+                                Country tempCountry = countriesMap.get(countryName);
+
+                                if(tempCountry == null){
+
+                                    Node countryNode = graphDb.createNode(DynamicLabel.label(CountryModel.LABEL));
+                                    tempCountry = new Country(countryNode);
+                                    tempCountry.setName(countryName);
+                                    countriesMap.put(countryName, tempCountry);
+                                }
+
+                                tempInstallation.setCountry(tempCountry);
+                            }else {
+                                System.out.println("No country found for installation: " + installationKey);
+                            }
+
+                            if(parentCompany != null){
+                                Company company = companiesMap.get(parentCompany);
+                                if(company == null){
+                                    Node companyNode = graphDb.createNode(DynamicLabel.label(CompanyModel.LABEL));
+                                    company = new Company(companyNode);
+                                    company.setName(parentCompany);
+                                    companiesMap.put(parentCompany, company);
+                                }
+                                tempInstallation.setCompany(company);
+                            }
+
+
+                            Sector sector = sectorsMap.get(sectorCategory);
+
+
+
+                            installationsMap.put(installationKey, tempInstallation);
+
+                        }
+
+                    }else {
+                        System.out.println("Installation found with no key: " + line);
                     }
 
-                    tempInstallation.setCountry(tempCountry);
-
-                    installationsMap.put(installationKey, tempInstallation);
 
                 }
 
+                tx.success();
             }
 
             reader.close();

@@ -10,7 +10,7 @@ public class Sector implements SectorModel {
     Node node = null;
 
     public Sector(Node node){
-        node = node;
+        this.node = node;
     }
 
     public String getName() {

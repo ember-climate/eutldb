@@ -3,13 +3,12 @@ package org.sandbag.model;
 import org.neo4j.graphdb.Relationship;
 
 /**
- * Created by root on 15/02/16.
+ * Created by root on 16/02/16.
  */
-public class InstallationCountry implements InstallationCountryModel{
-
+public class InstallationSector implements InstallationSectorModel{
     protected Relationship relationship;
 
-    public InstallationCountry(Relationship relationship){
+    public InstallationSector(Relationship relationship){
         this.relationship = relationship;
     }
 
@@ -22,7 +21,7 @@ public class InstallationCountry implements InstallationCountryModel{
         return new Installation(relationship.getStartNode());
     }
 
-    public Country getCountry(){
-        return new Country(relationship.getEndNode());
+    public Sector getSector(){
+        return new Sector(relationship.getEndNode());
     }
 }

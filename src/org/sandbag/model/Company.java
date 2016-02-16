@@ -1,5 +1,6 @@
 package org.sandbag.model;
 
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
 
 /**
@@ -21,8 +22,19 @@ public class Company implements CompanyModel {
     }
 
     @Override
+    public Company getParentCompany(){
+        return new Company(node.getSingleRelationship(new ParentCompany(null), Direction.OUTGOING).getEndNode());
+
+    }
+
+    @Override
     public void setName(String name) {
         node.setProperty(CompanyModel.name, name);
+    }
+
+    @Override
+    public void setParentCompany(Company company){
+        node.createRelationshipTo(company.node, new ParentCompany(null));
     }
 
     @Override

@@ -21,6 +21,7 @@ public interface InstallationModel extends Label{
     boolean getOpen();
     String getName();
     String getCity();
+    Sector getSector();
 
 
     void setId(String id);
@@ -30,5 +31,6 @@ public interface InstallationModel extends Label{
     void setCity(String city);
     void setPostCode(String postCode);
     void setName(String name);
+    void setSector(Sector sector);
 
 }

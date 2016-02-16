@@ -55,6 +55,11 @@ public class Installation implements InstallationModel{
     }
 
     @Override
+    public void setSector(Sector sector) {
+        node.createRelationshipTo(sector.node, new InstallationSector(null));
+    }
+
+    @Override
     public void setOpen(boolean open) {
         node.setProperty(InstallationModel.open, open);
     }
@@ -62,6 +67,11 @@ public class Installation implements InstallationModel{
     @Override
     public String getCity() {
         return String.valueOf(node.getProperty(InstallationModel.city));
+    }
+
+    @Override
+    public Sector getSector() {
+        return new Sector(node.getSingleRelationship(new InstallationSector(null), Direction.OUTGOING).getEndNode());
     }
 
     @Override

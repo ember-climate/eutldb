@@ -11,7 +11,9 @@ public interface CompanyModel extends Label {
     String name = "name";
 
     String getName();
+    Company getParentCompany();
 
     void setName(String name);
+    void setParentCompany(Company company);
 
 }

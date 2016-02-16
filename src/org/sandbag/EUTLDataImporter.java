@@ -7,6 +7,7 @@ import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.schema.IndexDefinition;
 import org.neo4j.graphdb.schema.Schema;
+import org.neo4j.kernel.impl.api.CommandApplierFacade;
 import org.sandbag.model.*;
 
 import java.io.BufferedReader;
@@ -67,8 +68,8 @@ public class EUTLDataImporter {
 
                     String[] columns = line.split("\t");
                     String countryName = columns[0];
-                    String parentCompany = columns[1];
-                    String accountHolder = columns[2];
+                    String parentCompanySt = columns[1];
+                    String accountHolderSt = columns[2];
                     String installationName = columns[3];
                     String installationKey = columns[4];
                     String installationCity = columns[5];
@@ -107,20 +108,41 @@ public class EUTLDataImporter {
                                 System.out.println("No country found for installation: " + installationKey);
                             }
 
-                            if(parentCompany != null){
-                                Company company = companiesMap.get(parentCompany);
-                                if(company == null){
+                            Company parentCompany = null;
+                            if(parentCompanySt != null){
+                                parentCompany = companiesMap.get(parentCompanySt);
+                                if(parentCompany == null){
                                     Node companyNode = graphDb.createNode(DynamicLabel.label(CompanyModel.LABEL));
-                                    company = new Company(companyNode);
-                                    company.setName(parentCompany);
-                                    companiesMap.put(parentCompany, company);
+                                    parentCompany = new Company(companyNode);
+                                    parentCompany.setName(parentCompanySt);
+                                    companiesMap.put(parentCompanySt, parentCompany);
                                 }
-                                tempInstallation.setCompany(company);
                             }
 
+                            if(accountHolderSt != null){
+                                Company accountHolder = companiesMap.get(accountHolderSt);
+                                if(accountHolder == null){
+                                    Node companyNode = graphDb.createNode(DynamicLabel.label(CompanyModel.LABEL));
+                                    accountHolder = new Company(companyNode);
+                                    accountHolder.setName(accountHolderSt);
+                                    companiesMap.put(accountHolderSt, accountHolder);
+                                    if(parentCompany != null){
+                                        accountHolder.setParentCompany(parentCompany);
+                                    }
+                                }
+                                tempInstallation.setCompany(accountHolder);
+                            }
 
-                            Sector sector = sectorsMap.get(sectorCategory);
-
+                            if(sectorCategory != null){
+                                Sector sector = sectorsMap.get(sectorCategory);
+                                if(sector == null){
+                                    Node sectorNode = graphDb.createNode(DynamicLabel.label(SectorModel.LABEL));
+                                    sector = new Sector(sectorNode);
+                                    sector.setName(sectorCategory);
+                                    sectorsMap.put(sectorCategory, sector);
+                                }
+                                tempInstallation.setSector(sector);
+                            }
 
 
                             installationsMap.put(installationKey, tempInstallation);

@@ -109,7 +109,7 @@ public class EUTLDataImporter {
                             }
 
                             Company parentCompany = null;
-                            if(parentCompanySt != null){
+                            if(parentCompanySt != null && !parentCompanySt.isEmpty()){
                                 parentCompany = companiesMap.get(parentCompanySt);
                                 if(parentCompany == null){
                                     Node companyNode = graphDb.createNode(DynamicLabel.label(CompanyModel.LABEL));

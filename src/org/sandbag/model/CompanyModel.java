@@ -7,7 +7,7 @@ import org.neo4j.graphdb.Label;
  */
 public interface CompanyModel extends Label {
 
-    String LABEL = "PARENT_COMPANY";
+    String LABEL = "COMPANY";
     String name = "name";
 
     String getName();

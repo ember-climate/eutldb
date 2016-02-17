@@ -1,8 +1,8 @@
 # Examples of queries
 
-## Dave's query
 
-[_**What is the surplus-deficit of free allowances to emissions in the cement sector, by country, in 2014?**_](#query1)
+
+[_**What is the surplus-deficit of free allowances to emissions in the cement sector, by country, in 2014?**_](#Dave's query)
 
 Filters: SectorCategory="Cement and Lime", Period="2014"
 Subtype: "EM Verified" (this means verified emissions), "FA Standard" (this means the normal Free Allocation")
@@ -19,3 +19,4 @@ ORDER BY Country
 
 
 # query1
+# Dave's query

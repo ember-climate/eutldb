@@ -8,4 +8,7 @@ import org.neo4j.graphdb.RelationshipType;
 public interface InstallationCompanyModel extends RelationshipType {
 
     String LABEL = "INSTALLATION_COMPANY";
+
+    Installation getInstallation();
+    Company getCompany();
 }

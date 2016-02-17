@@ -99,6 +99,12 @@ public class Installation implements InstallationModel{
         VerifiedEmissions verifiedEmissions = new VerifiedEmissions(node.createRelationshipTo(period.node, new VerifiedEmissions(null)));
         verifiedEmissions.setValue(value);
     }
+    @Override
+    public void setFreeAllocationForPeriod(Period period, double value, String type){
+        FreeAllocation freeAllocation = new FreeAllocation(node.createRelationshipTo(period.node, new FreeAllocation(null)));
+        freeAllocation.setValue(value);
+        freeAllocation.setType(type);
+    }
 
     @Override
     public String name() {

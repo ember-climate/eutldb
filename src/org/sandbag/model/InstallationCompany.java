@@ -17,10 +17,12 @@ public class InstallationCompany implements InstallationCompanyModel {
         return LABEL;
     }
 
+    @Override
     public Installation getInstallation(){
         return new Installation(relationship.getStartNode());
     }
 
+    @Override
     public Company getCompany(){
         return new Company(relationship.getEndNode());
     }

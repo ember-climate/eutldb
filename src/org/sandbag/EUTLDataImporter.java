@@ -185,7 +185,6 @@ public class EUTLDataImporter {
 
                         if(subTypeSt.equals("EM Verified")){
                             if(period != null){
-                                //System.out.println("Storing emissions info!");
                                 double tempValue;
                                 try{
                                     tempValue = Double.parseDouble(tonesCO2.replaceAll(",",""));
@@ -195,7 +194,16 @@ public class EUTLDataImporter {
                                 }
                             }
                         }
-
+                    }else if(typeSt.trim().equals("FreeAllocation")){
+                        if(period != null){
+                            double tempValue;
+                            try{
+                                tempValue = Double.parseDouble(tonesCO2.replaceAll(",",""));
+                                installation.setFreeAllocationForPeriod(period, tempValue, subTypeSt);
+                            }catch (Exception e){
+                                System.out.println("Problem parsing CO2 value: " + tonesCO2 + " for line:\n" + line);
+                            }
+                        }
                     }
 
 

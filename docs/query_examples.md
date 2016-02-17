@@ -8,7 +8,7 @@ Filters: SectorCategory="Cement and Lime", Period="2014"
 Subtype: "EM Verified" (this means verified emissions), "FA Standard" (this means the normal Free Allocation")
 RegCtryName
 
-``` cypher
+``` sql
 //Dave's query
 MATCH (c:COUNTRY)<-[:INSTALLATION_COUNTRY]-(i:INSTALLATION)-[:INSTALLATION_SECTOR]->(s:SECTOR{name:'Cement and Lime'}),
 (i)-[ve:VERIFIED_EMISSIONS]->(p:PERIOD{name:'2014'}),

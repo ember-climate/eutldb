@@ -1,7 +1,7 @@
 # Examples of queries
 
-* [Dave's query](#Daves-query)
-* [Get installations data](#Get-installation-data)
+* [Dave's query](#daves-query)
+* [Get installations data](#get-installation-data)
 
 
 ## Get installation data

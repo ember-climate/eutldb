@@ -31,3 +31,5 @@ MATCH (c:COUNTRY)<-[:INSTALLATION_COUNTRY]-(i:INSTALLATION)-[:INSTALLATION_SECTO
 RETURN c.name AS Country, sum(ve.value) AS Verified_Emissions, sum(fa.value) AS Free_Allocations, sum(ve.value) - sum(fa.value) AS Surplus_Deficit
 ORDER BY Country
 ```
+
+![Dave's query result][docs/images/daves_query_output.png]

@@ -180,31 +180,54 @@ public class EUTLDataImporter {
                     }
 
 
+                    if(!tonesCO2.isEmpty()){
+                        if(typeSt.trim().equals("Emissions")){
 
-                    if(typeSt.trim().equals("Emissions")){
-
-                        if(subTypeSt.equals("EM Verified")){
+                            if(subTypeSt.equals("EM Verified")){
+                                if(period != null){
+                                    double tempValue;
+                                    try{
+                                        tempValue = Double.parseDouble(tonesCO2.replaceAll(",",""));
+                                        installation.setVerifiedEmissionsForPeriod(period, tempValue);
+                                    }catch (Exception e){
+                                        System.out.println("Problem parsing CO2 value: " + tonesCO2 + " for line:\n" + line);
+                                    }
+                                }
+                            }
+                        }else if(typeSt.trim().equals("FreeAllocation")){
                             if(period != null){
                                 double tempValue;
                                 try{
                                     tempValue = Double.parseDouble(tonesCO2.replaceAll(",",""));
-                                    installation.setVerifiedEmissionsForPeriod(period, tempValue);
+                                    installation.setFreeAllocationForPeriod(period, tempValue, subTypeSt);
+                                }catch (Exception e){
+                                    System.out.println("Problem parsing CO2 value: " + tonesCO2 + " for line:\n" + line);
+                                }
+                            }
+                        }else if(typeSt.trim().equals("OffsetEntitlement")){
+                            if(period != null){
+                                double tempValue;
+                                try{
+                                    tempValue = Double.parseDouble(tonesCO2.replaceAll(",",""));
+                                    installation.setOffsetEntitlementForPeriod(period, tempValue, subTypeSt);
+                                }catch (Exception e){
+                                    System.out.println("Problem parsing CO2 value: " + tonesCO2 + " for line:\n" + line);
+                                }
+                            }
+                        }else if(typeSt.trim().equals("Offsets")){
+                            if(period != null){
+                                double tempValue;
+                                try{
+                                    tempValue = Double.parseDouble(tonesCO2.replaceAll(",",""));
+                                    installation.setOffsetsForPeriod(period, tempValue, subTypeSt);
                                 }catch (Exception e){
                                     System.out.println("Problem parsing CO2 value: " + tonesCO2 + " for line:\n" + line);
                                 }
                             }
                         }
-                    }else if(typeSt.trim().equals("FreeAllocation")){
-                        if(period != null){
-                            double tempValue;
-                            try{
-                                tempValue = Double.parseDouble(tonesCO2.replaceAll(",",""));
-                                installation.setFreeAllocationForPeriod(period, tempValue, subTypeSt);
-                            }catch (Exception e){
-                                System.out.println("Problem parsing CO2 value: " + tonesCO2 + " for line:\n" + line);
-                            }
-                        }
                     }
+
+
 
 
 
@@ -250,8 +273,20 @@ public class EUTLDataImporter {
                 System.out.println("Creating indices...");
 
                 schema = graphDb.schema();
-                IndexDefinition indexDefinition = schema.indexFor(DynamicLabel.label(Installation.LABEL))
+                IndexDefinition installationIdIndex = schema.indexFor(DynamicLabel.label(Installation.LABEL))
                         .on(InstallationModel.id)
+                        .create();
+                IndexDefinition countryNameIndex = schema.indexFor(DynamicLabel.label(Country.LABEL))
+                        .on(CountryModel.name)
+                        .create();
+                IndexDefinition periodNameIndex = schema.indexFor(DynamicLabel.label(Period.LABEL))
+                        .on(PeriodModel.name)
+                        .create();
+                IndexDefinition sectorNameIndex = schema.indexFor(DynamicLabel.label(Sector.LABEL))
+                        .on(SectorModel.name)
+                        .create();
+                IndexDefinition companyNameIndex = schema.indexFor(DynamicLabel.label(Company.LABEL))
+                        .on(CompanyModel.name)
                         .create();
 
                 tx.success();

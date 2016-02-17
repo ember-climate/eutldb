@@ -34,5 +34,7 @@ public interface InstallationModel extends Label{
     void setSector(Sector sector);
     void setVerifiedEmissionsForPeriod(Period period, double value);
     void setFreeAllocationForPeriod(Period period, double value, String type);
+    void setOffsetsForPeriod(Period period, double value, String type);
+    void setOffsetEntitlementForPeriod(Period period, double value, String type);
 
 }

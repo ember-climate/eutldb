@@ -105,6 +105,18 @@ public class Installation implements InstallationModel{
         freeAllocation.setValue(value);
         freeAllocation.setType(type);
     }
+    @Override
+    public void setOffsetsForPeriod(Period period, double value, String type){
+        Offsets offsets = new Offsets(node.createRelationshipTo(period.node, new Offsets(null)));
+        offsets.setValue(value);
+        offsets.setType(type);
+    }
+    @Override
+    public void setOffsetEntitlementForPeriod(Period period, double value, String type){
+        OffsetEntitlement offsetEntitlement = new OffsetEntitlement(node.createRelationshipTo(period.node, new OffsetEntitlement(null)));
+        offsetEntitlement.setValue(value);
+        offsetEntitlement.setType(type);
+    }
 
     @Override
     public String name() {

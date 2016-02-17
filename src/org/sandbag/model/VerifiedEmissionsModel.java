@@ -11,7 +11,7 @@ public interface VerifiedEmissionsModel extends RelationshipType {
 
     String value = "value";
 
-    String getValue();
+    double getValue();
     void setValue(double value);
 
 }

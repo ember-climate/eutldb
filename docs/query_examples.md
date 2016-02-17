@@ -1,8 +1,23 @@
 # Examples of queries
 
+* [Dave's query](#Daves-query)
+* [Get installations data](#Get-installation-data)
 
 
-[_**What is the surplus-deficit of free allowances to emissions in the cement sector, by country, in 2014?**_](#Dave's-query)
+## Get installation data
+
+Gets information from the first 10 installations that are found in the database
+
+```
+// get installation data
+MATCH (i:INSTALLATION)
+RETURN i
+LIMIT 10
+```
+
+## Dave's query
+
+_**What is the surplus-deficit of free allowances to emissions in the cement sector, by country, in 2014?**_
 
 Filters: SectorCategory="Cement and Lime", Period="2014"
 Subtype: "EM Verified" (this means verified emissions), "FA Standard" (this means the normal Free Allocation")
@@ -16,7 +31,3 @@ MATCH (c:COUNTRY)<-[:INSTALLATION_COUNTRY]-(i:INSTALLATION)-[:INSTALLATION_SECTO
 RETURN c.name AS Country, sum(ve.value) AS Verified_Emissions, sum(fa.value) AS Free_Allocations, sum(ve.value) - sum(fa.value) AS Surplus_Deficit
 ORDER BY Country
 ```
-
-
-# query1
-# Dave's query

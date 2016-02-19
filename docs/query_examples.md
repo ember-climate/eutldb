@@ -2,6 +2,7 @@
 
 * [Dave's query](#daves-query)
 * [Get installations data](#get-installation-data)
+* [Get data from a specific installation)(#get-data-from-a-specific-installation)i
 * [Get some companies](#get-some-companies)
 * [Three-level companies](#three-level-companies)
 * [Get some emissions data](#get-some-emissions-data)
@@ -11,11 +12,21 @@
 
 Gets information from the first 10 installations that are found in the database
 
-```
+``` sql
 // get installation data
 MATCH (i:INSTALLATION)
 RETURN i
 LIMIT 10
+```
+
+## Get data from a specific installation
+
+Gets all relationships and nodes associated to the specific installation that has as id the value: **AT 210**
+
+``` sql
+// get installation data
+MATCH (i:INSTALLATION{id:'AT 210'})-[r]->(x)
+RETURN i, x, r
 ```
 
 ## Dave's query

@@ -2,6 +2,8 @@
 
 * [Dave's query](#daves-query)
 * [Get installations data](#get-installation-data)
+* [Get some companies](#get-some-companies)
+* [Three-level companies](#three-level-companies)
 
 
 ## Get installation data
@@ -33,3 +35,23 @@ ORDER BY Country
 ```
 
 ![Dave's query result](/docs/images/daves_query_output.png)
+
+## Get some companies
+
+Get a random set of companies _(limited to 10)_
+
+``` sql
+// get some companies
+MATCH (p:COMPANY)<-[PARENT_COMPANY]-(p2:COMPANY)
+RETURN * LIMIT 10
+```
+
+## Three-level companies
+
+Find companies with, at least, two levels of subsidiaries
+
+``` sql
+// three level companies
+MATCH (p1:COMPANY)<-[:PARENT_COMPANY]-(p2:COMPANY)<-[:PARENT_COMPANY]-(p3:COMPANY)
+RETURN *
+```

@@ -4,6 +4,7 @@
 * [Get installations data](#get-installation-data)
 * [Get some companies](#get-some-companies)
 * [Three-level companies](#three-level-companies)
+* [Get some emissions data](#get-some-emissions-data)
 
 
 ## Get installation data
@@ -54,4 +55,14 @@ Find companies with, at least, two levels of subsidiaries
 // three level companies
 MATCH (p1:COMPANY)<-[:PARENT_COMPANY]-(p2:COMPANY)<-[:PARENT_COMPANY]-(p3:COMPANY)
 RETURN *
+```
+
+## Get some emissions data
+
+Gets randomly a set of verified emissions values  _(limited to ten results)_
+
+``` sql
+//get some emissions data
+MATCH (i:INSTALLATION)-[:VERIFIED_EMISSIONS]->(p:PERIOD)
+RETURN * limit 10
 ```

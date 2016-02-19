@@ -2,7 +2,8 @@
 
 * [Dave's query](#daves-query)
 * [Get installations data](#get-installation-data)
-* [Get data from a specific installation)(#get-data-from-a-specific-installation)i
+* [Get data from a specific installation](#get-data-from-a-specific-installation)
+* [Number of installations per sector](#number-of-installations-per-sector)
 * [Get some companies](#get-some-companies)
 * [Three-level companies](#three-level-companies)
 * [Get some emissions data](#get-some-emissions-data)
@@ -27,6 +28,16 @@ Gets all relationships and nodes associated to the specific installation that ha
 // get installation data
 MATCH (i:INSTALLATION{id:'AT 210'})-[r]->(x)
 RETURN i, x, r
+```
+
+## Number of installations per sector
+
+Get the number of installations that exist for each sector
+
+``` sql
+// number of installations per sector
+MATCH (i:INSTALLATION)-[is:INSTALLATION_SECTOR]->(s:SECTOR)
+RETURN s.name,count(i)
 ```
 
 ## Dave's query

@@ -4,6 +4,7 @@
 * [Get installations data](#get-installation-data)
 * [Get data from a specific installation](#get-data-from-a-specific-installation)
 * [Number of installations per sector](#number-of-installations-per-sector)
+* [Number of installations per sector and country](#number-of-installations-per-sector-and-country)
 * [Get some companies](#get-some-companies)
 * [Three-level companies](#three-level-companies)
 * [Get some emissions data](#get-some-emissions-data)
@@ -38,6 +39,15 @@ Get the number of installations that exist for each sector
 // number of installations per sector
 MATCH (i:INSTALLATION)-[is:INSTALLATION_SECTOR]->(s:SECTOR)
 RETURN s.name,count(i)
+```
+
+## Number of installations per sector and country
+
+``` sql
+// number of installations per sector and country
+MATCH (c:COUNTRY)<-[:INSTALLATION_COUNTRY]-(i:INSTALLATION)-[is:INSTALLATION_SECTOR]->(s:SECTOR)
+RETURN s.name,c.name,count(i)
+ORDER BY c.name, count(i)
 ```
 
 ## Dave's query

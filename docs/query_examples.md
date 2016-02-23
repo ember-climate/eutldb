@@ -8,6 +8,7 @@
 * [Get some companies](#get-some-companies)
 * [Three-level companies](#three-level-companies)
 * [Get some emissions data](#get-some-emissions-data)
+* [Verified emissions per period for a specific country and sector](#verified-emissions-per-period-for-a-specific-country-and-sector)
 
 
 ## Get installation data
@@ -97,4 +98,14 @@ Gets randomly a set of verified emissions values  _(limited to ten results)_
 //get some emissions data
 MATCH (i:INSTALLATION)-[:VERIFIED_EMISSIONS]->(p:PERIOD)
 RETURN * limit 10
+```
+
+## Verified emissions per period for a specific country and sector
+
+``` sql
+//Verified emissions per specific country and specific sector
+MATCH (c:COUNTRY{name:'Austria'})<-[:INSTALLATION_COUNTRY]-(i:INSTALLATION)-[:INSTALLATION_SECTOR]->(s:SECTOR{name:'Cement and Lime'}),
+(i)-[ve:VERIFIED_EMISSIONS]->(p:PERIOD)
+RETURN sum(ve.value) AS Verified_Emissions, p.name
+ORDER BY p.name
 ```

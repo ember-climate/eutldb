@@ -9,4 +9,4 @@ Prototype of the new EUTL graph database
 
 ## Data browser online
 
-The current address is: [http://52.49.23.223:7474/browser/](http://52.49.23.223:7474/browser/)
+The current address is: [http://sandbag-climate.github.io/EUTLdbDashboard.html](http://sandbag-climate.github.io/EUTLdbDashboard.html)

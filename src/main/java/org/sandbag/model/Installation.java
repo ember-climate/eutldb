@@ -55,6 +55,31 @@ public class Installation implements InstallationModel{
     }
 
     @Override
+    public void setAddress(String address) {
+        node.setProperty(InstallationModel.address, address);
+    }
+
+    @Override
+    public void setEprtrId(String eprtrId) {
+        node.setProperty(InstallationModel.eprtrId, eprtrId);
+    }
+
+    @Override
+    public void setPermitId(String permitId) {
+        node.setProperty(InstallationModel.permitId, permitId);
+    }
+
+    @Override
+    public void setPermitEntryDate(String date) {
+        node.setProperty(InstallationModel.permitEntryDate, date);
+    }
+
+    @Override
+    public void setPermitExpiryOrRevocationDate(String date) {
+        node.setProperty(InstallationModel.permitExpiryOrRevocationDate, date);
+    }
+
+    @Override
     public void setSector(Sector sector) {
         node.createRelationshipTo(sector.node, new InstallationSector(null));
     }
@@ -67,6 +92,31 @@ public class Installation implements InstallationModel{
     @Override
     public String getCity() {
         return String.valueOf(node.getProperty(InstallationModel.city));
+    }
+
+    @Override
+    public String getAddress() {
+        return String.valueOf(node.getProperty(InstallationModel.address));
+    }
+
+    @Override
+    public String getEprtrId() {
+        return String.valueOf(node.getProperty(InstallationModel.eprtrId));
+    }
+
+    @Override
+    public String getPermitId() {
+        return String.valueOf(node.getProperty(InstallationModel.permitId));
+    }
+
+    @Override
+    public String getPermitEntryDate() {
+        return String.valueOf(node.getProperty(InstallationModel.permitEntryDate));
+    }
+
+    @Override
+    public String getPermitExpiryOrRevocationDate() {
+        return String.valueOf(node.getProperty(InstallationModel.permitExpiryOrRevocationDate));
     }
 
     @Override

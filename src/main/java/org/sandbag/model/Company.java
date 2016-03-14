@@ -14,11 +14,35 @@ public class Company implements CompanyModel {
         this.node = node;
     }
 
-    protected String name;
 
     @Override
     public String getName() {
-        return name;
+        return String.valueOf(node.getProperty(CompanyModel.name));
+    }
+
+    @Override
+    public String getRegistrationNumber() {
+        return String.valueOf(node.getProperty(CompanyModel.registrationNumber));
+    }
+
+    @Override
+    public String getCity() {
+        return String.valueOf(node.getProperty(CompanyModel.city));
+    }
+
+    @Override
+    public String getPostalCode() {
+        return String.valueOf(node.getProperty(CompanyModel.postalCode));
+    }
+
+    @Override
+    public String getAddress() {
+        return String.valueOf(node.getProperty(CompanyModel.address));
+    }
+
+    @Override
+    public String getStatus() {
+        return String.valueOf(node.getProperty(CompanyModel.status));
     }
 
     @Override
@@ -30,6 +54,31 @@ public class Company implements CompanyModel {
     @Override
     public void setName(String name) {
         node.setProperty(CompanyModel.name, name);
+    }
+
+    @Override
+    public void setRegistrationNumber(String value) {
+        node.setProperty(CompanyModel.registrationNumber, value);
+    }
+
+    @Override
+    public void setPostalCode(String value) {
+        node.setProperty(CompanyModel.postalCode, value);
+    }
+
+    @Override
+    public void setAddress(String address) {
+        node.setProperty(CompanyModel.address, address);
+    }
+
+    @Override
+    public void setCity(String city) {
+        node.setProperty(CompanyModel.city, city);
+    }
+
+    @Override
+    public void setStatus(String status) {
+        node.setProperty(CompanyModel.status, status);
     }
 
     @Override

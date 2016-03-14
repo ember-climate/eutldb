@@ -7,4 +7,7 @@ import org.neo4j.graphdb.RelationshipType;
  */
 public interface ParentCompanyModel extends RelationshipType{
     String LABEL = "PARENT_COMPANY";
+
+    String name = "name";
+
 }

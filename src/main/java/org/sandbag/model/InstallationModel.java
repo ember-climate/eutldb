@@ -13,6 +13,11 @@ public interface InstallationModel extends Label{
     String city = "city";
     String postCode = "post_code";
     String open = "open";
+    String address = "address";
+    String eprtrId = "EPRTR_ID";
+    String permitId = "permit_id";
+    String permitEntryDate = "permit_entry_date";
+    String permitExpiryOrRevocationDate = "permit_expiry_or_revocation_date";
 
     String getId();
     Country getCountry();
@@ -21,7 +26,13 @@ public interface InstallationModel extends Label{
     boolean getOpen();
     String getName();
     String getCity();
+    String getAddress();
+    String getEprtrId();
+    String getPermitId();
+    String getPermitEntryDate();
+    String getPermitExpiryOrRevocationDate();
     Sector getSector();
+
 
 
     void setId(String id);
@@ -31,6 +42,11 @@ public interface InstallationModel extends Label{
     void setCity(String city);
     void setPostCode(String postCode);
     void setName(String name);
+    void setAddress(String address);
+    void setEprtrId(String eprtrId);
+    void setPermitId(String permitId);
+    void setPermitEntryDate(String date);
+    void setPermitExpiryOrRevocationDate(String date);
     void setSector(Sector sector);
     void setVerifiedEmissionsForPeriod(Period period, double value);
     void setFreeAllocationForPeriod(Period period, double value, String type);

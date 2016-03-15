@@ -276,6 +276,9 @@ public class EUTLMegaFileImporter {
                 IndexDefinition countryNameIndex = schema.indexFor(DynamicLabel.label(Country.LABEL))
                         .on(CountryModel.name)
                         .create();
+                IndexDefinition countryIdIndex = schema.indexFor(DynamicLabel.label(Country.LABEL))
+                        .on(CountryModel.id)
+                        .create();
                 IndexDefinition periodNameIndex = schema.indexFor(DynamicLabel.label(Period.LABEL))
                         .on(PeriodModel.name)
                         .create();

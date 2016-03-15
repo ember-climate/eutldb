@@ -1,10 +1,7 @@
 package org.sandbag.model;
 
 import org.neo4j.cypher.internal.compiler.v1_9.commands.expressions.Count;
-import org.neo4j.graphdb.DynamicLabel;
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Transaction;
+import org.neo4j.graphdb.*;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.schema.IndexDefinition;
 import org.neo4j.graphdb.schema.Schema;
@@ -19,8 +16,16 @@ public class DatabaseManager {
     private static GraphDatabaseService graphDb;
     private static Schema schema;
 
+    public Label COUNTRY_LABEL = DynamicLabel.label( CountryModel.LABEL );
+    public Label COMPANY_LABEL = DynamicLabel.label( CompanyModel.LABEL );
+    public Label INSTALLATION_LABEL = DynamicLabel.label( InstallationModel.LABEL );
+
     public DatabaseManager(String dbFolder){
         initDatabase(dbFolder);
+    }
+
+    public Transaction beginTransaction(){
+        return graphDb.beginTx();
     }
 
     private void initDatabase(String dbFolder){
@@ -40,6 +45,9 @@ public class DatabaseManager {
                     IndexDefinition countryNameIndex = schema.indexFor(DynamicLabel.label(Country.LABEL))
                             .on(CountryModel.name)
                             .create();
+                    IndexDefinition countryIdIndex = schema.indexFor(DynamicLabel.label(Country.LABEL))
+                            .on(CountryModel.id)
+                            .create();
                     IndexDefinition periodNameIndex = schema.indexFor(DynamicLabel.label(Period.LABEL))
                             .on(PeriodModel.name)
                             .create();
@@ -48,6 +56,9 @@ public class DatabaseManager {
                             .create();
                     IndexDefinition companyNameIndex = schema.indexFor(DynamicLabel.label(Company.LABEL))
                             .on(CompanyModel.name)
+                            .create();
+                    IndexDefinition companyRegistrationNumberIndex = schema.indexFor(DynamicLabel.label(Company.LABEL))
+                            .on(CompanyModel.registrationNumber)
                             .create();
 
                     tx.success();
@@ -65,7 +76,7 @@ public class DatabaseManager {
 
     }
 
-    private Installation createInstallationNode(String id,
+    private Installation createInstallation(String id,
                                         String name,
                                         String city,
                                         String postCode,
@@ -99,21 +110,60 @@ public class DatabaseManager {
 
     }
 
-    private Country createCountry(String name){
+    public Country createCountry(String name, String id){
         Node countryNode = graphDb.createNode(DynamicLabel.label(CountryModel.LABEL));
 
         Country country = new Country(countryNode);
         country.setName(name);
+        country.setId(id);
 
         return country;
     }
 
-    private Company createCompany(String name){
+    public Company createCompany(String name,
+                                 String registrationNumber,
+                                 String postalCode,
+                                 String city,
+                                 String address,
+                                 String status){
         Node companyNode = graphDb.createNode(DynamicLabel.label(CompanyModel.LABEL));
 
         Company company = new Company(companyNode);
         company.setName(name);
+        company.setAddress(address);
+        company.setCity(city);
+        company.setPostalCode(postalCode);
+        company.setRegistrationNumber(registrationNumber);
+        company.setStatus(status);
 
         return company;
+    }
+
+    public Country getCountryByName(String name){
+        Country country = null;
+        Node countryNode = graphDb.findNode( COUNTRY_LABEL, CountryModel.name, name );
+        if(countryNode != null){
+            country = new Country(countryNode);
+        }
+        return country;
+
+    }
+    public Country getCountryById(String id){
+        Country country = null;
+        Node countryNode = graphDb.findNode( COUNTRY_LABEL, CountryModel.id, id );
+        if(countryNode != null){
+            country = new Country(countryNode);
+        }
+        return country;
+    }
+
+    public Company getCompanyByRegistrationNumber(String registrationNumber){
+        Company company = null;
+        Node companyNode = graphDb.findNode( COMPANY_LABEL, CompanyModel.registrationNumber, registrationNumber );
+        if(companyNode != null){
+            company = new Company(companyNode);
+        }
+        return company;
+
     }
 }

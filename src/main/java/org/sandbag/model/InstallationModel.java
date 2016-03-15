@@ -18,6 +18,8 @@ public interface InstallationModel extends Label{
     String permitId = "permit_id";
     String permitEntryDate = "permit_entry_date";
     String permitExpiryOrRevocationDate = "permit_expiry_or_revocation_date";
+    String latitude = "latitude";
+    String longitude = "longitude";
 
     String getId();
     Country getCountry();
@@ -31,6 +33,8 @@ public interface InstallationModel extends Label{
     String getPermitId();
     String getPermitEntryDate();
     String getPermitExpiryOrRevocationDate();
+    String getLatitude();
+    String getLongitude();
     Sector getSector();
 
 
@@ -47,6 +51,8 @@ public interface InstallationModel extends Label{
     void setPermitId(String permitId);
     void setPermitEntryDate(String date);
     void setPermitExpiryOrRevocationDate(String date);
+    void setLatitude(String latitude);
+    void setLongitude(String longitude);
     void setSector(Sector sector);
     void setVerifiedEmissionsForPeriod(Period period, double value);
     void setFreeAllocationForPeriod(Period period, double value, String type);

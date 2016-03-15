@@ -90,9 +90,14 @@ public class EUTLDBImporter {
                 Company company = dbManager.getCompanyByRegistrationNumber(companyRegistrationNumberSt);
                 if(company == null){
                     if(!companyRegistrationNumberSt.isEmpty()){
-                        company = dbManager.createCompany()
+                        company = dbManager.createCompany(companyNameSt,companyRegistrationNumberSt,companyPostalCodeSt,
+                                companyCitySt, companyMainAddressSt + "\n" + companySecondaryAddressSt, companyStatusSt);
                     }
                 }
+                Installation installation = dbManager.createInstallation(installationIdSt,installationNameSt,
+                        installationCitySt, installationPostalCodeSt, installationMainAddressSt + " " + installationSecondaryAddressSt,
+                        eprtrIdSt, permitIDSt, permitEntryDateSt, permitExpiryRevocationDateSt, latituteSt, longitudeSt,
+                        country, company);
             }
 
 

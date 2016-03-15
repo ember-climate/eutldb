@@ -80,6 +80,16 @@ public class Installation implements InstallationModel{
     }
 
     @Override
+    public void setLatitude(String latitude) {
+        node.setProperty(InstallationModel.latitude, latitude);
+    }
+
+    @Override
+    public void setLongitude(String longitude) {
+        node.setProperty(InstallationModel.longitude, longitude);
+    }
+
+    @Override
     public void setSector(Sector sector) {
         node.createRelationshipTo(sector.node, new InstallationSector(null));
     }
@@ -117,6 +127,16 @@ public class Installation implements InstallationModel{
     @Override
     public String getPermitExpiryOrRevocationDate() {
         return String.valueOf(node.getProperty(InstallationModel.permitExpiryOrRevocationDate));
+    }
+
+    @Override
+    public String getLatitude() {
+        return String.valueOf(node.getProperty(InstallationModel.latitude));
+    }
+
+    @Override
+    public String getLongitude() {
+        return String.valueOf(node.getProperty(InstallationModel.longitude));
     }
 
     @Override

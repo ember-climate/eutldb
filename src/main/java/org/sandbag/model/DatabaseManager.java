@@ -76,25 +76,26 @@ public class DatabaseManager {
 
     }
 
-    private Installation createInstallation(String id,
-                                        String name,
-                                        String city,
-                                        String postCode,
-                                        String open,
-                                        String address,
-                                        String eprtrId,
-                                        String permitId,
-                                        String permitEntryDate,
-                                        String permitExpiryOrRevocationDate,
-                                        Country country,
-                                        Company company){
+    public Installation createInstallation(String id,
+                                            String name,
+                                            String city,
+                                            String postCode,
+                                            String address,
+                                            String eprtrId,
+                                            String permitId,
+                                            String permitEntryDate,
+                                            String permitExpiryOrRevocationDate,
+                                            String latitude,
+                                            String longitude,
+                                            Country country,
+                                            Company company){
 
         Node installationNode = graphDb.createNode(DynamicLabel.label(InstallationModel.LABEL));
 
         Installation installation = new Installation(installationNode);
         installation.setId(id);
         installation.setName(name);
-        installation.setOpen(open.toLowerCase().equals("open"));
+        //installation.setOpen(open.toLowerCase().equals("open"));
         installation.setCity(city);
         installation.setPostCode(postCode);
         installation.setAddress(address);
@@ -102,9 +103,16 @@ public class DatabaseManager {
         installation.setPermitId(permitId);
         installation.setPermitEntryDate(permitEntryDate);
         installation.setPermitExpiryOrRevocationDate(permitExpiryOrRevocationDate);
+        installation.setLatitude(latitude);
+        installation.setLongitude(longitude);
 
-        installation.setCountry(country);
-        installation.setCompany(company);
+        if(country != null){
+            installation.setCountry(country);
+        }
+        if(company != null){
+            installation.setCompany(company);
+        }
+
 
         return installation;
 

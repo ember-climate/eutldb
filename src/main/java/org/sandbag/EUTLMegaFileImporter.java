@@ -1,6 +1,5 @@
 package org.sandbag;
 
-import org.neo4j.csv.reader.SourceTraceability;
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
@@ -8,16 +7,14 @@ import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.schema.IndexDefinition;
 import org.neo4j.graphdb.schema.Schema;
-import org.neo4j.kernel.impl.api.CommandApplierFacade;
 import org.sandbag.model.*;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
-public class EUTLDataImporter {
+public class EUTLMegaFileImporter {
 
     private static GraphDatabaseService graphDb;
     private static Schema schema;
@@ -35,7 +32,7 @@ public class EUTLDataImporter {
 
             File csvFile = new File(csvFileSt);
 
-            EUTLDataImporter importer = new EUTLDataImporter();
+            EUTLMegaFileImporter importer = new EUTLMegaFileImporter();
             importer.importDBFromCSVFile(dbFolder, csvFile);
         }
 

@@ -1,10 +1,10 @@
 package org.sandbag.model;
 
-import org.neo4j.cypher.internal.compiler.v1_9.commands.expressions.Count;
 import org.neo4j.graphdb.*;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.schema.IndexDefinition;
 import org.neo4j.graphdb.schema.Schema;
+import org.sandbag.model.nodes.*;
 
 import java.io.File;
 
@@ -82,19 +82,19 @@ public class DatabaseManager {
     }
 
     public Installation createInstallation(String id,
-                                            String name,
-                                            String city,
-                                            String postCode,
-                                            String address,
-                                            String eprtrId,
-                                            String permitId,
-                                            String permitEntryDate,
-                                            String permitExpiryOrRevocationDate,
-                                            String latitude,
-                                            String longitude,
-                                            Country country,
-                                            Company company,
-                                            Sector sector){
+                                           String name,
+                                           String city,
+                                           String postCode,
+                                           String address,
+                                           String eprtrId,
+                                           String permitId,
+                                           String permitEntryDate,
+                                           String permitExpiryOrRevocationDate,
+                                           String latitude,
+                                           String longitude,
+                                           Country country,
+                                           Company company,
+                                           Sector sector){
 
         Node installationNode = graphDb.createNode(DynamicLabel.label(InstallationModel.LABEL));
 
@@ -135,6 +135,15 @@ public class DatabaseManager {
         country.setId(id);
 
         return country;
+    }
+
+    public Period createPeriod(String name){
+        Node periodNode = graphDb.createNode(PERIOD_LABEL);
+
+        Period period = new Period(periodNode);
+        period.setName(name);
+
+        return period;
     }
 
     public Sector createSector(String id, String name){
@@ -182,6 +191,23 @@ public class DatabaseManager {
             country = new Country(countryNode);
         }
         return country;
+    }
+    public Installation getInstallationById(String id){
+        Installation installation = null;
+        Node installationNode = graphDb.findNode( INSTALLATION_LABEL, InstallationModel.id, id );
+        if(installationNode != null){
+            installation = new Installation(installationNode);
+        }
+        return installation;
+    }
+    public Period getPeriodByName(String name){
+        Period period = null;
+        Node periodNode = graphDb.findNode( PERIOD_LABEL, PeriodModel.name, name );
+        if(periodNode != null){
+            period = new Period(periodNode);
+        }
+        return period;
+
     }
     public Sector getSectorById(String id){
         Sector sector = null;

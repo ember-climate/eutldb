@@ -1,9 +1,8 @@
 package org.sandbag.programs;
 
-import org.neo4j.graphdb.DynamicLabel;
-import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.*;
+import org.sandbag.model.nodes.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -53,6 +52,105 @@ public class EUTLDBImporter {
         }
 
         System.out.println("Done! :)");
+    }
+
+    public void importAircraftOperatorFile(File file){
+
+    }
+
+    public void importComplianceDataFile(File file){
+
+        System.out.println("Importing file " + file.getName());
+
+        try{
+
+            String line;
+            int lineCounter = 1;
+
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            reader.readLine(); //skipping header
+
+            Transaction tx = dbManager.beginTransaction();
+
+            while((line = reader.readLine()) != null){
+
+                String[] columns = line.split("\t");
+                String countryIdSt = columns[0];
+                String installationIdSt = columns[1];
+                installationIdSt = countryIdSt + installationIdSt;
+                String yearSt = columns[2];
+                String allowancesSt = columns[3];
+                String verifiedEmissionsSt = columns[4];
+                String unitsSurrenderedSt = columns[5];
+                String complianceCode = columns[6];
+
+                Period period = dbManager.getPeriodByName(yearSt);
+                if(period == null){
+                    period = dbManager.createPeriod(yearSt);
+                }
+                Installation installation = dbManager.getInstallationById(installationIdSt);
+                if(installation != null){
+
+                    //+++++++++++++++++++++ SURRENDERED UNITS++++++++++++++++++++++++++++++++
+                    if(!unitsSurrenderedSt.isEmpty()){
+                        try{
+                            double tempValue = Double.parseDouble(unitsSurrenderedSt);
+                            installation.setSurrenderedUnitsForPeriod(period, tempValue);
+                        }catch(Exception e){
+                            System.out.println("Problem with installation: " + installationIdSt + " [" + countryIdSt + "]");
+                            System.out.println("Units surrendered value: " + unitsSurrenderedSt + " is not a number. It won't be stored");
+                        }
+                    }
+                    //+++++++++++++++++++++ VERIFIED EMISSIONS++++++++++++++++++++++++++++++++
+                    if(!verifiedEmissionsSt.isEmpty()){
+                        try{
+                            double tempValue = Double.parseDouble(verifiedEmissionsSt);
+                            installation.setVerifiedEmissionsForPeriod(period, tempValue);
+                        }catch(Exception e){
+                            System.out.println("Problem with installation: " + installationIdSt + " [" + countryIdSt + "]");
+                            System.out.println("Verified emissions value: " + verifiedEmissionsSt + " is not a number. It won't be stored");
+                        }
+                    }
+                    //++++++++++++++++++++++ COMPLIANCE ++++++++++++++++++++++++++++++++++++
+                    if(!complianceCode.isEmpty()){
+                        installation.setComplianceForPeriod(period, complianceCode);
+                    }
+                    //++++++++++++++++++++ ALLOWANCES IN ALLOCATION ++++++++++++++++++++++++++
+                    if(!allowancesSt.isEmpty()){
+                        try{
+                            double tempValue = Double.parseDouble(allowancesSt);
+                            installation.setAllowancesInAllocationForPeriod(period, tempValue);
+                        }catch(Exception e){
+                            System.out.println("Problem with installation: " + installationIdSt + " [" + countryIdSt + "]");
+                            System.out.println("Allowances in allocation value: " + allowancesSt + " is not a number. It won't be stored");
+                        }
+                    }
+
+
+
+                }
+
+                if(lineCounter % 100 == 0){
+                    tx.success();
+                    tx.close();
+                    tx = dbManager.beginTransaction();
+                }
+
+
+                lineCounter++;
+            }
+
+            tx.success();
+            tx.close();
+
+
+
+            reader.close();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void importInstallationsFile(File file){
@@ -123,7 +221,7 @@ public class EUTLDBImporter {
                     }
 
 
-                    Installation installation = dbManager.createInstallation(installationIdSt,installationNameSt,
+                    Installation installation = dbManager.createInstallation(countryIdSt + installationIdSt,installationNameSt,
                             installationCitySt, installationPostalCodeSt, installationMainAddressSt + " " + installationSecondaryAddressSt,
                             eprtrIdSt, permitIDSt, permitEntryDateSt, permitExpiryRevocationDateSt, latituteSt, longitudeSt,
                             country, company, sector);
@@ -148,6 +246,102 @@ public class EUTLDBImporter {
 
     }
 
+    public void importAllocationDataPeriod0File(File file){
+        System.out.println("Importing file " + file.getName());
+
+        try{
+
+            String line;
+            int lineCounter = 1;
+
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            reader.readLine(); //skipping header
+
+            Transaction tx = dbManager.beginTransaction();
+
+            Period period2005 = dbManager.getPeriodByName("2005");
+            if(period2005 == null){
+                period2005 = dbManager.createPeriod("2005");
+            }
+            Period period2006 = dbManager.getPeriodByName("2006");
+            if(period2006 == null){
+                period2006 = dbManager.createPeriod("2006");
+            }
+            Period period2007 = dbManager.getPeriodByName("2007");
+            if(period2007 == null){
+                period2007 = dbManager.createPeriod("2007");
+            }
+
+            while((line = reader.readLine()) != null){
+
+                String[] columns = line.split("\t");
+                String countryIdSt = columns[0];
+                String installationIdSt = columns[1];
+                String latestUpdateSt = columns[2];
+                String year2005St = columns[3];
+                String year2006St = columns[4];
+                String year2007St = columns[5];
+
+                String installationCompleteID = countryIdSt + installationIdSt;
+                Installation installation = dbManager.getInstallationById(installationCompleteID);
+                if(installation != null){
+                    if(!year2005St.isEmpty()){
+                        try{
+                            double tempValue = Double.parseDouble(year2005St);
+                            installation.setFreeAllocationForPeriod(period2005, tempValue,"");
+                        }catch (Exception e){
+                            System.out.println("Problem with installation: " + installationCompleteID);
+                            System.out.println("Allocation value for period 2005: " + year2005St + " is not a number. It won't be stored");
+                        }
+                    }
+                    if(!year2006St.isEmpty()){
+                        try{
+                            double tempValue = Double.parseDouble(year2006St);
+                            installation.setFreeAllocationForPeriod(period2006, tempValue,"");
+                        }catch (Exception e){
+                            System.out.println("Problem with installation: " + installationCompleteID);
+                            System.out.println("Allocation value for period 2006: " + year2006St + " is not a number. It won't be stored");
+                        }
+                    }
+                    if(!year2007St.isEmpty()){
+                        try{
+                            double tempValue = Double.parseDouble(year2007St);
+                            installation.setFreeAllocationForPeriod(period2007, tempValue,"");
+                        }catch (Exception e){
+                            System.out.println("Problem with installation: " + installationCompleteID);
+                            System.out.println("Allocation value for period 2007: " + year2007St + " is not a number. It won't be stored");
+                        }
+                    }
+
+                }else{
+                    System.out.println("Installation not found: " + installationCompleteID);
+                }
+
+
+
+
+                if(lineCounter % 100 == 0){
+                    tx.success();
+                    tx.close();
+                    tx = dbManager.beginTransaction();
+                }
+
+
+                lineCounter++;
+            }
+
+            tx.success();
+            tx.close();
+
+
+
+            reader.close();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 
 

@@ -19,6 +19,8 @@ public class DatabaseManager {
     public Label COUNTRY_LABEL = DynamicLabel.label( CountryModel.LABEL );
     public Label COMPANY_LABEL = DynamicLabel.label( CompanyModel.LABEL );
     public Label INSTALLATION_LABEL = DynamicLabel.label( InstallationModel.LABEL );
+    public Label SECTOR_LABEL = DynamicLabel.label( SectorModel.LABEL );
+    public Label PERIOD_LABEL = DynamicLabel.label( PeriodModel.LABEL );
 
     public DatabaseManager(String dbFolder){
         initDatabase(dbFolder);
@@ -39,25 +41,28 @@ public class DatabaseManager {
                     System.out.println("Creating indices...");
 
                     schema = graphDb.schema();
-                    IndexDefinition installationIdIndex = schema.indexFor(DynamicLabel.label(Installation.LABEL))
+                    IndexDefinition installationIdIndex = schema.indexFor(INSTALLATION_LABEL)
                             .on(InstallationModel.id)
                             .create();
-                    IndexDefinition countryNameIndex = schema.indexFor(DynamicLabel.label(Country.LABEL))
+                    IndexDefinition countryNameIndex = schema.indexFor(COUNTRY_LABEL)
                             .on(CountryModel.name)
                             .create();
-                    IndexDefinition countryIdIndex = schema.indexFor(DynamicLabel.label(Country.LABEL))
+                    IndexDefinition countryIdIndex = schema.indexFor(COUNTRY_LABEL)
                             .on(CountryModel.id)
                             .create();
-                    IndexDefinition periodNameIndex = schema.indexFor(DynamicLabel.label(Period.LABEL))
+                    IndexDefinition periodNameIndex = schema.indexFor(PERIOD_LABEL)
                             .on(PeriodModel.name)
                             .create();
-                    IndexDefinition sectorNameIndex = schema.indexFor(DynamicLabel.label(Sector.LABEL))
+                    IndexDefinition sectorNameIndex = schema.indexFor(SECTOR_LABEL)
                             .on(SectorModel.name)
                             .create();
-                    IndexDefinition companyNameIndex = schema.indexFor(DynamicLabel.label(Company.LABEL))
+                    IndexDefinition sectorIdIndex = schema.indexFor(SECTOR_LABEL)
+                            .on(SectorModel.id)
+                            .create();
+                    IndexDefinition companyNameIndex = schema.indexFor(COMPANY_LABEL)
                             .on(CompanyModel.name)
                             .create();
-                    IndexDefinition companyRegistrationNumberIndex = schema.indexFor(DynamicLabel.label(Company.LABEL))
+                    IndexDefinition companyRegistrationNumberIndex = schema.indexFor(COMPANY_LABEL)
                             .on(CompanyModel.registrationNumber)
                             .create();
 
@@ -88,7 +93,8 @@ public class DatabaseManager {
                                             String latitude,
                                             String longitude,
                                             Country country,
-                                            Company company){
+                                            Company company,
+                                            Sector sector){
 
         Node installationNode = graphDb.createNode(DynamicLabel.label(InstallationModel.LABEL));
 
@@ -112,6 +118,9 @@ public class DatabaseManager {
         if(company != null){
             installation.setCompany(company);
         }
+        if(sector != null){
+            installation.setSector(sector);
+        }
 
 
         return installation;
@@ -119,7 +128,7 @@ public class DatabaseManager {
     }
 
     public Country createCountry(String name, String id){
-        Node countryNode = graphDb.createNode(DynamicLabel.label(CountryModel.LABEL));
+        Node countryNode = graphDb.createNode(COUNTRY_LABEL);
 
         Country country = new Country(countryNode);
         country.setName(name);
@@ -128,13 +137,23 @@ public class DatabaseManager {
         return country;
     }
 
+    public Sector createSector(String id, String name){
+        Node sectorNode = graphDb.createNode(SECTOR_LABEL);
+
+        Sector sector = new Sector(sectorNode);
+        sector.setName(name);
+        sector.setId(id);
+
+        return sector;
+    }
+
     public Company createCompany(String name,
                                  String registrationNumber,
                                  String postalCode,
                                  String city,
                                  String address,
                                  String status){
-        Node companyNode = graphDb.createNode(DynamicLabel.label(CompanyModel.LABEL));
+        Node companyNode = graphDb.createNode(COMPANY_LABEL);
 
         Company company = new Company(companyNode);
         company.setName(name);
@@ -163,6 +182,14 @@ public class DatabaseManager {
             country = new Country(countryNode);
         }
         return country;
+    }
+    public Sector getSectorById(String id){
+        Sector sector = null;
+        Node sectorNode = graphDb.findNode( SECTOR_LABEL, SectorModel.id, id );
+        if(sectorNode != null){
+            sector = new Sector(sectorNode);
+        }
+        return sector;
     }
 
     public Company getCompanyByRegistrationNumber(String registrationNumber){

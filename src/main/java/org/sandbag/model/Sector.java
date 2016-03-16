@@ -16,9 +16,15 @@ public class Sector implements SectorModel {
     public String getName() {
         return String.valueOf(node.getProperty(InstallationModel.name));
     }
+    public String getId() {
+        return String.valueOf(node.getProperty(InstallationModel.id));
+    }
 
     public void setName(String name) {
         node.setProperty(InstallationModel.name, name);
+    }
+    public void setId(String id) {
+        node.setProperty(InstallationModel.id, id);
     }
 
     @Override

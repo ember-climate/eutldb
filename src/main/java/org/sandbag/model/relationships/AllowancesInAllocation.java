@@ -34,7 +34,17 @@ public class AllowancesInAllocation implements AllowancesInAllocationModel {
     }
 
     @Override
+    public String getType() {
+        return String.valueOf(relationship.getProperty(AllowancesInAllocationModel.type));
+    }
+
+    @Override
     public void setValue(double value) {
         relationship.setProperty(AllowancesInAllocationModel.value, value);
+    }
+
+    @Override
+    public void setType(String value) {
+        relationship.setProperty(AllowancesInAllocationModel.type, value);
     }
 }

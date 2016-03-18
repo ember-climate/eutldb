@@ -5,163 +5,183 @@ import org.neo4j.graphdb.Node;
 import org.sandbag.model.relationships.*;
 
 /**
- * Created by pablo on 14/02/16.
+ * Created by root on 18/03/16.
  */
-public class Installation implements InstallationModel{
+public class AircraftOperator implements AircraftOperatorModel{
 
     Node node = null;
 
-    public Installation(Node node){
+    public AircraftOperator(Node node){
         this.node = node;
     }
 
 
     @Override
     public String getId() {
-        return String.valueOf(node.getProperty(InstallationModel.id));
+        return String.valueOf(node.getProperty(AircraftOperatorModel.id));
     }
 
     @Override
     public void setId(String id) {
-        node.setProperty(InstallationModel.id, id);
+        node.setProperty(AircraftOperatorModel.id, id);
     }
 
     @Override
     public Country getCountry() {
-        return new Country(node.getSingleRelationship(new InstallationCountry(null), Direction.OUTGOING).getEndNode());
+        return new Country(node.getSingleRelationship(new AircraftOperatorCountry(null), Direction.OUTGOING).getEndNode());
     }
 
     @Override
     public Company getCompany() {
-        return new Company(node.getSingleRelationship(new InstallationCompany(null), Direction.OUTGOING).getEndNode());
+        return new Company(node.getSingleRelationship(new AircraftOperatorCompany(null), Direction.OUTGOING).getEndNode());
     }
 
     @Override
     public void setCountry(Country country) {
-        node.createRelationshipTo(country.node, new InstallationCountry(null));
+        node.createRelationshipTo(country.node, new AircraftOperatorCountry(null));
     }
 
     @Override
-    public void setCompany(Company company) { node.createRelationshipTo(company.node, new InstallationCompany(null));}
+    public void setCompany(Company company) { node.createRelationshipTo(company.node, new AircraftOperatorCompany(null));}
 
     @Override
     public String getName() {
-        return String.valueOf(node.getProperty(InstallationModel.name));
+        return String.valueOf(node.getProperty(AircraftOperatorModel.name));
     }
 
     @Override
     public void setName(String name) {
-        node.setProperty(InstallationModel.name, name);
+        node.setProperty(AircraftOperatorModel.name, name);
     }
 
     @Override
     public void setAddress(String address) {
-        node.setProperty(InstallationModel.address, address);
+        node.setProperty(AircraftOperatorModel.address, address);
     }
 
     @Override
     public void setEprtrId(String eprtrId) {
-        node.setProperty(InstallationModel.eprtrId, eprtrId);
+        node.setProperty(AircraftOperatorModel.eprtrId, eprtrId);
     }
 
     @Override
-    public void setPermitId(String permitId) {
-        node.setProperty(InstallationModel.permitId, permitId);
+    public void setUniqueCodeUnderCommissionRegulation(String value) {
+        node.setProperty(AircraftOperatorModel.uniqueCodeUnderCommissionRegulation, value);
     }
 
     @Override
-    public void setPermitEntryDate(String date) {
-        node.setProperty(InstallationModel.permitEntryDate, date);
+    public void setMonitoringPlanId(String value) {
+        node.setProperty(AircraftOperatorModel.monitoringPlanId, value);
     }
 
     @Override
-    public void setPermitExpiryOrRevocationDate(String date) {
-        node.setProperty(InstallationModel.permitExpiryOrRevocationDate, date);
+    public void setMonitoringPlanFirstYearOfApplicability(String value) {
+        node.setProperty(AircraftOperatorModel.monitoringPlanFirstYearOfApplicability, value);
+    }
+
+    @Override
+    public void setMonitoringPlanYearOfExpiry(String value) {
+        node.setProperty(AircraftOperatorModel.monitoringPlanYearOfExpiry, value);
+    }
+
+    @Override
+    public void setIcaoDesignator(String value) {
+        node.setProperty(AircraftOperatorModel.icaoDesignator, value);
     }
 
     @Override
     public void setLatitude(String latitude) {
-        node.setProperty(InstallationModel.latitude, latitude);
+        node.setProperty(AircraftOperatorModel.latitude, latitude);
     }
 
     @Override
     public void setLongitude(String longitude) {
-        node.setProperty(InstallationModel.longitude, longitude);
+        node.setProperty(AircraftOperatorModel.longitude, longitude);
     }
 
     @Override
     public void setSector(Sector sector) {
-        node.createRelationshipTo(sector.node, new InstallationSector(null));
+        node.createRelationshipTo(sector.node, new AircraftOperatorSector(null));
     }
 
     @Override
-    public void setOpen(boolean open) {
-        node.setProperty(InstallationModel.open, open);
+    public void setStatus(String status) {
+        node.setProperty(AircraftOperatorModel.status, status);
     }
 
     @Override
     public String getCity() {
-        return String.valueOf(node.getProperty(InstallationModel.city));
+        return String.valueOf(node.getProperty(AircraftOperatorModel.city));
     }
 
     @Override
     public String getAddress() {
-        return String.valueOf(node.getProperty(InstallationModel.address));
+        return String.valueOf(node.getProperty(AircraftOperatorModel.address));
     }
 
     @Override
     public String getEprtrId() {
-        return String.valueOf(node.getProperty(InstallationModel.eprtrId));
+        return String.valueOf(node.getProperty(AircraftOperatorModel.eprtrId));
     }
 
     @Override
-    public String getPermitId() {
-        return String.valueOf(node.getProperty(InstallationModel.permitId));
+    public String getUniqueCodeUnderCommissionRegulation() {
+        return String.valueOf(node.getProperty(AircraftOperatorModel.uniqueCodeUnderCommissionRegulation));
     }
 
     @Override
-    public String getPermitEntryDate() {
-        return String.valueOf(node.getProperty(InstallationModel.permitEntryDate));
+    public String getMonitoringPlanId() {
+        return String.valueOf(node.getProperty(AircraftOperatorModel.monitoringPlanId));
     }
 
     @Override
-    public String getPermitExpiryOrRevocationDate() {
-        return String.valueOf(node.getProperty(InstallationModel.permitExpiryOrRevocationDate));
+    public String getMonitoringPlanFirstYearOfApplicability() {
+        return String.valueOf(node.getProperty(AircraftOperatorModel.monitoringPlanFirstYearOfApplicability));
+    }
+
+    @Override
+    public String getMonitoringPlanYearOfExpiry() {
+        return String.valueOf(node.getProperty(AircraftOperatorModel.monitoringPlanYearOfExpiry));
+    }
+
+    @Override
+    public String getIcaoDesignator() {
+        return String.valueOf(node.getProperty(AircraftOperatorModel.icaoDesignator));
     }
 
     @Override
     public String getLatitude() {
-        return String.valueOf(node.getProperty(InstallationModel.latitude));
+        return String.valueOf(node.getProperty(AircraftOperatorModel.latitude));
     }
 
     @Override
     public String getLongitude() {
-        return String.valueOf(node.getProperty(InstallationModel.longitude));
+        return String.valueOf(node.getProperty(AircraftOperatorModel.longitude));
     }
 
     @Override
     public Sector getSector() {
-        return new Sector(node.getSingleRelationship(new InstallationSector(null), Direction.OUTGOING).getEndNode());
+        return new Sector(node.getSingleRelationship(new AircraftOperatorSector(null), Direction.OUTGOING).getEndNode());
     }
 
     @Override
     public void setCity(String city) {
-        node.setProperty(InstallationModel.city, city);
+        node.setProperty(AircraftOperatorModel.city, city);
     }
 
     @Override
     public String getPostCode() {
-        return String.valueOf(node.getProperty(InstallationModel.postCode));
+        return String.valueOf(node.getProperty(AircraftOperatorModel.postCode));
     }
 
     @Override
-    public boolean getOpen() {
-        return Boolean.valueOf(String.valueOf(node.getProperty(InstallationModel.open)));
+    public String getStatus() {
+        return String.valueOf(node.getProperty(AircraftOperatorModel.status));
     }
 
     @Override
     public void setPostCode(String postCode) {
-        node.setProperty(InstallationModel.postCode, postCode);
+        node.setProperty(AircraftOperatorModel.postCode, postCode);
     }
 
     @Override

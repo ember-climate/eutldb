@@ -2,6 +2,7 @@ package org.sandbag.model;
 
 import org.neo4j.graphdb.*;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+import org.neo4j.graphdb.index.Index;
 import org.neo4j.graphdb.schema.IndexDefinition;
 import org.neo4j.graphdb.schema.Schema;
 import org.sandbag.model.nodes.*;
@@ -21,15 +22,37 @@ public class DatabaseManager {
     public Label INSTALLATION_LABEL = DynamicLabel.label( InstallationModel.LABEL );
     public Label SECTOR_LABEL = DynamicLabel.label( SectorModel.LABEL );
     public Label PERIOD_LABEL = DynamicLabel.label( PeriodModel.LABEL );
+    public Label AIRCRAFT_OPERATOR_LABEL = DynamicLabel.label( AircraftOperatorModel.LABEL );
 
+    public static IndexDefinition installationIdIndex = null;
+    public static IndexDefinition countryNameIndex = null;
+    public static IndexDefinition countryIdIndex = null;
+    public static IndexDefinition periodNameIndex = null;
+    public static IndexDefinition sectorNameIndex = null;
+    public static IndexDefinition sectorIdIndex  = null;
+    public static IndexDefinition companyNameIndex = null;
+    public static IndexDefinition companyRegistrationNumberIndex = null;
+
+    /**
+     * Constructor
+     * @param dbFolder
+     */
     public DatabaseManager(String dbFolder){
         initDatabase(dbFolder);
     }
 
+    /**
+     *
+     * @return
+     */
     public Transaction beginTransaction(){
         return graphDb.beginTx();
     }
 
+    /**
+     * Database initialization
+     * @param dbFolder
+     */
     private void initDatabase(String dbFolder){
         if(graphDb == null){
             graphDb = new GraphDatabaseFactory().newEmbeddedDatabase( new File(dbFolder) );
@@ -38,33 +61,39 @@ public class DatabaseManager {
 
                 try(Transaction tx = graphDb.beginTx()){
 
-                    System.out.println("Creating indices...");
-
                     schema = graphDb.schema();
-                    IndexDefinition installationIdIndex = schema.indexFor(INSTALLATION_LABEL)
-                            .on(InstallationModel.id)
-                            .create();
-                    IndexDefinition countryNameIndex = schema.indexFor(COUNTRY_LABEL)
-                            .on(CountryModel.name)
-                            .create();
-                    IndexDefinition countryIdIndex = schema.indexFor(COUNTRY_LABEL)
-                            .on(CountryModel.id)
-                            .create();
-                    IndexDefinition periodNameIndex = schema.indexFor(PERIOD_LABEL)
-                            .on(PeriodModel.name)
-                            .create();
-                    IndexDefinition sectorNameIndex = schema.indexFor(SECTOR_LABEL)
-                            .on(SectorModel.name)
-                            .create();
-                    IndexDefinition sectorIdIndex = schema.indexFor(SECTOR_LABEL)
-                            .on(SectorModel.id)
-                            .create();
-                    IndexDefinition companyNameIndex = schema.indexFor(COMPANY_LABEL)
-                            .on(CompanyModel.name)
-                            .create();
-                    IndexDefinition companyRegistrationNumberIndex = schema.indexFor(COMPANY_LABEL)
-                            .on(CompanyModel.registrationNumber)
-                            .create();
+
+                    if(!schema.getIndexes().iterator().hasNext()){
+
+                        System.out.println("Creating indices...");
+
+                        installationIdIndex = schema.indexFor(INSTALLATION_LABEL)
+                                .on(InstallationModel.id)
+                                .create();
+                        countryNameIndex = schema.indexFor(COUNTRY_LABEL)
+                                .on(CountryModel.name)
+                                .create();
+                        countryIdIndex = schema.indexFor(COUNTRY_LABEL)
+                                .on(CountryModel.id)
+                                .create();
+                        periodNameIndex = schema.indexFor(PERIOD_LABEL)
+                                .on(PeriodModel.name)
+                                .create();
+                        sectorNameIndex = schema.indexFor(SECTOR_LABEL)
+                                .on(SectorModel.name)
+                                .create();
+                        sectorIdIndex = schema.indexFor(SECTOR_LABEL)
+                                .on(SectorModel.id)
+                                .create();
+                        companyNameIndex = schema.indexFor(COMPANY_LABEL)
+                                .on(CompanyModel.name)
+                                .create();
+                        companyRegistrationNumberIndex = schema.indexFor(COMPANY_LABEL)
+                                .on(CompanyModel.registrationNumber)
+                                .create();
+                    }
+
+
 
                     tx.success();
                     tx.close();
@@ -78,6 +107,55 @@ public class DatabaseManager {
                 e.printStackTrace();
             }
         }
+
+    }
+
+    public Installation createAircraftOperator(String id,
+                                               String name,
+                                               String city,
+                                               String postCode,
+                                               String address,
+                                               String eprtrId,
+                                               String uniqueCodeUnderCommissionRegulation,
+                                               String monitoringPlanId,
+                                               String monitoringPlanYearOfApplicability,
+                                               String monitoringPlanYearOfExpiry,
+                                               String icaoDesignator,
+                                               String latitude,
+                                               String longitude,
+                                               Country country,
+                                               Company company,
+                                               Sector sector){
+
+        Node aircraftOperatorNode = graphDb.createNode(AIRCRAFT_OPERATOR_LABEL);
+
+        AircraftOperator aircraftOperator = new AircraftOperator(aircraftOperatorNode);
+        installation.setId(id);
+        installation.setName(name);
+        //installation.setOpen(open.toLowerCase().equals("open"));
+        installation.setCity(city);
+        installation.setPostCode(postCode);
+        installation.setAddress(address);
+        installation.setEprtrId(eprtrId);
+        installation.setPermitId(permitId);
+        installation.setPermitEntryDate(permitEntryDate);
+        installation.setPermitExpiryOrRevocationDate(permitExpiryOrRevocationDate);
+        installation.setLatitude(latitude);
+        installation.setLongitude(longitude);
+
+        if(country != null){
+            installation.setCountry(country);
+        }
+        if(company != null){
+            installation.setCompany(company);
+        }
+        if(sector != null){
+            installation.setSector(sector);
+        }
+
+
+        return installation;
+
 
     }
 
@@ -96,7 +174,7 @@ public class DatabaseManager {
                                            Company company,
                                            Sector sector){
 
-        Node installationNode = graphDb.createNode(DynamicLabel.label(InstallationModel.LABEL));
+        Node installationNode = graphDb.createNode(INSTALLATION_LABEL);
 
         Installation installation = new Installation(installationNode);
         installation.setId(id);

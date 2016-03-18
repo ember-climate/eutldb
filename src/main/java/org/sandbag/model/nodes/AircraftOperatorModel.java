@@ -3,21 +3,23 @@ package org.sandbag.model.nodes;
 import org.neo4j.graphdb.Label;
 
 /**
- * Created by pablo on 15/02/16.
+ * Created by root on 18/03/16.
  */
-public interface InstallationModel extends Label{
+public interface AircraftOperatorModel extends Label {
 
-    String LABEL = "INSTALLATION";
+    String LABEL = "AIRCRAFT OPERATOR";
     String id = "id";
     String name = "name";
     String city = "city";
     String postCode = "post_code";
-    String open = "open";
+    String status = "status";
     String address = "address";
     String eprtrId = "EPRTR_ID";
-    String permitId = "permit_id";
-    String permitEntryDate = "permit_entry_date";
-    String permitExpiryOrRevocationDate = "permit_expiry_or_revocation_date";
+    String uniqueCodeUnderCommissionRegulation = "unique_code_under_commission_regulation";
+    String monitoringPlanId = "monitoring_plan_id";
+    String monitoringPlanFirstYearOfApplicability = "monitoring_first_year_of_applicability";
+    String monitoringPlanYearOfExpiry = "monitoring_plan_year_of_expiry";
+    String icaoDesignator = "icao_designator";
     String latitude = "latitude";
     String longitude = "longitude";
 
@@ -25,32 +27,35 @@ public interface InstallationModel extends Label{
     Country getCountry();
     Company getCompany();
     String getPostCode();
-    boolean getOpen();
+    String getStatus();
     String getName();
     String getCity();
     String getAddress();
     String getEprtrId();
-    String getPermitId();
-    String getPermitEntryDate();
-    String getPermitExpiryOrRevocationDate();
+    String getUniqueCodeUnderCommissionRegulation();
+    String getMonitoringPlanId();
+    String getMonitoringPlanFirstYearOfApplicability();
+    String getMonitoringPlanYearOfExpiry();
+    String getIcaoDesignator();
     String getLatitude();
     String getLongitude();
     Sector getSector();
 
 
-
     void setId(String id);
     void setCountry(Country country);
     void setCompany(Company company);
-    void setOpen(boolean open);
+    void setStatus(String status);
     void setCity(String city);
     void setPostCode(String postCode);
     void setName(String name);
     void setAddress(String address);
     void setEprtrId(String eprtrId);
-    void setPermitId(String permitId);
-    void setPermitEntryDate(String date);
-    void setPermitExpiryOrRevocationDate(String date);
+    void setUniqueCodeUnderCommissionRegulation(String value);
+    void setMonitoringPlanId(String value);
+    void setMonitoringPlanFirstYearOfApplicability(String value);
+    void setMonitoringPlanYearOfExpiry(String value);
+    void setIcaoDesignator(String value);
     void setLatitude(String latitude);
     void setLongitude(String longitude);
     void setSector(Sector sector);

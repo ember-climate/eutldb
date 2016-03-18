@@ -173,7 +173,7 @@ public class EUTLDBImporter {
 
                     String aircraftOperatorCompleteIDSt = countryIdSt + aircraftOperatorIdSt;
 
-                    AircraftOperator aircraftOperator = dbManager.createAircraftOperator(aircraftOperatorIdSt,companyNameSt,
+                    AircraftOperator aircraftOperator = dbManager.createAircraftOperator(aircraftOperatorCompleteIDSt,companyNameSt,
                             aircraftOperatorCitySt,aircraftOperatorPostalCodeSt,aircraftOperatorMainAddressSt + aircraftOperatorSecondaryAddressSt,
                             eprtrIdSt, companyStatusSt, uniqueCodeUnderComissionioRegulationSt, monitoringPlanIDSt,
                             monitoringPlanFirstYearOfApplicabilitySt,monitoringPlanYearOfExpiry, icaoDesignator,

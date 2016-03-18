@@ -30,6 +30,7 @@ public class EUTLDBImporter {
             EUTLDBImporter importer = new EUTLDBImporter(args[0]);
 
             importer.importInstallationsFromFolder(args[1]);
+            importer.importAircraftOperatorsFromFolder(args[2]);
             importer.importComplianceDataFromFolder(args[3]);
 
             importer.importNERAllocationData(new File(args[4]));
@@ -61,6 +62,27 @@ public class EUTLDBImporter {
 
         System.out.println("Done! :)");
     }
+
+    public void importAircraftOperatorsFromFolder(String folderSt){
+
+        System.out.println("Importing aircraft operators from folder: " + folderSt);
+
+        File folder = new File(folderSt);
+        if(folder.isDirectory()){
+
+            for(File currentFile : folder.listFiles()){
+                if(currentFile.getName().split("\\.")[1].toLowerCase().equals("csv")){
+                    importAircraftOperatorFile(currentFile);
+                }
+            }
+
+        }else{
+            System.out.println("Please enter a valid folder name");
+        }
+
+        System.out.println("Done! :)");
+    }
+
 
     public void importComplianceDataFromFolder(String folderSt){
         System.out.println("Importing compliance data from folder: " + folderSt);
@@ -151,10 +173,11 @@ public class EUTLDBImporter {
 
                     String aircraftOperatorCompleteIDSt = countryIdSt + aircraftOperatorIdSt;
 
-                    Installation installation = dbManager.createInstallation(installationCompleteIDSt,installationNameSt,
-                            installationCitySt, installationPostalCodeSt, installationMainAddressSt + " " + installationSecondaryAddressSt,
-                            eprtrIdSt, permitIDSt, permitEntryDateSt, permitExpiryRevocationDateSt, latituteSt, longitudeSt,
-                            country, company, sector);
+                    AircraftOperator aircraftOperator = dbManager.createAircraftOperator(aircraftOperatorIdSt,companyNameSt,
+                            aircraftOperatorCitySt,aircraftOperatorPostalCodeSt,aircraftOperatorMainAddressSt + aircraftOperatorSecondaryAddressSt,
+                            eprtrIdSt, companyStatusSt, uniqueCodeUnderComissionioRegulationSt, monitoringPlanIDSt,
+                            monitoringPlanFirstYearOfApplicabilitySt,monitoringPlanYearOfExpiry, icaoDesignator,
+                            latitudeSt, longitudeSt, country, company, sector);
 
                     tx.success();
                     tx.close();

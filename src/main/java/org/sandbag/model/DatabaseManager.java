@@ -110,53 +110,53 @@ public class DatabaseManager {
 
     }
 
-    public Installation createAircraftOperator(String id,
-                                               String name,
-                                               String city,
-                                               String postCode,
-                                               String address,
-                                               String eprtrId,
-                                               String uniqueCodeUnderCommissionRegulation,
-                                               String monitoringPlanId,
-                                               String monitoringPlanYearOfApplicability,
-                                               String monitoringPlanYearOfExpiry,
-                                               String icaoDesignator,
-                                               String latitude,
-                                               String longitude,
-                                               Country country,
-                                               Company company,
-                                               Sector sector){
+    public AircraftOperator createAircraftOperator(String id,
+                                                   String name,
+                                                   String city,
+                                                   String postCode,
+                                                   String address,
+                                                   String eprtrId,
+                                                   String status,
+                                                   String uniqueCodeUnderCommissionRegulation,
+                                                   String monitoringPlanId,
+                                                   String monitoringPlanYearOfApplicability,
+                                                   String monitoringPlanYearOfExpiry,
+                                                   String icaoDesignator,
+                                                   String latitude,
+                                                   String longitude,
+                                                   Country country,
+                                                   Company company,
+                                                   Sector sector){
 
         Node aircraftOperatorNode = graphDb.createNode(AIRCRAFT_OPERATOR_LABEL);
 
         AircraftOperator aircraftOperator = new AircraftOperator(aircraftOperatorNode);
-        installation.setId(id);
-        installation.setName(name);
-        //installation.setOpen(open.toLowerCase().equals("open"));
-        installation.setCity(city);
-        installation.setPostCode(postCode);
-        installation.setAddress(address);
-        installation.setEprtrId(eprtrId);
-        installation.setPermitId(permitId);
-        installation.setPermitEntryDate(permitEntryDate);
-        installation.setPermitExpiryOrRevocationDate(permitExpiryOrRevocationDate);
-        installation.setLatitude(latitude);
-        installation.setLongitude(longitude);
+        aircraftOperator.setId(id);
+        aircraftOperator.setName(name);
+        aircraftOperator.setStatus(status);
+        aircraftOperator.setCity(city);
+        aircraftOperator.setPostCode(postCode);
+        aircraftOperator.setAddress(address);
+        aircraftOperator.setEprtrId(eprtrId);
+        aircraftOperator.setUniqueCodeUnderCommissionRegulation(uniqueCodeUnderCommissionRegulation);
+        aircraftOperator.setMonitoringPlanId(monitoringPlanId);
+        aircraftOperator.setMonitoringPlanFirstYearOfApplicability(monitoringPlanYearOfApplicability);
+        aircraftOperator.setMonitoringPlanYearOfExpiry(monitoringPlanYearOfExpiry);
+        aircraftOperator.setIcaoDesignator(icaoDesignator);
+        aircraftOperator.setLatitude(latitude);
+        aircraftOperator.setLongitude(longitude);
 
         if(country != null){
-            installation.setCountry(country);
+            aircraftOperator.setCountry(country);
         }
         if(company != null){
-            installation.setCompany(company);
+            aircraftOperator.setCompany(company);
         }
         if(sector != null){
-            installation.setSector(sector);
+            aircraftOperator.setSector(sector);
         }
 
-
-        return installation;
-
-
+        return aircraftOperator;
     }
 
     public Installation createInstallation(String id,

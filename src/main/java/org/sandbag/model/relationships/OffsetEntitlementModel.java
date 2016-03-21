@@ -10,10 +10,7 @@ public interface OffsetEntitlementModel extends RelationshipType {
     String LABEL = "OFFSET_ENTITLEMENT";
 
     String value = "value";
-    String type = "type";
 
     double getValue();
-    String getType();
     void setValue(double value);
-    void setType(String type);
 }

@@ -182,10 +182,9 @@ public class Installation implements InstallationModel{
         offsets.setType(type);
     }
     @Override
-    public void setOffsetEntitlementForPeriod(Period period, double value, String type){
+    public void setOffsetEntitlementForPeriod(Period period, double value){
         OffsetEntitlement offsetEntitlement = new OffsetEntitlement(node.createRelationshipTo(period.node, new OffsetEntitlement(null)));
         offsetEntitlement.setValue(value);
-        offsetEntitlement.setType(type);
     }
 
     @Override

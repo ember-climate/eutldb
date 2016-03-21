@@ -278,6 +278,14 @@ public class DatabaseManager {
         }
         return installation;
     }
+    public AircraftOperator getAircraftOperatorById(String id){
+        AircraftOperator aircraftOperator = null;
+        Node aircraftOperatorNode = graphDb.findNode( AIRCRAFT_OPERATOR_LABEL, AircraftOperatorModel.id, id );
+        if(aircraftOperatorNode != null){
+            aircraftOperator = new AircraftOperator(aircraftOperatorNode);
+        }
+        return aircraftOperator;
+    }
     public Period getPeriodByName(String name){
         Period period = null;
         Node periodNode = graphDb.findNode( PERIOD_LABEL, PeriodModel.name, name );

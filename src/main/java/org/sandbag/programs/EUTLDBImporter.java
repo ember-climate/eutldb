@@ -17,14 +17,16 @@ public class EUTLDBImporter {
     private static DatabaseManager dbManager;
 
     public static void main(String[] args){
-        if(args.length != 6){
+        if(args.length != 8){
             System.out.println("The program expects the following parameters:\n" +
                     "1. Database folder\n" +
                     "2. Installations folder\n" +
                     "3. Aircraf Operators folder\n" +
                     "4. Compliance Data folder\n" +
                     "5. NER allocation data file\n" +
-                    "6. Article 10c data file");
+                    "6. Article 10c data file\n" +
+                    "7. Installations Offset Entitlements file\n" +
+                    "8. Aircraft Operators Offset Entitlements file");
         }else{
 
             EUTLDBImporter importer = new EUTLDBImporter(args[0]);
@@ -35,6 +37,8 @@ public class EUTLDBImporter {
 
             importer.importNERAllocationData(new File(args[4]));
             importer.importArticle10cAllocationData(new File(args[5]));
+            importer.importInstallationsOffsetEntitlements(new File(args[6]));
+            importer.importAircraftOperatorsOffsetEntitlements(new File(args[7]));
 
         }
     }
@@ -313,6 +317,144 @@ public class EUTLDBImporter {
                         System.out.println("(Article 10c data) Installation " + installationIdSt + " could not be found...");
                         System.out.println("installationIdIncompleteSt = '" + installationIdIncompleteSt + "'");
                         System.out.println("countryIdSt = '" + countryIdSt + "'");
+                    }
+
+                    if(lineCounter % 100 == 0){
+                        tx.success();
+                        tx.close();
+                        tx = dbManager.beginTransaction();
+                    }
+
+                    lineCounter++;
+                }
+            }
+
+            tx.success();
+            tx.close();
+            reader.close();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void importInstallationsOffsetEntitlements(File file){
+        System.out.println("Importing file " + file.getName());
+        try{
+
+            String line;
+            int lineCounter = 1;
+            String offsetEntitlementsPeriod = "2008to2020";
+
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            reader.readLine(); //skipping header
+
+            Transaction tx = dbManager.beginTransaction();
+
+            Period period = dbManager.getPeriodByName(offsetEntitlementsPeriod);
+            if(period == null){
+                System.out.println("Creating period: " + offsetEntitlementsPeriod);
+                period = dbManager.createPeriod(offsetEntitlementsPeriod);
+                tx.success();
+                tx.close();
+                tx = dbManager.beginTransaction();
+            }
+
+            while((line = reader.readLine()) != null){
+
+                if(!line.trim().isEmpty()){
+
+                    String[] columns = line.split("\t");
+
+                    String countryIdSt = columns[0];
+                    String installationIdIncompleteSt = columns[1].trim();
+                    String installationIdSt = countryIdSt + installationIdIncompleteSt;
+                    String valueSt = columns[2];
+                    try{
+                        Double value = Double.parseDouble(valueSt);
+
+                        Installation installation = dbManager.getInstallationById(installationIdSt);
+                        if(installation != null){
+
+                            installation.setOffsetEntitlementForPeriod(period, value);
+
+                        }else{
+                            System.out.println("(Offset entitlement) Installation " + installationIdSt + " could not be found...");
+                            System.out.println("installationIdIncompleteSt = '" + installationIdIncompleteSt + "'");
+                            System.out.println("countryIdSt = '" + countryIdSt + "'");
+                        }
+                    }catch(Exception e){
+
+                    }
+
+                    if(lineCounter % 100 == 0){
+                        tx.success();
+                        tx.close();
+                        tx = dbManager.beginTransaction();
+                    }
+
+                    lineCounter++;
+                }
+            }
+
+            tx.success();
+            tx.close();
+            reader.close();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void importAircraftOperatorsOffsetEntitlements(File file){
+        System.out.println("Importing file " + file.getName());
+        try{
+
+            String line;
+            int lineCounter = 1;
+            String offsetEntitlementsPeriod = "2008to2020";
+
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            reader.readLine(); //skipping header
+
+            Transaction tx = dbManager.beginTransaction();
+
+            Period period = dbManager.getPeriodByName(offsetEntitlementsPeriod);
+            if(period == null){
+                System.out.println("Creating period: " + offsetEntitlementsPeriod);
+                period = dbManager.createPeriod(offsetEntitlementsPeriod);
+                tx.success();
+                tx.close();
+                tx = dbManager.beginTransaction();
+            }
+
+            while((line = reader.readLine()) != null){
+
+                if(!line.trim().isEmpty()){
+
+                    String[] columns = line.split("\t");
+
+                    String countryIdSt = columns[0];
+                    String aircraftOperatorIncompleteIdSt = columns[1].trim();
+                    String aircraftOperatorIdSt = countryIdSt + aircraftOperatorIncompleteIdSt;
+                    String valueSt = columns[2];
+                    try{
+                        Double value = Double.parseDouble(valueSt);
+
+                        AircraftOperator aircraftOperator = dbManager.getAircraftOperatorById(aircraftOperatorIdSt);
+                        if(aircraftOperator != null){
+
+                            aircraftOperator.setOffsetEntitlementForPeriod(period, value);
+
+                        }else{
+                            System.out.println("(Offset entitlement) Aircraft Operator " + aircraftOperatorIdSt + " could not be found...");
+                            System.out.println("aircraftOperatorIncompleteIdSt = '" + aircraftOperatorIncompleteIdSt + "'");
+                            System.out.println("countryIdSt = '" + countryIdSt + "'");
+                        }
+                    }catch(Exception e){
+
                     }
 
                     if(lineCounter % 100 == 0){

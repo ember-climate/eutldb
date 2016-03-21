@@ -57,7 +57,7 @@ public interface InstallationModel extends Label{
     void setVerifiedEmissionsForPeriod(Period period, double value);
     void setFreeAllocationForPeriod(Period period, double value, String type);
     void setOffsetsForPeriod(Period period, double value, String type);
-    void setOffsetEntitlementForPeriod(Period period, double value, String type);
+    void setOffsetEntitlementForPeriod(Period period, double value);
     void setSurrenderedUnitsForPeriod(Period period, double value);
     void setComplianceForPeriod(Period period, String value);
     void setAllowancesInAllocationForPeriod(Period period, double value, String type);

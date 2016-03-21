@@ -7,15 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d95b43a-1bd1-418a-95e4-7ed98cc42f7f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/DatabaseManager.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/DatabaseManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/AircraftOperator.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/AircraftOperator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/AircraftOperatorModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/AircraftOperatorModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Installation.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Installation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/InstallationModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/InstallationModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/OffsetEntitlement.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/OffsetEntitlement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/OffsetEntitlementModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/OffsetEntitlementModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLMegaFileImporter.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLMegaFileImporter.java" />
     </list>
     <ignored path="eutldb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,8 +34,8 @@
       <file leaf-file-name="EUTLDBImporter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33772454">
-              <caret line="432" column="30" selection-start-line="432" selection-start-column="30" selection-end-line="432" selection-end-column="30" />
+            <state vertical-scroll-proportion="5.430272">
+              <caret line="452" column="99" selection-start-line="452" selection-start-column="99" selection-end-line="452" selection-end-column="99" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#importInstallationsFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
@@ -50,7 +43,7 @@
                 <element signature="method#importComplianceDataFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
                 <element signature="method#importAircraftOperatorFile#0;class#EUTLDBImporter#0" expanded="false" />
                 <element signature="method#importNERAllocationData#0;class#EUTLDBImporter#0" expanded="false" />
-                <element signature="method#importInstallationsOffsetEntitlements#0;class#EUTLDBImporter#0" expanded="false" />
+                <element signature="method#importArticle10cAllocationData#0;class#EUTLDBImporter#0" expanded="false" />
                 <element signature="method#importInstallationsFile#0;class#EUTLDBImporter#0" expanded="false" />
                 <element signature="method#importAllocationDataForPeriod1File#0;class#EUTLDBImporter#0" expanded="false" />
                 <element signature="method#importAllocationDataForPeriod0File#0;class#EUTLDBImporter#0" expanded="false" />
@@ -114,7 +107,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/org/sandbag/model/ParentCompany.java" />
         <option value="$PROJECT_DIR$/src/org/sandbag/model/Company.java" />
         <option value="$PROJECT_DIR$/src/org/sandbag/model/CompanyModel.java" />
         <option value="$PROJECT_DIR$/src/org/sandbag/model/PeriodModel.java" />
@@ -161,10 +153,11 @@
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/OffsetEntitlement.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/OffsetEntitlementModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/InstallationModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/AircraftOperatorModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/AircraftOperator.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/DatabaseManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLMegaFileImporter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java" />
       </list>
     </option>
   </component>
@@ -650,20 +643,20 @@
     <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32681242" sideWeight="0.49786323" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3360849" sideWeight="0.50214595" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4972826" sideWeight="0.49785408" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28423476" sideWeight="0.49785408" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.113247864" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32681242" sideWeight="0.49786323" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -810,13 +803,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.1932246">
           <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLMegaFileImporter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="85" column="27" selection-start-line="85" selection-start-column="20" selection-end-line="85" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -1063,10 +1049,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLMegaFileImporter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="6.3782945">
+          <caret line="208" column="96" selection-start-line="208" selection-start-column="96" selection-end-line="208" selection-end-column="96" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33772454">
-          <caret line="432" column="30" selection-start-line="432" selection-start-column="30" selection-end-line="432" selection-end-column="30" />
+        <state vertical-scroll-proportion="5.430272">
+          <caret line="452" column="99" selection-start-line="452" selection-start-column="99" selection-end-line="452" selection-end-column="99" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#importInstallationsFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
@@ -1074,7 +1068,7 @@
             <element signature="method#importComplianceDataFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
             <element signature="method#importAircraftOperatorFile#0;class#EUTLDBImporter#0" expanded="false" />
             <element signature="method#importNERAllocationData#0;class#EUTLDBImporter#0" expanded="false" />
-            <element signature="method#importInstallationsOffsetEntitlements#0;class#EUTLDBImporter#0" expanded="false" />
+            <element signature="method#importArticle10cAllocationData#0;class#EUTLDBImporter#0" expanded="false" />
             <element signature="method#importInstallationsFile#0;class#EUTLDBImporter#0" expanded="false" />
             <element signature="method#importAllocationDataForPeriod1File#0;class#EUTLDBImporter#0" expanded="false" />
             <element signature="method#importAllocationDataForPeriod0File#0;class#EUTLDBImporter#0" expanded="false" />

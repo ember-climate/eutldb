@@ -31,12 +31,12 @@ public class EUTLDBImporter {
 
             EUTLDBImporter importer = new EUTLDBImporter(args[0]);
 
-            importer.importInstallationsFromFolder(args[1]);
-            importer.importAircraftOperatorsFromFolder(args[2]);
-            importer.importComplianceDataFromFolder(args[3]);
+            //importer.importInstallationsFromFolder(args[1]);
+            //importer.importAircraftOperatorsFromFolder(args[2]);
+            //importer.importComplianceDataFromFolder(args[3]);
 
-            importer.importNERAllocationData(new File(args[4]));
-            importer.importArticle10cAllocationData(new File(args[5]));
+           // importer.importNERAllocationData(new File(args[4]));
+            //importer.importArticle10cAllocationData(new File(args[5]));
             importer.importInstallationsOffsetEntitlements(new File(args[6]));
             importer.importAircraftOperatorsOffsetEntitlements(new File(args[7]));
 
@@ -367,14 +367,19 @@ public class EUTLDBImporter {
 
                     String[] columns = line.split("\t");
 
-                    String countryIdSt = columns[0];
+                    String countryNameSt = columns[0];
                     String installationIdIncompleteSt = columns[1].trim();
-                    String installationIdSt = countryIdSt + installationIdIncompleteSt;
+
                     String valueSt = columns[2];
                     try{
                         Double value = Double.parseDouble(valueSt);
 
+                        Country country = dbManager.getCountryByName(countryNameSt);
+                        String countryIdSt = country.getId();
+                        String installationIdSt = countryIdSt + installationIdIncompleteSt;
+
                         Installation installation = dbManager.getInstallationById(installationIdSt);
+
                         if(installation != null){
 
                             installation.setOffsetEntitlementForPeriod(period, value);
@@ -436,12 +441,16 @@ public class EUTLDBImporter {
 
                     String[] columns = line.split("\t");
 
-                    String countryIdSt = columns[0];
+                    String countryNameSt = columns[0];
                     String aircraftOperatorIncompleteIdSt = columns[1].trim();
-                    String aircraftOperatorIdSt = countryIdSt + aircraftOperatorIncompleteIdSt;
+
                     String valueSt = columns[2];
                     try{
                         Double value = Double.parseDouble(valueSt);
+
+                        Country country = dbManager.getCountryByName(countryNameSt);
+                        String countryIdSt = country.getId();
+                        String aircraftOperatorIdSt = countryIdSt + aircraftOperatorIncompleteIdSt;
 
                         AircraftOperator aircraftOperator = dbManager.getAircraftOperatorById(aircraftOperatorIdSt);
                         if(aircraftOperator != null){

@@ -206,7 +206,7 @@ public class EUTLMegaFileImporter {
                                 double tempValue;
                                 try{
                                     tempValue = Double.parseDouble(tonesCO2.replaceAll(",",""));
-                                    installation.setOffsetEntitlementForPeriod(period, tempValue, subTypeSt);
+                                    installation.setOffsetEntitlementForPeriod(period, tempValue);
                                 }catch (Exception e){
                                     System.out.println("Problem parsing CO2 value: " + tonesCO2 + " for line:\n" + line);
                                 }

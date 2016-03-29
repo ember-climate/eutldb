@@ -23,6 +23,8 @@ public class DatabaseManager {
     public Label SECTOR_LABEL = DynamicLabel.label( SectorModel.LABEL );
     public Label PERIOD_LABEL = DynamicLabel.label( PeriodModel.LABEL );
     public Label AIRCRAFT_OPERATOR_LABEL = DynamicLabel.label( AircraftOperatorModel.LABEL );
+    public Label PROJECT_LABEL = DynamicLabel.label( ProjectModel.LABEL );
+    public Label OFFSET_LABEL = DynamicLabel.label( OffsetModel.LABEL );
 
     public static IndexDefinition installationIdIndex = null;
     public static IndexDefinition countryNameIndex = null;
@@ -159,6 +161,78 @@ public class DatabaseManager {
         return aircraftOperator;
     }
 
+    public Offset createOffset(String amountSt,
+                               Installation installation,
+                               Project project,
+                               Period period,
+                               Country originatingCountry){
+
+        try{
+            Double amount = Double.parseDouble(amountSt);
+
+            Node offsetNode = graphDb.createNode(OFFSET_LABEL);
+            Offset offset = new Offset(offsetNode);
+
+            offset.setAmount(amount);
+            if(installation != null){
+                offset.setInstallation(installation);
+            }
+            if(project != null){
+                offset.setProject(project);
+            }
+            if(period != null){
+                offset.setPeriod(period);
+            }
+            if(originatingCountry != null){
+                offset.setOriginatingCountry(originatingCountry);
+            }
+
+            return offset;
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
+
+    }
+
+    public Offset createOffset(String amountSt,
+                               AircraftOperator aircraftOperator,
+                               Project project,
+                               Period period,
+                               Country originatingCountry){
+
+        try{
+            Double amount = Double.parseDouble(amountSt);
+
+            Node offsetNode = graphDb.createNode(OFFSET_LABEL);
+            Offset offset = new Offset(offsetNode);
+
+            offset.setAmount(amount);
+            if(aircraftOperator != null){
+                offset.setAircraftOperator(aircraftOperator);
+            }
+            if(project != null){
+                offset.setProject(project);
+            }
+            if(period != null){
+                offset.setPeriod(period);
+            }
+            if(originatingCountry != null){
+                offset.setOriginatingCountry(originatingCountry);
+            }
+
+            return offset;
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
+
+    }
+
     public Installation createInstallation(String id,
                                            String name,
                                            String city,
@@ -222,6 +296,15 @@ public class DatabaseManager {
         period.setName(name);
 
         return period;
+    }
+
+    public Project createProject(String id){
+        Node projectNode = graphDb.createNode(PROJECT_LABEL);
+
+        Project project = new Project(projectNode);
+        project.setId(id);
+
+        return project;
     }
 
     public Sector createSector(String id, String name){
@@ -302,6 +385,14 @@ public class DatabaseManager {
             sector = new Sector(sectorNode);
         }
         return sector;
+    }
+    public Project getProjectById(String id){
+        Project project = null;
+        Node projectNode = graphDb.findNode( PROJECT_LABEL, ProjectModel.id, id );
+        if(projectNode != null){
+            project = new Project(projectNode);
+        }
+        return project;
     }
 
     public Company getCompanyByRegistrationNumber(String registrationNumber){

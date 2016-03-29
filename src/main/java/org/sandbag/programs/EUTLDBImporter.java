@@ -735,61 +735,52 @@ public class EUTLDBImporter {
 
                     String[] columns = line.split("\t");
 
-                    String countryIdSt = columns[0];
+                    String countryIdSt = columns[0].trim();
                     String installationIdIncompleteSt = columns[1].trim();
                     String installationIdSt = countryIdSt + installationIdIncompleteSt;
-                    String originatingRegistrySt = columns[2];
-                    String allowancesSt = columns[3];
-                    String verifiedEmissionsSt = columns[4];
-                    String unitsSurrenderedSt = columns[5];
-                    String complianceCode = columns[6];
+                    String originatingRegistrySt = columns[2].trim();
+                    String unitTypeSt = columns[3].trim();
+                    String amountSt = columns[4].trim();
+                    String originalCommitmentPeriod = columns[5].trim();
+                    String applicableCommitmentPeriod = columns[6].trim();
+                    String yearOfComplianceSt = columns[7].trim();
+                    String lulucfActivitySt = columns[8].trim();
+                    String projectIdSt = columns[9].trim();
+                    String trackSt = columns[10].trim();
+                    String expiryDateSt = columns[11].trim();
 
-                    Period period = dbManager.getPeriodByName(yearSt);
+                    Period period = dbManager.getPeriodByName(yearOfComplianceSt);
                     if(period == null){
-                        System.out.println("Creating period: " + yearSt);
-                        period = dbManager.createPeriod(yearSt);
+                        System.out.println("Creating period: " + yearOfComplianceSt);
+                        period = dbManager.createPeriod(yearOfComplianceSt);
                         tx.success();
                         tx.close();
                         tx = dbManager.beginTransaction();
                     }
+                    Country originatingCountry = dbManager.getCountryByName(originatingRegistrySt);
+                    if(originatingCountry == null){
+                        System.out.println("Creating country: " + originatingCountry);
+                        originatingCountry = dbManager.createCountry(originatingRegistrySt,"");
+                        tx.success();
+                        tx.close();
+                        tx = dbManager.beginTransaction();
+                    }
+                    Project project = null;
+                    if(!projectIdSt.isEmpty()){
+                        project = dbManager.getProjectById(projectIdSt);
+                        if(project == null){
+                            System.out.println("Creating project: " + projectIdSt);
+                            project = dbManager.createProject(projectIdSt);
+                            tx.success();
+                            tx.close();
+                            tx = dbManager.beginTransaction();
+                        }
+                    }
+
                     Installation installation = dbManager.getInstallationById(installationIdSt);
                     if(installation != null){
 
-                        //+++++++++++++++++++++ SURRENDERED UNITS++++++++++++++++++++++++++++++++
-                        if(!unitsSurrenderedSt.isEmpty()){
-                            try{
-                                double tempValue = Double.parseDouble(unitsSurrenderedSt);
-                                installation.setSurrenderedUnitsForPeriod(period, tempValue);
-                            }catch(Exception e){
-//                                System.out.println("Problem with installation: " + installationIdSt + " [" + countryIdSt + "]");
-//                                System.out.println("Units surrendered value: " + unitsSurrenderedSt + " is not a number. It won't be stored");
-                            }
-                        }
-                        //+++++++++++++++++++++ VERIFIED EMISSIONS++++++++++++++++++++++++++++++++
-                        if(!verifiedEmissionsSt.isEmpty()){
-                            try{
-                                double tempValue = Double.parseDouble(verifiedEmissionsSt);
-                                installation.setVerifiedEmissionsForPeriod(period, tempValue);
-                            }catch(Exception e){
-//                                System.out.println("Problem with installation: " + installationIdSt + " [" + countryIdSt + "]");
-//                                System.out.println("Verified emissions value: " + verifiedEmissionsSt + " is not a number. It won't be stored");
-                            }
-                        }
-                        //++++++++++++++++++++++ COMPLIANCE ++++++++++++++++++++++++++++++++++++
-                        if(!complianceCode.isEmpty()){
-                            installation.setComplianceForPeriod(period, complianceCode);
-                        }
-                        //++++++++++++++++++++ ALLOWANCES IN ALLOCATION ++++++++++++++++++++++++++
-                        if(!allowancesSt.isEmpty()){
-                            try{
-                                double tempValue = Double.parseDouble(allowancesSt);
-                                installation.setAllowancesInAllocationForPeriod(period, tempValue, AllowancesInAllocationModel.STANDARD_TYPE);
-                            }catch(Exception e){
-//                                System.out.println("Problem with installation: " + installationIdSt + " [" + countryIdSt + "]");
-//                                System.out.println("Allowances in allocation value: " + allowancesSt + " is not a number. It won't be stored");
-                            }
-                        }
-
+                        Offset offset = dbManager.createOffset(amountSt, installation, project, period, originatingCountry);
 
 
                     }else{
@@ -797,6 +788,8 @@ public class EUTLDBImporter {
                         AircraftOperator aircraftOperator = dbManager.getAircraftOperatorById(installationIdSt);
 
                         if(aircraftOperator != null){
+
+                            Offset offset = dbManager.createOffset(amountSt, aircraftOperator, project, period, originatingCountry);
 
                         }else{
                             System.out.println("Installation/aircraft op. " + installationIdSt + " could not be found...");

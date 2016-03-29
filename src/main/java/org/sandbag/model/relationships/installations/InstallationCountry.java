@@ -20,10 +20,12 @@ public class InstallationCountry implements InstallationCountryModel{
         return LABEL;
     }
 
+    @Override
     public Installation getInstallation(){
         return new Installation(relationship.getStartNode());
     }
 
+    @Override
     public Country getCountry(){
         return new Country(relationship.getEndNode());
     }

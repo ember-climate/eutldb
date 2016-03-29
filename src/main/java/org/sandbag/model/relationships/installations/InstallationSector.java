@@ -19,10 +19,12 @@ public class InstallationSector implements InstallationSectorModel{
         return LABEL;
     }
 
+    @Override
     public Installation getInstallation(){
         return new Installation(relationship.getStartNode());
     }
 
+    @Override
     public Sector getSector(){
         return new Sector(relationship.getEndNode());
     }

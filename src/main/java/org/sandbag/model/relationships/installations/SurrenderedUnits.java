@@ -20,10 +20,12 @@ public class SurrenderedUnits implements SurrenderedUnitsModel {
         return LABEL;
     }
 
+    @Override
     public Installation getInstallation(){
         return new Installation(relationship.getStartNode());
     }
 
+    @Override
     public Period getPeriod(){
         return new Period(relationship.getEndNode());
     }

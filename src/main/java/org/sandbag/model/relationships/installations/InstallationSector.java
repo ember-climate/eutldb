@@ -1,16 +1,16 @@
-package org.sandbag.model.relationships;
+package org.sandbag.model.relationships.installations;
 
 import org.neo4j.graphdb.Relationship;
-import org.sandbag.model.nodes.Company;
 import org.sandbag.model.nodes.Installation;
+import org.sandbag.model.nodes.Sector;
 
 /**
  * Created by root on 16/02/16.
  */
-public class InstallationCompany implements InstallationCompanyModel {
+public class InstallationSector implements InstallationSectorModel{
     protected Relationship relationship;
 
-    public InstallationCompany(Relationship relationship){
+    public InstallationSector(Relationship relationship){
         this.relationship = relationship;
     }
 
@@ -19,13 +19,11 @@ public class InstallationCompany implements InstallationCompanyModel {
         return LABEL;
     }
 
-    @Override
     public Installation getInstallation(){
         return new Installation(relationship.getStartNode());
     }
 
-    @Override
-    public Company getCompany(){
-        return new Company(relationship.getEndNode());
+    public Sector getSector(){
+        return new Sector(relationship.getEndNode());
     }
 }

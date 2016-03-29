@@ -2,7 +2,7 @@ package org.sandbag.model.nodes;
 
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
-import org.sandbag.model.relationships.*;
+import org.sandbag.model.relationships.installations.*;
 
 /**
  * Created by pablo on 14/02/16.

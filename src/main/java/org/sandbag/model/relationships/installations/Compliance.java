@@ -1,17 +1,17 @@
-package org.sandbag.model.relationships;
+package org.sandbag.model.relationships.installations;
 
 import org.neo4j.graphdb.Relationship;
 import org.sandbag.model.nodes.Installation;
 import org.sandbag.model.nodes.Period;
 
 /**
- * Created by root on 17/02/16.
+ * Created by root on 16/03/16.
  */
-public class OffsetEntitlement implements OffsetEntitlementModel{
+public class Compliance implements ComplianceModel {
 
     protected Relationship relationship;
 
-    public OffsetEntitlement(Relationship relationship){
+    public Compliance(Relationship relationship){
         this.relationship = relationship;
     }
 
@@ -29,13 +29,12 @@ public class OffsetEntitlement implements OffsetEntitlementModel{
     }
 
     @Override
-    public double getValue() {
-        return Double.parseDouble(String.valueOf(relationship.getProperty(OffsetEntitlementModel.value)));
+    public String getValue() {
+        return String.valueOf(relationship.getProperty(ComplianceModel.value));
     }
 
     @Override
-    public void setValue(double value) {
-        relationship.setProperty(OffsetEntitlementModel.value, value);
+    public void setValue(String value) {
+        relationship.setProperty(ComplianceModel.value, value);
     }
-
 }

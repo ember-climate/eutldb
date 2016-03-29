@@ -1,17 +1,17 @@
-package org.sandbag.model.relationships;
+package org.sandbag.model.relationships.installations;
 
 import org.neo4j.graphdb.Relationship;
 import org.sandbag.model.nodes.Installation;
 import org.sandbag.model.nodes.Period;
 
 /**
- * Created by root on 16/03/16.
+ * Created by root on 16/02/16.
  */
-public class SurrenderedUnits implements SurrenderedUnitsModel {
+public class VerifiedEmissions implements VerifiedEmissionsModel {
 
     protected Relationship relationship;
 
-    public SurrenderedUnits(Relationship relationship){
+    public VerifiedEmissions(Relationship relationship){
         this.relationship = relationship;
     }
 
@@ -30,11 +30,11 @@ public class SurrenderedUnits implements SurrenderedUnitsModel {
 
     @Override
     public double getValue() {
-        return Double.parseDouble(String.valueOf(relationship.getProperty(SurrenderedUnitsModel.value)));
+        return Double.parseDouble(String.valueOf(relationship.getProperty(VerifiedEmissionsModel.value)));
     }
 
     @Override
     public void setValue(double value) {
-        relationship.setProperty(SurrenderedUnitsModel.value, value);
+        relationship.setProperty(VerifiedEmissionsModel.value, value);
     }
 }

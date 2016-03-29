@@ -1,4 +1,4 @@
-package org.sandbag.model.relationships;
+package org.sandbag.model.relationships.installations;
 
 import org.neo4j.graphdb.Relationship;
 import org.sandbag.model.nodes.Installation;
@@ -7,11 +7,11 @@ import org.sandbag.model.nodes.Period;
 /**
  * Created by root on 16/03/16.
  */
-public class Compliance implements ComplianceModel {
+public class SurrenderedUnits implements SurrenderedUnitsModel {
 
     protected Relationship relationship;
 
-    public Compliance(Relationship relationship){
+    public SurrenderedUnits(Relationship relationship){
         this.relationship = relationship;
     }
 
@@ -29,12 +29,12 @@ public class Compliance implements ComplianceModel {
     }
 
     @Override
-    public String getValue() {
-        return String.valueOf(relationship.getProperty(ComplianceModel.value));
+    public double getValue() {
+        return Double.parseDouble(String.valueOf(relationship.getProperty(SurrenderedUnitsModel.value)));
     }
 
     @Override
-    public void setValue(String value) {
-        relationship.setProperty(ComplianceModel.value, value);
+    public void setValue(double value) {
+        relationship.setProperty(SurrenderedUnitsModel.value, value);
     }
 }

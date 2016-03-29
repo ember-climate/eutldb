@@ -1,4 +1,4 @@
-package org.sandbag.model.relationships;
+package org.sandbag.model.relationships.installations;
 
 import org.neo4j.graphdb.Relationship;
 import org.sandbag.model.nodes.Installation;
@@ -7,11 +7,11 @@ import org.sandbag.model.nodes.Period;
 /**
  * Created by root on 17/02/16.
  */
-public class Offsets implements OffsetsModel {
+public class OffsetEntitlement implements OffsetEntitlementModel{
 
     protected Relationship relationship;
 
-    public Offsets(Relationship relationship){
+    public OffsetEntitlement(Relationship relationship){
         this.relationship = relationship;
     }
 
@@ -30,19 +30,12 @@ public class Offsets implements OffsetsModel {
 
     @Override
     public double getValue() {
-        return Double.parseDouble(String.valueOf(relationship.getProperty(OffsetsModel.value)));
-    }
-    @Override
-    public String getType() {
-        return String.valueOf(relationship.getProperty(OffsetsModel.type));
+        return Double.parseDouble(String.valueOf(relationship.getProperty(OffsetEntitlementModel.value)));
     }
 
     @Override
     public void setValue(double value) {
-        relationship.setProperty(OffsetsModel.value, value);
+        relationship.setProperty(OffsetEntitlementModel.value, value);
     }
-    @Override
-    public void setType(String type) {
-        relationship.setProperty(OffsetsModel.type, type);
-    }
+
 }

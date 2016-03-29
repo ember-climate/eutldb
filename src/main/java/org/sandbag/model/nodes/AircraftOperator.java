@@ -2,7 +2,10 @@ package org.sandbag.model.nodes;
 
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
-import org.sandbag.model.relationships.*;
+import org.sandbag.model.relationships.aircraft_ops.AircraftOperatorCompany;
+import org.sandbag.model.relationships.aircraft_ops.AircraftOperatorCountry;
+import org.sandbag.model.relationships.aircraft_ops.AircraftOperatorSector;
+import org.sandbag.model.relationships.installations.*;
 
 /**
  * Created by root on 18/03/16.

@@ -1,17 +1,17 @@
-package org.sandbag.model.relationships;
+package org.sandbag.model.relationships.installations;
 
 import org.neo4j.graphdb.Relationship;
 import org.sandbag.model.nodes.Installation;
 import org.sandbag.model.nodes.Period;
 
 /**
- * Created by root on 16/02/16.
+ * Created by root on 17/02/16.
  */
-public class VerifiedEmissions implements VerifiedEmissionsModel {
+public class Offsets implements OffsetsModel {
 
     protected Relationship relationship;
 
-    public VerifiedEmissions(Relationship relationship){
+    public Offsets(Relationship relationship){
         this.relationship = relationship;
     }
 
@@ -30,11 +30,19 @@ public class VerifiedEmissions implements VerifiedEmissionsModel {
 
     @Override
     public double getValue() {
-        return Double.parseDouble(String.valueOf(relationship.getProperty(VerifiedEmissionsModel.value)));
+        return Double.parseDouble(String.valueOf(relationship.getProperty(OffsetsModel.value)));
+    }
+    @Override
+    public String getType() {
+        return String.valueOf(relationship.getProperty(OffsetsModel.type));
     }
 
     @Override
     public void setValue(double value) {
-        relationship.setProperty(VerifiedEmissionsModel.value, value);
+        relationship.setProperty(OffsetsModel.value, value);
+    }
+    @Override
+    public void setType(String type) {
+        relationship.setProperty(OffsetsModel.type, type);
     }
 }

@@ -3,6 +3,8 @@ package org.sandbag.model.nodes;
 import org.neo4j.graphdb.Node;
 import org.sandbag.model.nodes.interfaces.OffsetModel;
 import org.sandbag.model.relationships.OffsetOriginatingCountry;
+import org.sandbag.model.relationships.OffsetPeriod;
+import org.sandbag.model.relationships.OffsetProject;
 import org.sandbag.model.relationships.Offsets;
 
 /**

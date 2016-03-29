@@ -40,12 +40,32 @@ public class EUTLDBImporter {
             importer.importArticle10cAllocationData(new File(args[5]));
             importer.importInstallationsOffsetEntitlements(new File(args[6]));
             importer.importAircraftOperatorsOffsetEntitlements(new File(args[7]));
+            importer.importOffsetsFromFolder(args[8]);
 
         }
     }
 
     public EUTLDBImporter(String dbFolder){
         dbManager = new DatabaseManager(dbFolder);
+    }
+
+    public void importOffsetsFromFolder(String folderSt){
+        System.out.println("Importing offsets from folder: " + folderSt);
+
+        File folder = new File(folderSt);
+        if(folder.isDirectory()){
+
+            for(File currentFile : folder.listFiles()){
+                if(currentFile.getName().split("\\.")[1].toLowerCase().equals("csv")){
+                    importOffsetsFile(currentFile);
+                }
+            }
+
+        }else{
+            System.out.println("Please enter a valid folder name");
+        }
+
+        System.out.println("Done! :)");
     }
 
     public void importInstallationsFromFolder(String folderSt){
@@ -696,4 +716,118 @@ public class EUTLDBImporter {
         }
     }
 
+    public void importOffsetsFile(File file){
+        System.out.println("Importing file " + file.getName());
+
+        try{
+
+            String line;
+            int lineCounter = 1;
+
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            reader.readLine(); //skipping header
+
+            Transaction tx = dbManager.beginTransaction();
+
+            while((line = reader.readLine()) != null){
+
+                if(!line.trim().isEmpty()){
+
+                    String[] columns = line.split("\t");
+
+                    String countryIdSt = columns[0];
+                    String installationIdIncompleteSt = columns[1].trim();
+                    String installationIdSt = countryIdSt + installationIdIncompleteSt;
+                    String originatingRegistrySt = columns[2];
+                    String allowancesSt = columns[3];
+                    String verifiedEmissionsSt = columns[4];
+                    String unitsSurrenderedSt = columns[5];
+                    String complianceCode = columns[6];
+
+                    Period period = dbManager.getPeriodByName(yearSt);
+                    if(period == null){
+                        System.out.println("Creating period: " + yearSt);
+                        period = dbManager.createPeriod(yearSt);
+                        tx.success();
+                        tx.close();
+                        tx = dbManager.beginTransaction();
+                    }
+                    Installation installation = dbManager.getInstallationById(installationIdSt);
+                    if(installation != null){
+
+                        //+++++++++++++++++++++ SURRENDERED UNITS++++++++++++++++++++++++++++++++
+                        if(!unitsSurrenderedSt.isEmpty()){
+                            try{
+                                double tempValue = Double.parseDouble(unitsSurrenderedSt);
+                                installation.setSurrenderedUnitsForPeriod(period, tempValue);
+                            }catch(Exception e){
+//                                System.out.println("Problem with installation: " + installationIdSt + " [" + countryIdSt + "]");
+//                                System.out.println("Units surrendered value: " + unitsSurrenderedSt + " is not a number. It won't be stored");
+                            }
+                        }
+                        //+++++++++++++++++++++ VERIFIED EMISSIONS++++++++++++++++++++++++++++++++
+                        if(!verifiedEmissionsSt.isEmpty()){
+                            try{
+                                double tempValue = Double.parseDouble(verifiedEmissionsSt);
+                                installation.setVerifiedEmissionsForPeriod(period, tempValue);
+                            }catch(Exception e){
+//                                System.out.println("Problem with installation: " + installationIdSt + " [" + countryIdSt + "]");
+//                                System.out.println("Verified emissions value: " + verifiedEmissionsSt + " is not a number. It won't be stored");
+                            }
+                        }
+                        //++++++++++++++++++++++ COMPLIANCE ++++++++++++++++++++++++++++++++++++
+                        if(!complianceCode.isEmpty()){
+                            installation.setComplianceForPeriod(period, complianceCode);
+                        }
+                        //++++++++++++++++++++ ALLOWANCES IN ALLOCATION ++++++++++++++++++++++++++
+                        if(!allowancesSt.isEmpty()){
+                            try{
+                                double tempValue = Double.parseDouble(allowancesSt);
+                                installation.setAllowancesInAllocationForPeriod(period, tempValue, AllowancesInAllocationModel.STANDARD_TYPE);
+                            }catch(Exception e){
+//                                System.out.println("Problem with installation: " + installationIdSt + " [" + countryIdSt + "]");
+//                                System.out.println("Allowances in allocation value: " + allowancesSt + " is not a number. It won't be stored");
+                            }
+                        }
+
+
+
+                    }else{
+
+                        AircraftOperator aircraftOperator = dbManager.getAircraftOperatorById(installationIdSt);
+
+                        if(aircraftOperator != null){
+
+                        }else{
+                            System.out.println("Installation/aircraft op. " + installationIdSt + " could not be found...");
+                            System.out.println("installationIdIncompleteSt = '" + installationIdIncompleteSt + "'");
+                            System.out.println("countryIdSt = '" + countryIdSt + "'");
+                        }
+
+                    }
+
+                    if(lineCounter % 100 == 0){
+                        tx.success();
+                        tx.close();
+                        tx = dbManager.beginTransaction();
+                    }
+
+
+                    lineCounter++;
+                }
+
+
+            }
+
+            tx.success();
+            tx.close();
+
+
+            reader.close();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

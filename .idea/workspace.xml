@@ -7,50 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d95b43a-1bd1-418a-95e4-7ed98cc42f7f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/AllowancesInAllocationModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/ComplianceModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/OffsetEntitlementModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/OffsetsModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/SurrenderedUnitsModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/VerifiedEmissionsModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/AircraftOperatorModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/interfaces/AircraftOperatorModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/CompanyModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/interfaces/CompanyModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/CountryModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/interfaces/CountryModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/InstallationModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/interfaces/InstallationModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/NACECodeModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/interfaces/NACECodeModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/PeriodModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/interfaces/PeriodModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/SectorModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/interfaces/SectorModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/ParentCompanyModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/ParentCompanyModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/TransactionModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/TransactionModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/aircraft_ops/AircraftOperatorCompanyModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/aircraft_ops/interfaces/AircraftOperatorCompanyModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/aircraft_ops/AircraftOperatorCountryModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/aircraft_ops/interfaces/AircraftOperatorCountryModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/aircraft_ops/AircraftOperatorSectorModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/aircraft_ops/interfaces/AircraftOperatorSectorModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/AllowancesInAllocation.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/AllowancesInAllocation.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/Compliance.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/Compliance.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/InstallationCompanyModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/interfaces/InstallationCompanyModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/InstallationCountryModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/interfaces/InstallationCountryModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/InstallationSectorModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/interfaces/InstallationSectorModel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/OffsetEntitlement.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/OffsetEntitlement.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/Offsets.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/Offsets.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/SurrenderedUnits.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/SurrenderedUnits.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/VerifiedEmissions.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/VerifiedEmissions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/DatabaseManager.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/DatabaseManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/AircraftOperator.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/AircraftOperator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Company.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Company.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Country.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Country.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Installation.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Installation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/NACECode.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/NACECode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Period.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Period.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Sector.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Sector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/ParentCompany.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/ParentCompany.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/aircraft_ops/AircraftOperatorCompany.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/aircraft_ops/AircraftOperatorCompany.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/aircraft_ops/AircraftOperatorCountry.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/aircraft_ops/AircraftOperatorCountry.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/aircraft_ops/AircraftOperatorSector.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/aircraft_ops/AircraftOperatorSector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/InstallationCompany.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/InstallationCompany.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/InstallationCountry.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/InstallationCountry.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/InstallationSector.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/InstallationSector.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLMegaFileImporter.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLMegaFileImporter.java" />
     </list>
     <ignored path="eutldb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -73,107 +30,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Compliance.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/Compliance.java">
+      <file leaf-file-name="EUTLDBImporter.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="27" column="35" selection-start-line="27" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OffsetEntitlement.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/OffsetEntitlement.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Offsets.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/Offsets.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ParentCompany.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/ParentCompany.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SurrenderedUnits.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/SurrenderedUnits.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VerifiedEmissions.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/VerifiedEmissions.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5005988">
-              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ParentCompanyModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/ParentCompanyModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.23592815">
+              <caret line="740" column="48" selection-start-line="740" selection-start-column="48" selection-end-line="740" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SurrenderedUnitsModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/SurrenderedUnitsModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TransactionModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/TransactionModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VerifiedEmissionsModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/VerifiedEmissionsModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="method#importOffsetsFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
+                <element signature="method#importInstallationsFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
+                <element signature="method#importAircraftOperatorsFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
+                <element signature="method#importComplianceDataFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
+                <element signature="method#importAircraftOperatorFile#0;class#EUTLDBImporter#0" expanded="false" />
+                <element signature="method#importNERAllocationData#0;class#EUTLDBImporter#0" expanded="false" />
+                <element signature="method#importArticle10cAllocationData#0;class#EUTLDBImporter#0" expanded="false" />
+                <element signature="method#importInstallationsOffsetEntitlements#0;class#EUTLDBImporter#0" expanded="false" />
+                <element signature="method#importAircraftOperatorsOffsetEntitlements#0;class#EUTLDBImporter#0" expanded="false" />
+                <element signature="method#importInstallationsFile#0;class#EUTLDBImporter#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -214,7 +87,6 @@
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLMegaFileImporter.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/TransactionModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/aircraft_ops/AircraftOperatorSectorModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/AllowancesInAllocationModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/ComplianceModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/Compliance.java" />
@@ -251,6 +123,7 @@
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/ParentCompany.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/SurrenderedUnits.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/VerifiedEmissions.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java" />
       </list>
     </option>
   </component>
@@ -859,7 +732,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30483872" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29946238" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3360849" sideWeight="0.50214595" order="10" side_tool="true" content_ui="tabs" />
@@ -977,25 +850,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="202" column="16" selection-start-line="202" selection-start-column="16" selection-end-line="202" selection-end-column="16" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="40.121952">
-          <caret line="44" column="5" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#importInstallationsFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
-            <element signature="method#importAircraftOperatorsFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
-            <element signature="method#importComplianceDataFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
-            <element signature="method#importAircraftOperatorFile#0;class#EUTLDBImporter#0" expanded="false" />
-            <element signature="method#importNERAllocationData#0;class#EUTLDBImporter#0" expanded="false" />
-            <element signature="method#importArticle10cAllocationData#0;class#EUTLDBImporter#0" expanded="false" />
-            <element signature="method#importInstallationsOffsetEntitlements#0;class#EUTLDBImporter#0" expanded="false" />
-            <element signature="method#importAircraftOperatorsOffsetEntitlements#0;class#EUTLDBImporter#0" expanded="false" />
-            <element signature="method#importInstallationsFile#0;class#EUTLDBImporter#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1259,9 +1113,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/VerifiedEmissions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5005988">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23592815">
+          <caret line="740" column="48" selection-start-line="740" selection-start-column="48" selection-end-line="740" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#importOffsetsFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
+            <element signature="method#importInstallationsFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
+            <element signature="method#importAircraftOperatorsFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
+            <element signature="method#importComplianceDataFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
+            <element signature="method#importAircraftOperatorFile#0;class#EUTLDBImporter#0" expanded="false" />
+            <element signature="method#importNERAllocationData#0;class#EUTLDBImporter#0" expanded="false" />
+            <element signature="method#importArticle10cAllocationData#0;class#EUTLDBImporter#0" expanded="false" />
+            <element signature="method#importInstallationsOffsetEntitlements#0;class#EUTLDBImporter#0" expanded="false" />
+            <element signature="method#importAircraftOperatorsOffsetEntitlements#0;class#EUTLDBImporter#0" expanded="false" />
+            <element signature="method#importInstallationsFile#0;class#EUTLDBImporter#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

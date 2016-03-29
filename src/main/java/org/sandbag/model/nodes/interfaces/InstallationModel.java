@@ -1,6 +1,10 @@
-package org.sandbag.model.nodes;
+package org.sandbag.model.nodes.interfaces;
 
 import org.neo4j.graphdb.Label;
+import org.sandbag.model.nodes.Company;
+import org.sandbag.model.nodes.Country;
+import org.sandbag.model.nodes.Period;
+import org.sandbag.model.nodes.Sector;
 
 /**
  * Created by pablo on 15/02/16.

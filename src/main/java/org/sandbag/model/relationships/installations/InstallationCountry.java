@@ -3,11 +3,12 @@ package org.sandbag.model.relationships.installations;
 import org.neo4j.graphdb.Relationship;
 import org.sandbag.model.nodes.Country;
 import org.sandbag.model.nodes.Installation;
+import org.sandbag.model.relationships.installations.interfaces.InstallationCountryModel;
 
 /**
  * Created by root on 15/02/16.
  */
-public class InstallationCountry implements InstallationCountryModel{
+public class InstallationCountry implements InstallationCountryModel {
 
     protected Relationship relationship;
 

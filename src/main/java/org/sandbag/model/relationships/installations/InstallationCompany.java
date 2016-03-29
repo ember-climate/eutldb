@@ -3,6 +3,7 @@ package org.sandbag.model.relationships.installations;
 import org.neo4j.graphdb.Relationship;
 import org.sandbag.model.nodes.Company;
 import org.sandbag.model.nodes.Installation;
+import org.sandbag.model.relationships.installations.interfaces.InstallationCompanyModel;
 
 /**
  * Created by root on 16/02/16.

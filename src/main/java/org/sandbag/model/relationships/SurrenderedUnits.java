@@ -1,17 +1,19 @@
-package org.sandbag.model.relationships.installations;
+package org.sandbag.model.relationships;
 
 import org.neo4j.graphdb.Relationship;
+import org.sandbag.model.nodes.AircraftOperator;
 import org.sandbag.model.nodes.Installation;
 import org.sandbag.model.nodes.Period;
+import org.sandbag.model.relationships.interfaces.SurrenderedUnitsModel;
 
 /**
- * Created by root on 17/02/16.
+ * Created by root on 16/03/16.
  */
-public class OffsetEntitlement implements OffsetEntitlementModel{
+public class SurrenderedUnits implements SurrenderedUnitsModel {
 
     protected Relationship relationship;
 
-    public OffsetEntitlement(Relationship relationship){
+    public SurrenderedUnits(Relationship relationship){
         this.relationship = relationship;
     }
 
@@ -20,10 +22,11 @@ public class OffsetEntitlement implements OffsetEntitlementModel{
         return LABEL;
     }
 
-    @Override
     public Installation getInstallation(){
         return new Installation(relationship.getStartNode());
     }
+    public AircraftOperator getAircraftOperator(){ return new AircraftOperator(relationship.getStartNode());}
+
 
     @Override
     public Period getPeriod(){
@@ -32,12 +35,11 @@ public class OffsetEntitlement implements OffsetEntitlementModel{
 
     @Override
     public double getValue() {
-        return Double.parseDouble(String.valueOf(relationship.getProperty(OffsetEntitlementModel.value)));
+        return Double.parseDouble(String.valueOf(relationship.getProperty(SurrenderedUnitsModel.value)));
     }
 
     @Override
     public void setValue(double value) {
-        relationship.setProperty(OffsetEntitlementModel.value, value);
+        relationship.setProperty(SurrenderedUnitsModel.value, value);
     }
-
 }

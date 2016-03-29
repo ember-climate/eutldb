@@ -3,11 +3,12 @@ package org.sandbag.model.relationships.aircraft_ops;
 import org.neo4j.graphdb.Relationship;
 import org.sandbag.model.nodes.AircraftOperator;
 import org.sandbag.model.nodes.Country;
+import org.sandbag.model.relationships.aircraft_ops.interfaces.AircraftOperatorCountryModel;
 
 /**
  * Created by root on 18/03/16.
  */
-public class AircraftOperatorCountry implements AircraftOperatorCountryModel{
+public class AircraftOperatorCountry implements AircraftOperatorCountryModel {
 
     protected Relationship relationship;
 

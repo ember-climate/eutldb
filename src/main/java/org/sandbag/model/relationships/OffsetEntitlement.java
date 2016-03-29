@@ -1,17 +1,19 @@
-package org.sandbag.model.relationships.installations;
+package org.sandbag.model.relationships;
 
 import org.neo4j.graphdb.Relationship;
+import org.sandbag.model.nodes.AircraftOperator;
 import org.sandbag.model.nodes.Installation;
 import org.sandbag.model.nodes.Period;
+import org.sandbag.model.relationships.interfaces.OffsetEntitlementModel;
 
 /**
- * Created by root on 16/02/16.
+ * Created by root on 17/02/16.
  */
-public class VerifiedEmissions implements VerifiedEmissionsModel {
+public class OffsetEntitlement implements OffsetEntitlementModel {
 
     protected Relationship relationship;
 
-    public VerifiedEmissions(Relationship relationship){
+    public OffsetEntitlement(Relationship relationship){
         this.relationship = relationship;
     }
 
@@ -20,10 +22,11 @@ public class VerifiedEmissions implements VerifiedEmissionsModel {
         return LABEL;
     }
 
-    @Override
     public Installation getInstallation(){
         return new Installation(relationship.getStartNode());
     }
+    public AircraftOperator getAircraftOperator(){ return new AircraftOperator(relationship.getStartNode());}
+
 
     @Override
     public Period getPeriod(){
@@ -32,11 +35,12 @@ public class VerifiedEmissions implements VerifiedEmissionsModel {
 
     @Override
     public double getValue() {
-        return Double.parseDouble(String.valueOf(relationship.getProperty(VerifiedEmissionsModel.value)));
+        return Double.parseDouble(String.valueOf(relationship.getProperty(value)));
     }
 
     @Override
     public void setValue(double value) {
-        relationship.setProperty(VerifiedEmissionsModel.value, value);
+        relationship.setProperty(OffsetEntitlementModel.value, value);
     }
+
 }

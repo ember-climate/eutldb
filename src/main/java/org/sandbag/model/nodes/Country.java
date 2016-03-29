@@ -1,11 +1,12 @@
 package org.sandbag.model.nodes;
 
 import org.neo4j.graphdb.Node;
+import org.sandbag.model.nodes.interfaces.CountryModel;
 
 /**
  * Created by pablo on 14/02/16.
  */
-public class Country implements CountryModel{
+public class Country implements CountryModel {
 
     Node node = null;
 

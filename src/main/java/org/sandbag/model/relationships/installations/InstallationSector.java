@@ -3,11 +3,12 @@ package org.sandbag.model.relationships.installations;
 import org.neo4j.graphdb.Relationship;
 import org.sandbag.model.nodes.Installation;
 import org.sandbag.model.nodes.Sector;
+import org.sandbag.model.relationships.installations.interfaces.InstallationSectorModel;
 
 /**
  * Created by root on 16/02/16.
  */
-public class InstallationSector implements InstallationSectorModel{
+public class InstallationSector implements InstallationSectorModel {
     protected Relationship relationship;
 
     public InstallationSector(Relationship relationship){

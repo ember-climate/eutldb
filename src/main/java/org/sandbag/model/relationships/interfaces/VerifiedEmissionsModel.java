@@ -1,22 +1,21 @@
-package org.sandbag.model.relationships.installations;
+package org.sandbag.model.relationships.interfaces;
 
 import org.neo4j.graphdb.RelationshipType;
 import org.sandbag.model.nodes.Installation;
 import org.sandbag.model.nodes.Period;
 
 /**
- * Created by root on 16/03/16.
+ * Created by root on 16/02/16.
  */
-public interface SurrenderedUnitsModel extends RelationshipType {
+public interface VerifiedEmissionsModel extends RelationshipType {
 
-    String LABEL = "SURRENDERED_UNITS";
+    String LABEL = "VERIFIED_EMISSIONS";
 
     String value = "value";
 
     double getValue();
     void setValue(double value);
 
-    Installation getInstallation();
     Period getPeriod();
 
 }

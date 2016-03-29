@@ -1,4 +1,4 @@
-package org.sandbag.model.relationships.aircraft_ops;
+package org.sandbag.model.relationships.aircraft_ops.interfaces;
 
 import org.neo4j.graphdb.RelationshipType;
 import org.sandbag.model.nodes.AircraftOperator;

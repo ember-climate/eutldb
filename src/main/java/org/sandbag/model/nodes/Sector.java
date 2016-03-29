@@ -1,6 +1,8 @@
 package org.sandbag.model.nodes;
 
 import org.neo4j.graphdb.Node;
+import org.sandbag.model.nodes.interfaces.InstallationModel;
+import org.sandbag.model.nodes.interfaces.SectorModel;
 
 /**
  * Created by pablo on 14/02/16.

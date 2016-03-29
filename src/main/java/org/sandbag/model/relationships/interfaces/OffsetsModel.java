@@ -1,22 +1,23 @@
-package org.sandbag.model.relationships.installations;
+package org.sandbag.model.relationships.interfaces;
 
 import org.neo4j.graphdb.RelationshipType;
 import org.sandbag.model.nodes.Installation;
 import org.sandbag.model.nodes.Period;
 
 /**
- * Created by root on 16/02/16.
+ * Created by root on 17/02/16.
  */
-public interface VerifiedEmissionsModel extends RelationshipType {
+public interface OffsetsModel extends RelationshipType {
 
-    String LABEL = "VERIFIED_EMISSIONS";
+    String LABEL = "OFFSETS";
 
     String value = "value";
+    String type = "type";
 
     double getValue();
+    String getType();
     void setValue(double value);
+    void setType(String type);
 
-    Installation getInstallation();
     Period getPeriod();
-
 }

@@ -1,4 +1,4 @@
-package org.sandbag.model.relationships.installations;
+package org.sandbag.model.relationships.installations.interfaces;
 
 import org.neo4j.graphdb.RelationshipType;
 import org.sandbag.model.nodes.Company;

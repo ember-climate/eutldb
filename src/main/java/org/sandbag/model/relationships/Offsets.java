@@ -1,8 +1,10 @@
-package org.sandbag.model.relationships.installations;
+package org.sandbag.model.relationships;
 
 import org.neo4j.graphdb.Relationship;
+import org.sandbag.model.nodes.AircraftOperator;
 import org.sandbag.model.nodes.Installation;
 import org.sandbag.model.nodes.Period;
+import org.sandbag.model.relationships.interfaces.OffsetsModel;
 
 /**
  * Created by root on 17/02/16.
@@ -20,10 +22,11 @@ public class Offsets implements OffsetsModel {
         return LABEL;
     }
 
-    @Override
     public Installation getInstallation(){
         return new Installation(relationship.getStartNode());
     }
+    public AircraftOperator getAircraftOperator(){ return new AircraftOperator(relationship.getStartNode());}
+
 
     @Override
     public Period getPeriod(){

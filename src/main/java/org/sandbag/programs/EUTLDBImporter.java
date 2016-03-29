@@ -3,7 +3,7 @@ package org.sandbag.programs;
 import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.*;
 import org.sandbag.model.nodes.*;
-import org.sandbag.model.relationships.installations.AllowancesInAllocationModel;
+import org.sandbag.model.relationships.interfaces.AllowancesInAllocationModel;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -3,6 +3,7 @@ package org.sandbag.model.relationships.aircraft_ops;
 import org.neo4j.graphdb.Relationship;
 import org.sandbag.model.nodes.AircraftOperator;
 import org.sandbag.model.nodes.Company;
+import org.sandbag.model.relationships.aircraft_ops.interfaces.AircraftOperatorCompanyModel;
 
 /**
  * Created by root on 18/03/16.

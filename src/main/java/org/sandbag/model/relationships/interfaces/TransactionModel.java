@@ -1,4 +1,4 @@
-package org.sandbag.model.relationships;
+package org.sandbag.model.relationships.interfaces;
 
 import org.neo4j.graphdb.RelationshipType;
 

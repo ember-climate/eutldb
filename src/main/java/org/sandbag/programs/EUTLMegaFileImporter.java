@@ -8,6 +8,7 @@ import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.schema.IndexDefinition;
 import org.neo4j.graphdb.schema.Schema;
 import org.sandbag.model.nodes.*;
+import org.sandbag.model.nodes.interfaces.*;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -1,6 +1,7 @@
-package org.sandbag.model.nodes;
+package org.sandbag.model.nodes.interfaces;
 
 import org.neo4j.graphdb.Label;
+import org.sandbag.model.nodes.Company;
 
 /**
  * Created by root on 15/02/16.

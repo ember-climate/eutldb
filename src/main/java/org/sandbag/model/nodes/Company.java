@@ -2,6 +2,7 @@ package org.sandbag.model.nodes;
 
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
+import org.sandbag.model.nodes.interfaces.CompanyModel;
 import org.sandbag.model.relationships.ParentCompany;
 
 /**

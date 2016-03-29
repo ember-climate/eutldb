@@ -1,6 +1,7 @@
 package org.sandbag.model.nodes;
 
 import org.neo4j.graphdb.Node;
+import org.sandbag.model.nodes.interfaces.NACECodeModel;
 
 /**
  * Created by root on 03/03/16.

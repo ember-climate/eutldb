@@ -1,4 +1,4 @@
-package org.sandbag.model.relationships.installations;
+package org.sandbag.model.relationships.interfaces;
 
 import org.neo4j.graphdb.RelationshipType;
 import org.sandbag.model.nodes.Installation;
@@ -22,7 +22,6 @@ public interface AllowancesInAllocationModel extends RelationshipType {
     void setValue(double value);
     void setType(String value);
 
-    Installation getInstallation();
     Period getPeriod();
 
 }

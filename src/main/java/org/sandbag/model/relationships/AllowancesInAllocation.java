@@ -1,8 +1,10 @@
-package org.sandbag.model.relationships.installations;
+package org.sandbag.model.relationships;
 
 import org.neo4j.graphdb.Relationship;
+import org.sandbag.model.nodes.AircraftOperator;
 import org.sandbag.model.nodes.Installation;
 import org.sandbag.model.nodes.Period;
+import org.sandbag.model.relationships.interfaces.AllowancesInAllocationModel;
 
 /**
  * Created by root on 16/03/16.
@@ -23,7 +25,9 @@ public class AllowancesInAllocation implements AllowancesInAllocationModel {
     public Installation getInstallation(){
         return new Installation(relationship.getStartNode());
     }
+    public AircraftOperator getAircraftOperator(){ return new AircraftOperator(relationship.getStartNode());}
 
+    @Override
     public Period getPeriod(){
         return new Period(relationship.getEndNode());
     }

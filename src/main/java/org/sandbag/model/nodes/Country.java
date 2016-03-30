@@ -15,20 +15,20 @@ public class Country implements CountryModel {
     }
 
     public String getId() {
-        return String.valueOf(node.getProperty(id));
+        return String.valueOf(node.getProperty(CountryModel.id));
     }
 
     public void setId(String id) {
-        node.setProperty(name, id);
+        node.setProperty(CountryModel.id, id);
 
     }
 
     public String getName() {
-        return String.valueOf(node.getProperty(name));
+        return String.valueOf(node.getProperty(CountryModel.name));
     }
 
-    public void setName(String name) {
-        node.setProperty(CountryModel.name, name);
+    public void setName(String value) {
+        node.setProperty(CountryModel.name, value);
     }
 
     @Override

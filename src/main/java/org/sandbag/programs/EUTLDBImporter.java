@@ -1,6 +1,5 @@
 package org.sandbag.programs;
 
-import org.neo4j.csv.reader.SourceTraceability;
 import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.*;
 import org.sandbag.model.nodes.*;
@@ -45,6 +44,9 @@ public class EUTLDBImporter {
             importer.importInstallationsOffsetEntitlements(new File(args[6]));
             importer.importAircraftOperatorsOffsetEntitlements(new File(args[7]));
             importer.importOffsetsFromFolder(args[8]);
+
+            dbManager.shutdown();
+
 
         }
     }
@@ -180,6 +182,7 @@ public class EUTLDBImporter {
 
                     Country country = dbManager.getCountryByName(countryNameSt);
                     if(country == null){
+                        System.out.println("Creating country: [" + countryIdSt + "," + countryNameSt + "]" );
                         country = dbManager.createCountry(countryNameSt, countryIdSt);
                     }
                     Company company = dbManager.getCompanyByRegistrationNumber(companyRegistrationNumberSt);
@@ -672,9 +675,11 @@ public class EUTLDBImporter {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             reader.readLine(); //skipping header
 
-            while((line = reader.readLine()) != null){
+            int lineCounter = 0;
 
-                Transaction tx = dbManager.beginTransaction();
+            Transaction tx = dbManager.beginTransaction();
+
+            while((line = reader.readLine()) != null){
 
                 String[] columns = line.split("\t", -1);
                 //System.out.println("columns.length = " + columns.length);
@@ -709,13 +714,20 @@ public class EUTLDBImporter {
 
                     Country country = dbManager.getCountryByName(countryNameSt);
                     if(country == null){
+                        System.out.println("Creating country: [" + countryIdSt + "," + countryNameSt + "]" );
                         country = dbManager.createCountry(countryNameSt, countryIdSt);
+                        tx.success();
+                        tx.close();
+                        tx = dbManager.beginTransaction();
                     }
                     Company company = dbManager.getCompanyByRegistrationNumber(companyRegistrationNumberSt);
                     if(company == null){
                         if(!companyRegistrationNumberSt.isEmpty()){
                             company = dbManager.createCompany(companyNameSt,companyRegistrationNumberSt,companyPostalCodeSt,
                                     companyCitySt, companyMainAddressSt + "\n" + companySecondaryAddressSt, companyStatusSt);
+                            tx.success();
+                            tx.close();
+                            tx = dbManager.beginTransaction();
                         }
                     }
 
@@ -725,7 +737,11 @@ public class EUTLDBImporter {
                     Sector sector = dbManager.getSectorById(sectorId);
                     if(sector == null){
                         if(!sectorId.isEmpty()){
+                            System.out.println("Creating sector: " + sectorName);
                             sector = dbManager.createSector(sectorId, sectorName);
+                            tx.success();
+                            tx.close();
+                            tx = dbManager.beginTransaction();
                         }
                     }
 
@@ -739,13 +755,22 @@ public class EUTLDBImporter {
                             eprtrIdSt, permitIDSt, permitEntryDateSt, permitExpiryRevocationDateSt, latituteSt, longitudeSt,
                             country, company, sector);
 
+
+                }
+
+                lineCounter++;
+
+                if(lineCounter % 1000 == 0){
                     tx.success();
                     tx.close();
+                    tx = dbManager.beginTransaction();
+                    System.out.println(lineCounter + " lines imported...");
                 }
 
             }
 
-
+            tx.success();
+            tx.close();
 
             reader.close();
 

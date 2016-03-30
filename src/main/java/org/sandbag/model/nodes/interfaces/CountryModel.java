@@ -8,6 +8,7 @@ import org.neo4j.graphdb.Label;
 public interface CountryModel extends Label{
 
     String LABEL = "COUNTRY";
+
     String id = "id";
     String name = "name";
 

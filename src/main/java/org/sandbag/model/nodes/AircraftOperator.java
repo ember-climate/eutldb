@@ -194,12 +194,6 @@ public class AircraftOperator implements AircraftOperatorModel {
         verifiedEmissions.setValue(value);
     }
     @Override
-    public void setFreeAllocationForPeriod(Period period, double value, String type){
-        FreeAllocation freeAllocation = new FreeAllocation(node.createRelationshipTo(period.node, new FreeAllocation(null)));
-        freeAllocation.setValue(value);
-        freeAllocation.setType(type);
-    }
-    @Override
     public void setOffsetsForPeriod(Period period, double value, String type){
         Offsets offsets = new Offsets(node.createRelationshipTo(period.node, new Offsets(null)));
         offsets.setValue(value);

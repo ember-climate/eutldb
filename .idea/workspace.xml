@@ -7,7 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d95b43a-1bd1-418a-95e4-7ed98cc42f7f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Offset.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Offset.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/AircraftOperator.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/AircraftOperator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/interfaces/AircraftOperatorModel.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/interfaces/AircraftOperatorModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java" />
     </list>
     <ignored path="eutldb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,18 +32,17 @@
     <favorites_list name="eutldb" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="EUTLDBImporter.java" pinned="false" current-in-tab="false">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
+      <file leaf-file-name="EUTLDBImporter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="791" column="57" selection-start-line="791" selection-start-column="57" selection-end-line="791" selection-end-column="57" />
+            <state vertical-scroll-proportion="0.21917808">
+              <caret line="623" column="45" selection-start-line="623" selection-start-column="45" selection-end-line="623" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#importOffsetsFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
                 <element signature="method#importInstallationsFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
                 <element signature="method#importAircraftOperatorsFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
-                <element signature="method#importComplianceDataFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
                 <element signature="method#importAircraftOperatorFile#0;class#EUTLDBImporter#0" expanded="false" />
                 <element signature="method#importNERAllocationData#0;class#EUTLDBImporter#0" expanded="false" />
                 <element signature="method#importArticle10cAllocationData#0;class#EUTLDBImporter#0" expanded="false" />
@@ -52,11 +54,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Offset.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AircraftOperator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/AircraftOperator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="194" column="5" selection-start-line="194" selection-start-column="5" selection-end-line="194" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Offset.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Offset.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.18323353">
-              <caret line="32" column="64" selection-start-line="32" selection-start-column="64" selection-end-line="32" selection-end-column="64" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="36" column="16" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#822#823#0" expanded="true" />
@@ -70,7 +82,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/DatabaseManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="213" column="43" selection-start-line="213" selection-start-column="43" selection-end-line="213" selection-end-column="43" />
+              <caret line="222" column="33" selection-start-line="222" selection-start-column="33" selection-end-line="222" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -97,8 +109,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/aircraft_ops/AircraftOperatorSectorModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/AllowancesInAllocationModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/ComplianceModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/Compliance.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/installations/InstallationCountry.java" />
@@ -145,9 +155,11 @@
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/OffsetOriginatingCountryModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/OffsetProjectModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/OffsetProject.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/DatabaseManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Offset.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/AircraftOperator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/interfaces/AircraftOperatorModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java" />
       </list>
     </option>
   </component>
@@ -193,6 +205,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -449,7 +462,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -755,26 +767,26 @@
     <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32473117" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3256617" sideWeight="0.49786323" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3360849" sideWeight="0.50214595" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28423476" sideWeight="0.49785408" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32473117" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.113247864" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32646048" sideWeight="0.49786323" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28423476" sideWeight="0.49785408" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -799,22 +811,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLMegaFileImporter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="6.3782945">
-          <caret line="208" column="96" selection-start-line="208" selection-start-column="96" selection-end-line="208" selection-end-column="96" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/AircraftOperator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="204" column="73" selection-start-line="204" selection-start-column="73" selection-end-line="204" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/aircraft_ops/AircraftOperatorCompany.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -845,7 +841,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -853,7 +848,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -861,15 +855,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/interfaces/AircraftOperatorModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -901,7 +886,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -909,7 +893,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -917,7 +900,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -925,7 +907,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -933,9 +914,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -943,9 +921,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1226,39 +1201,62 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/DatabaseManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="213" column="43" selection-start-line="213" selection-start-column="43" selection-end-line="213" selection-end-column="43" />
+          <caret line="222" column="33" selection-start-line="222" selection-start-column="33" selection-end-line="222" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Offset.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="16" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#822#823#0" expanded="true" />
+            <element signature="e#900#901#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/interfaces/AircraftOperatorModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6376812">
+          <caret line="65" column="68" selection-start-line="65" selection-start-column="68" selection-end-line="65" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/AircraftOperator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="194" column="5" selection-start-line="194" selection-start-column="5" selection-end-line="194" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLMegaFileImporter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="7.4130435">
+          <caret line="199" column="48" selection-start-line="199" selection-start-column="48" selection-end-line="199" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/EUTLDBImporter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="791" column="57" selection-start-line="791" selection-start-column="57" selection-end-line="791" selection-end-column="57" />
+        <state vertical-scroll-proportion="0.21917808">
+          <caret line="623" column="45" selection-start-line="623" selection-start-column="45" selection-end-line="623" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#importOffsetsFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
             <element signature="method#importInstallationsFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
             <element signature="method#importAircraftOperatorsFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
-            <element signature="method#importComplianceDataFromFolder#0;class#EUTLDBImporter#0" expanded="false" />
             <element signature="method#importAircraftOperatorFile#0;class#EUTLDBImporter#0" expanded="false" />
             <element signature="method#importNERAllocationData#0;class#EUTLDBImporter#0" expanded="false" />
             <element signature="method#importArticle10cAllocationData#0;class#EUTLDBImporter#0" expanded="false" />
             <element signature="method#importInstallationsOffsetEntitlements#0;class#EUTLDBImporter#0" expanded="false" />
             <element signature="method#importAircraftOperatorsOffsetEntitlements#0;class#EUTLDBImporter#0" expanded="false" />
             <element signature="method#importInstallationsFile#0;class#EUTLDBImporter#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Offset.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18323353">
-          <caret line="32" column="64" selection-start-line="32" selection-start-column="64" selection-end-line="32" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#822#823#0" expanded="true" />
-            <element signature="e#900#901#0" expanded="true" />
           </folding>
         </state>
       </provider>

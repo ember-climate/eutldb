@@ -590,6 +590,41 @@ public class EUTLDBImporter {
 
                         if(aircraftOperator != null){
 
+                            //+++++++++++++++++++++ SURRENDERED UNITS++++++++++++++++++++++++++++++++
+                            if(!unitsSurrenderedSt.isEmpty()){
+                                try{
+                                    double tempValue = Double.parseDouble(unitsSurrenderedSt);
+                                    aircraftOperator.setSurrenderedUnitsForPeriod(period, tempValue);
+                                }catch(Exception e){
+//                                System.out.println("Problem with installation: " + installationIdSt + " [" + countryIdSt + "]");
+//                                System.out.println("Units surrendered value: " + unitsSurrenderedSt + " is not a number. It won't be stored");
+                                }
+                            }
+                            //+++++++++++++++++++++ VERIFIED EMISSIONS++++++++++++++++++++++++++++++++
+                            if(!verifiedEmissionsSt.isEmpty()){
+                                try{
+                                    double tempValue = Double.parseDouble(verifiedEmissionsSt);
+                                    aircraftOperator.setVerifiedEmissionsForPeriod(period, tempValue);
+                                }catch(Exception e){
+//                                System.out.println("Problem with installation: " + installationIdSt + " [" + countryIdSt + "]");
+//                                System.out.println("Verified emissions value: " + verifiedEmissionsSt + " is not a number. It won't be stored");
+                                }
+                            }
+                            //++++++++++++++++++++++ COMPLIANCE ++++++++++++++++++++++++++++++++++++
+                            if(!complianceCode.isEmpty()){
+                                aircraftOperator.setComplianceForPeriod(period, complianceCode);
+                            }
+                            //++++++++++++++++++++ ALLOWANCES IN ALLOCATION ++++++++++++++++++++++++++
+                            if(!allowancesSt.isEmpty()){
+                                try{
+                                    double tempValue = Double.parseDouble(allowancesSt);
+                                    aircraftOperator.setAllowancesInAllocationForPeriod(period, tempValue, AllowancesInAllocationModel.STANDARD_TYPE);
+                                }catch(Exception e){
+//                                System.out.println("Problem with installation: " + installationIdSt + " [" + countryIdSt + "]");
+//                                System.out.println("Allowances in allocation value: " + allowancesSt + " is not a number. It won't be stored");
+                                }
+                            }
+
                         }else{
                             System.out.println("Installation/aircraft op. " + installationIdSt + " could not be found...");
                             System.out.println("installationIdIncompleteSt = '" + installationIdIncompleteSt + "'");

@@ -162,6 +162,7 @@ public class DatabaseManager {
     }
 
     public Offset createOffset(String amountSt,
+                               String unitTypeSt,
                                Installation installation,
                                Project project,
                                Period period,
@@ -174,6 +175,18 @@ public class DatabaseManager {
             Offset offset = new Offset(offsetNode);
 
             offset.setAmount(amount);
+
+            if(unitTypeSt.startsWith("CER")){
+                offset.setUnitType(OffsetModel.CER_UNIT_TYPE);
+            }else if(unitTypeSt.startsWith("AAU")){
+                offset.setUnitType(OffsetModel.AAU_UNIT_TYPE);
+            }else if(unitTypeSt.startsWith("ERU")){
+                offset.setUnitType(OffsetModel.ERU_UNIT_TYPE);
+            }else{
+                offset.setUnitType(unitTypeSt);
+            }
+
+
             if(installation != null){
                 offset.setInstallation(installation);
             }
@@ -198,6 +211,7 @@ public class DatabaseManager {
     }
 
     public Offset createOffset(String amountSt,
+                               String unitTypeSt,
                                AircraftOperator aircraftOperator,
                                Project project,
                                Period period,
@@ -210,6 +224,18 @@ public class DatabaseManager {
             Offset offset = new Offset(offsetNode);
 
             offset.setAmount(amount);
+
+            if(unitTypeSt.startsWith("CER")){
+                offset.setUnitType(OffsetModel.CER_UNIT_TYPE);
+            }else if(unitTypeSt.startsWith("AAU")){
+                offset.setUnitType(OffsetModel.AAU_UNIT_TYPE);
+            }else if(unitTypeSt.startsWith("ERU")){
+                offset.setUnitType(OffsetModel.ERU_UNIT_TYPE);
+            }else{
+                offset.setUnitType(unitTypeSt);
+            }
+
+
             if(aircraftOperator != null){
                 offset.setAircraftOperator(aircraftOperator);
             }

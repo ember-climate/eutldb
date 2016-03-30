@@ -24,8 +24,18 @@ public class Offset implements OffsetModel {
     }
 
     @Override
+    public String getUnitType() {
+        return String.valueOf(node.getProperty(OffsetModel.unitType));
+    }
+
+    @Override
     public void setAmount(double value) {
         node.setProperty(OffsetModel.amount, value);
+    }
+
+    @Override
+    public void setUnitType(String value) {
+        node.setProperty(OffsetModel.unitType, value);
     }
 
     @Override

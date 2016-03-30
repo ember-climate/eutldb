@@ -1,5 +1,6 @@
 package org.sandbag.programs;
 
+import org.neo4j.csv.reader.SourceTraceability;
 import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.*;
 import org.sandbag.model.nodes.*;
@@ -10,14 +11,17 @@ import java.io.File;
 import java.io.FileReader;
 
 /**
- * Created by root on 14/03/16.
+ *
+ * Class to import EUTL database
+ * @author Pablo Pareja Tobes
+ *
  */
 public class EUTLDBImporter {
 
     private static DatabaseManager dbManager;
 
     public static void main(String[] args){
-        if(args.length != 8){
+        if(args.length != 9){
             System.out.println("The program expects the following parameters:\n" +
                     "1. Database folder\n" +
                     "2. Installations folder\n" +
@@ -142,7 +146,7 @@ public class EUTLDBImporter {
 
                 Transaction tx = dbManager.beginTransaction();
 
-                String[] columns = line.split("\t");
+                String[] columns = line.split("\t", -1);
                 //System.out.println("columns.length = " + columns.length);
                 if(columns.length > 0){
                     String countryNameSt = columns[0].trim();
@@ -234,7 +238,7 @@ public class EUTLDBImporter {
 
                 if(!line.trim().isEmpty()){
 
-                    String[] columns = line.split("\t");
+                    String[] columns = line.split("\t", -1);
 
                     String countryIdSt = columns[0];
                     String installationIdIncompleteSt = columns[1].trim();
@@ -305,7 +309,7 @@ public class EUTLDBImporter {
 
                 if(!line.trim().isEmpty()){
 
-                    String[] columns = line.split("\t");
+                    String[] columns = line.split("\t", -1);
 
                     String countryIdSt = columns[0];
                     String installationIdIncompleteSt = columns[1].trim();
@@ -386,7 +390,7 @@ public class EUTLDBImporter {
 
                 if(!line.trim().isEmpty()){
 
-                    String[] columns = line.split("\t");
+                    String[] columns = line.split("\t", -1);
 
                     String countryNameSt = columns[0];
                     String installationIdIncompleteSt = columns[1].trim();
@@ -460,7 +464,7 @@ public class EUTLDBImporter {
 
                 if(!line.trim().isEmpty()){
 
-                    String[] columns = line.split("\t");
+                    String[] columns = line.split("\t", -1);
 
                     String countryNameSt = columns[0];
                     String aircraftOperatorIncompleteIdSt = columns[1].trim();
@@ -525,7 +529,7 @@ public class EUTLDBImporter {
 
                 if(!line.trim().isEmpty()){
 
-                    String[] columns = line.split("\t");
+                    String[] columns = line.split("\t", -1);
 
                     String countryIdSt = columns[0];
                     String installationIdIncompleteSt = columns[1].trim();
@@ -672,7 +676,7 @@ public class EUTLDBImporter {
 
                 Transaction tx = dbManager.beginTransaction();
 
-                String[] columns = line.split("\t");
+                String[] columns = line.split("\t", -1);
                 //System.out.println("columns.length = " + columns.length);
                 if(columns.length > 0){
                     String countryNameSt = columns[0].trim();
@@ -768,7 +772,12 @@ public class EUTLDBImporter {
 
                 if(!line.trim().isEmpty()){
 
-                    String[] columns = line.split("\t");
+                    String[] columns = line.split("\t", -1);
+
+                    if(columns.length < 12){
+                        System.out.println("columns.length = " + columns.length);
+                        System.out.println("line = " + line);
+                    }
 
                     String countryIdSt = columns[0].trim();
                     String installationIdIncompleteSt = columns[1].trim();
@@ -784,54 +793,70 @@ public class EUTLDBImporter {
                     String trackSt = columns[10].trim();
                     String expiryDateSt = columns[11].trim();
 
-                    Period period = dbManager.getPeriodByName(yearOfComplianceSt);
-                    if(period == null){
-                        System.out.println("Creating period: " + yearOfComplianceSt);
-                        period = dbManager.createPeriod(yearOfComplianceSt);
-                        tx.success();
-                        tx.close();
-                        tx = dbManager.beginTransaction();
-                    }
-                    Country originatingCountry = dbManager.getCountryByName(originatingRegistrySt);
-                    if(originatingCountry == null){
-                        System.out.println("Creating country: " + originatingCountry);
-                        originatingCountry = dbManager.createCountry(originatingRegistrySt,"");
-                        tx.success();
-                        tx.close();
-                        tx = dbManager.beginTransaction();
-                    }
-                    Project project = null;
-                    if(!projectIdSt.isEmpty()){
-                        project = dbManager.getProjectById(projectIdSt);
-                        if(project == null){
-                            System.out.println("Creating project: " + projectIdSt);
-                            project = dbManager.createProject(projectIdSt);
+                    if(!yearOfComplianceSt.isEmpty() && !originatingRegistrySt.isEmpty() &&
+                            !installationIdIncompleteSt.isEmpty()){
+
+                        Period period = dbManager.getPeriodByName(yearOfComplianceSt);
+                        if(period == null){
+                            System.out.println("Creating period: " + yearOfComplianceSt);
+                            period = dbManager.createPeriod(yearOfComplianceSt);
                             tx.success();
                             tx.close();
                             tx = dbManager.beginTransaction();
                         }
-                    }
-
-                    Installation installation = dbManager.getInstallationById(installationIdSt);
-                    if(installation != null){
-
-                        Offset offset = dbManager.createOffset(amountSt, installation, project, period, originatingCountry);
-
-
-                    }else{
-
-                        AircraftOperator aircraftOperator = dbManager.getAircraftOperatorById(installationIdSt);
-
-                        if(aircraftOperator != null){
-
-                            Offset offset = dbManager.createOffset(amountSt, aircraftOperator, project, period, originatingCountry);
-
-                        }else{
-                            System.out.println("Installation/aircraft op. " + installationIdSt + " could not be found...");
-                            System.out.println("installationIdIncompleteSt = '" + installationIdIncompleteSt + "'");
-                            System.out.println("countryIdSt = '" + countryIdSt + "'");
+                        Country originatingCountry = dbManager.getCountryByName(originatingRegistrySt);
+                        if(originatingCountry == null){
+                            System.out.println("Creating country: " + originatingRegistrySt);
+                            originatingCountry = dbManager.createCountry(originatingRegistrySt,"");
+                            tx.success();
+                            tx.close();
+                            tx = dbManager.beginTransaction();
+                        }
+                        Project project = null;
+                        if(!projectIdSt.isEmpty()){
+                            project = dbManager.getProjectById(projectIdSt);
+                            if(project == null){
+                                System.out.println("Creating project: " + projectIdSt);
+                                project = dbManager.createProject(projectIdSt);
+                                tx.success();
+                                tx.close();
+                                tx = dbManager.beginTransaction();
+                            }
                         }
 
+                        Installation installation = dbManager.getInstallationById(installationIdSt);
+                        if(installation != null){
+
+                            Offset offset = dbManager.createOffset(
+                                    amountSt,
+                                    unitTypeSt,
+                                    installation,
+                                    project,
+                                    period,
+                                    originatingCountry);
+
+
+                        }else{
+
+                            AircraftOperator aircraftOperator = dbManager.getAircraftOperatorById(installationIdSt);
+
+                            if(aircraftOperator != null){
+
+                                Offset offset = dbManager.createOffset(
+                                        amountSt,
+                                        unitTypeSt,
+                                        aircraftOperator,
+                                        project,
+                                        period,
+                                        originatingCountry);
+
+                            }else{
+                                System.out.println("Installation/aircraft op. " + installationIdSt + " could not be found...");
+                                System.out.println("installationIdIncompleteSt = '" + installationIdIncompleteSt + "'");
+                                System.out.println("countryIdSt = '" + countryIdSt + "'");
+                            }
+
+                        }
                     }
 
                     if(lineCounter % 100 == 0){

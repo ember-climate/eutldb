@@ -8,6 +8,7 @@ import org.sandbag.model.nodes.*;
 import org.sandbag.model.nodes.interfaces.*;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -15,17 +16,17 @@ import java.util.concurrent.TimeUnit;
  */
 public class DatabaseManager {
 
-    private static GraphDatabaseService graphDb;
-    private static Schema schema;
+    public static GraphDatabaseService graphDb;
+    public static Schema schema;
 
-    public Label COUNTRY_LABEL = DynamicLabel.label(CountryModel.LABEL);
-    public Label COMPANY_LABEL = DynamicLabel.label(CompanyModel.LABEL);
-    public Label INSTALLATION_LABEL = DynamicLabel.label(InstallationModel.LABEL);
-    public Label SECTOR_LABEL = DynamicLabel.label(SectorModel.LABEL);
-    public Label PERIOD_LABEL = DynamicLabel.label(PeriodModel.LABEL);
-    public Label AIRCRAFT_OPERATOR_LABEL = DynamicLabel.label(AircraftOperatorModel.LABEL);
-    public Label PROJECT_LABEL = DynamicLabel.label(ProjectModel.LABEL);
-    public Label OFFSET_LABEL = DynamicLabel.label(OffsetModel.LABEL);
+    public static Label COUNTRY_LABEL = DynamicLabel.label(CountryModel.LABEL);
+    public static Label COMPANY_LABEL = DynamicLabel.label(CompanyModel.LABEL);
+    public static Label INSTALLATION_LABEL = DynamicLabel.label(InstallationModel.LABEL);
+    public static Label SECTOR_LABEL = DynamicLabel.label(SectorModel.LABEL);
+    public static Label PERIOD_LABEL = DynamicLabel.label(PeriodModel.LABEL);
+    public static Label AIRCRAFT_OPERATOR_LABEL = DynamicLabel.label(AircraftOperatorModel.LABEL);
+    public static Label PROJECT_LABEL = DynamicLabel.label(ProjectModel.LABEL);
+    public static Label OFFSET_LABEL = DynamicLabel.label(OffsetModel.LABEL);
 
     public static IndexDefinition installationIdIndex = null;
     public static IndexDefinition countryNameIndex = null;
@@ -132,6 +133,8 @@ public class DatabaseManager {
         }
 
     }
+
+
 
     public AircraftOperator createAircraftOperator(String id,
                                                    String name,
@@ -460,5 +463,9 @@ public class DatabaseManager {
 
     public void shutdown() {
         graphDb.shutdown();
+    }
+
+    public Iterator<Node> findNodes(Label label){
+        return graphDb.findNodes(label);
     }
 }

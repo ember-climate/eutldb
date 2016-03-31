@@ -77,6 +77,7 @@ public class ExportDBToMegaFiles {
                     lineSt += typeSt + "\t";
 
                     Installation installation = new Installation(installationIterator.next());
+                    System.out.println("installation.getId() = " + installation.getId());
                     Company company = installation.getCompany();
                     Sector sector = installation.getSector();
 
@@ -90,15 +91,12 @@ public class ExportDBToMegaFiles {
                             "\t" + installation.getLatitude() + "\t" + installation.getLongitude() + "\t" +
                             sector.getId() + "-" + sector.getName() + "\t";
 
-                    System.out.println("lineSt = " + lineSt);
+                    //System.out.println("lineSt = " + lineSt);
 
                     for (int yearCounter=2005;yearCounter<=2012;yearCounter++){
 
                         String periodSt = String.valueOf(yearCounter);
-                        System.out.println("periodSt = " + periodSt);
                         Period period = dbManager.getPeriodByName(periodSt);
-
-                        System.out.println("period.getName() = " + period.getName());
 
                         AllowancesInAllocation allowancesInAllocation = installation.getAllowancesInAllocationForPeriod(period);
                         if(allowancesInAllocation != null){
@@ -171,6 +169,7 @@ public class ExportDBToMegaFiles {
                     installationsCounter++;
 
                     if(installationsCounter % 100 == 0){
+                        System.out.println(installationsCounter + " installations exported");
                         tx.success();
                         tx.close();
                         tx = dbManager.beginTransaction();
@@ -294,6 +293,7 @@ public class ExportDBToMegaFiles {
                     aircraftOperatorsCounter++;
 
                     if(aircraftOperatorsCounter % 100 == 0){
+                        System.out.println(aircraftOperatorsCounter + " aircraft operators exported");
                         tx.success();
                         tx.close();
                         tx = dbManager.beginTransaction();

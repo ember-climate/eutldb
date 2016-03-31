@@ -187,7 +187,7 @@ public class EUTLDBImporter {
                     }
                     Company company = dbManager.getCompanyByRegistrationNumber(companyRegistrationNumberSt);
                     if(company == null){
-                        if(!companyRegistrationNumberSt.isEmpty()){
+                        if(!companyRegistrationNumberSt.isEmpty() || !companyNameSt.isEmpty()){
                             company = dbManager.createCompany(companyNameSt,companyRegistrationNumberSt,companyPostalCodeSt,
                                     companyCitySt, companyMainAddressSt + "\n" + companySecondaryAddressSt, companyStatusSt);
                         }

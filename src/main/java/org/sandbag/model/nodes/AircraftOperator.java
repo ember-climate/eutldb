@@ -2,11 +2,14 @@ package org.sandbag.model.nodes;
 
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
 import org.sandbag.model.nodes.interfaces.AircraftOperatorModel;
 import org.sandbag.model.relationships.*;
 import org.sandbag.model.relationships.aircraft_ops.AircraftOperatorCompany;
 import org.sandbag.model.relationships.aircraft_ops.AircraftOperatorCountry;
 import org.sandbag.model.relationships.aircraft_ops.AircraftOperatorSector;
+
+import java.util.Iterator;
 
 /**
  * Created by root on 18/03/16.
@@ -227,5 +230,78 @@ public class AircraftOperator implements AircraftOperatorModel {
     @Override
     public String name() {
         return LABEL;
+    }
+
+    public VerifiedEmissions getVerifiedEmissionsForPeriod(Period period){
+        VerifiedEmissions emissions = null;
+        Iterator<Relationship> iterator = node.getRelationships(new VerifiedEmissions((null)),Direction.OUTGOING).iterator();
+        boolean emissionsFound = false;
+        while(iterator.hasNext() && !emissionsFound){
+            VerifiedEmissions tempEmissions = new VerifiedEmissions(iterator.next());
+            if(period.getName().equals(tempEmissions.getPeriod().getName())){
+                emissions = tempEmissions;
+                emissionsFound = true;
+            }
+        }
+        return emissions;
+    }
+
+    public AllowancesInAllocation getAllowancesInAllocationForPeriod(Period period){
+        AllowancesInAllocation allowances = null;
+
+        Iterator<Relationship> iterator = node.getRelationships(new AllowancesInAllocation((null)),Direction.OUTGOING).iterator();
+        boolean allowancesFound = false;
+
+        while(iterator.hasNext() && !allowancesFound){
+            AllowancesInAllocation tempAllowances = new AllowancesInAllocation(iterator.next());
+            if(period.getName().equals(tempAllowances.getPeriod().getName())){
+                allowances = tempAllowances;
+                allowancesFound = true;
+            }
+        }
+        return allowances;
+    }
+
+    public AllowancesInAllocation getAllowancesInAllocationForPeriodAndType(Period period, String type){
+        AllowancesInAllocation allowances = null;
+        Iterator<Relationship> iterator = node.getRelationships(new AllowancesInAllocation((null)),Direction.OUTGOING).iterator();
+        boolean allowancesFound = false;
+        while(iterator.hasNext() && !allowancesFound){
+            AllowancesInAllocation tempAllowances = new AllowancesInAllocation(iterator.next());
+            if(period.getName().equals(tempAllowances.getPeriod().getName()) &&
+                    tempAllowances.getType().equals(type)){
+                allowances = tempAllowances;
+                allowancesFound = true;
+            }
+        }
+        return allowances;
+    }
+
+    public SurrenderedUnits getSurrenderedUnitsForPeriod(Period period){
+        SurrenderedUnits surrenderedUnits = null;
+        Iterator<Relationship> iterator = node.getRelationships(new SurrenderedUnits((null)),Direction.OUTGOING).iterator();
+        boolean surrenderedUnitsFound = false;
+        while(iterator.hasNext() && !surrenderedUnitsFound){
+            SurrenderedUnits tempSurrenderedUnits = new SurrenderedUnits(iterator.next());
+            if(period.getName().equals(tempSurrenderedUnits.getPeriod().getName())){
+                surrenderedUnits = tempSurrenderedUnits;
+                surrenderedUnitsFound = true;
+            }
+        }
+        return surrenderedUnits;
+    }
+
+    public Compliance getComplianceForPeriod(Period period){
+        Compliance compliance = null;
+        Iterator<Relationship> iterator = node.getRelationships(new Compliance((null)),Direction.OUTGOING).iterator();
+        boolean complianceFound = false;
+        while(iterator.hasNext() && !complianceFound){
+            Compliance tempCompliance = new Compliance(iterator.next());
+            if(period.getName().equals(tempCompliance.getPeriod().getName())){
+                compliance = tempCompliance;
+                complianceFound = true;
+            }
+        }
+        return compliance;
     }
 }

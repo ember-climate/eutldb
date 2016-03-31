@@ -3,10 +3,7 @@ package org.sandbag.programs;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.DatabaseManager;
-import org.sandbag.model.nodes.Company;
-import org.sandbag.model.nodes.Installation;
-import org.sandbag.model.nodes.Period;
-import org.sandbag.model.nodes.Sector;
+import org.sandbag.model.nodes.*;
 import org.sandbag.model.relationships.AllowancesInAllocation;
 import org.sandbag.model.relationships.Compliance;
 import org.sandbag.model.relationships.SurrenderedUnits;
@@ -181,6 +178,128 @@ public class ExportDBToMegaFiles {
 
 
                 }
+
+
+                tx.success();
+                tx.close();
+
+                tx = dbManager.beginTransaction();
+
+                Iterator<Node> aircraftOperatorsIterator = dbManager.findNodes(DatabaseManager.AIRCRAFT_OPERATOR_LABEL);
+
+                int aircraftOperatorsCounter = 0;
+
+                while(aircraftOperatorsIterator.hasNext()){
+
+                    AircraftOperator aircraftOperator = new AircraftOperator(aircraftOperatorsIterator.next());
+                    Company company = aircraftOperator.getCompany();
+                    Sector sector = aircraftOperator.getSector();
+
+                    String lineSt = "";
+                    String typeSt = "Installation";
+
+                    lineSt += typeSt + "\t";
+
+                    lineSt += aircraftOperator.getCountry().getName() + "\t" + aircraftOperator.getId() + "\t" +
+                            company.getRegistrationNumber() + "\t" + company.getStatus() + "\t" +
+                            company.getName() + "\t" + company.getAddress() + "\t" +
+                            company.getPostalCode() + "\t" + company.getCity() + "\t"
+                            + aircraftOperator.getUniqueCodeUnderCommissionRegulation() + "\t" +
+                            aircraftOperator.getMonitoringPlanId() + "\t" +
+                            aircraftOperator.getMonitoringPlanFirstYearOfApplicability() + "\t" +
+                            aircraftOperator.getMonitoringPlanYearOfExpiry() + "\t" + aircraftOperator.getEprtrId() +
+                            "\t" + aircraftOperator.getIcaoDesignator() + "\t" + aircraftOperator.getAddress() + "\t"
+                            + aircraftOperator.getPostCode() + "\t" + aircraftOperator.getCity() +
+                            "\t" + aircraftOperator.getLatitude() + "\t" + aircraftOperator.getLongitude() + "\t" +
+                            sector.getId() + "-" + sector.getName() + "\t";
+
+                    System.out.println("lineSt = " + lineSt);
+
+                    for (int yearCounter=2005;yearCounter<=2012;yearCounter++){
+
+                        String periodSt = String.valueOf(yearCounter);
+                        System.out.println("periodSt = " + periodSt);
+                        Period period = dbManager.getPeriodByName(periodSt);
+
+                        System.out.println("period.getName() = " + period.getName());
+
+                        AllowancesInAllocation allowancesInAllocation = aircraftOperator.getAllowancesInAllocationForPeriod(period);
+                        if(allowancesInAllocation != null){
+                            lineSt += allowancesInAllocation.getValue();
+                        }
+                        lineSt += "\t";
+
+                        VerifiedEmissions verifiedEmissions = aircraftOperator.getVerifiedEmissionsForPeriod(period);
+                        if(verifiedEmissions != null){
+                            lineSt += verifiedEmissions.getValue();
+                        }
+                        lineSt += "\t";
+
+                        SurrenderedUnits surrenderedUnits = aircraftOperator.getSurrenderedUnitsForPeriod(period);
+                        if(surrenderedUnits != null){
+                            lineSt += surrenderedUnits.getValue();
+                        }
+                        lineSt += "\t";
+
+                        Compliance compliance = aircraftOperator.getComplianceForPeriod(period);
+                        if(compliance != null){
+                            lineSt += compliance.getValue();
+                        }
+                        lineSt += "\t";
+
+                    }
+
+                    for (int yearCounter=2013;yearCounter<=2020;yearCounter++){
+
+                        Period period = dbManager.getPeriodByName(String.valueOf(yearCounter));
+
+                        AllowancesInAllocation standardAllocations = aircraftOperator.getAllowancesInAllocationForPeriodAndType(period, AllowancesInAllocation.STANDARD_TYPE);
+                        if(standardAllocations != null){
+                            lineSt += standardAllocations.getValue();
+                        }
+                        lineSt += "\t";
+
+                        AllowancesInAllocation tencAllocations = aircraftOperator.getAllowancesInAllocationForPeriodAndType(period, AllowancesInAllocation.ARTICLE_10C_TYPE);
+                        if(tencAllocations != null){
+                            lineSt += tencAllocations.getValue();
+                        }
+                        lineSt += "\t";
+
+                        AllowancesInAllocation nerAllocations = aircraftOperator.getAllowancesInAllocationForPeriodAndType(period, AllowancesInAllocation.NER_TYPE);
+                        if(nerAllocations != null){
+                            lineSt += nerAllocations.getValue();
+                        }
+                        lineSt += "\t";
+
+                        VerifiedEmissions verifiedEmissions = aircraftOperator.getVerifiedEmissionsForPeriod(period);
+                        if(verifiedEmissions != null){
+                            lineSt += verifiedEmissions.getValue();
+                        }
+                        lineSt += "\t";
+
+                        SurrenderedUnits surrenderedUnits = aircraftOperator.getSurrenderedUnitsForPeriod(period);
+                        if(surrenderedUnits != null){
+                            lineSt += surrenderedUnits.getValue();
+                        }
+                        lineSt += "\t";
+
+                        Compliance compliance = aircraftOperator.getComplianceForPeriod(period);
+                        if(compliance != null){
+                            lineSt += compliance.getValue();
+                        }
+                        lineSt += "\t";
+
+                    }
+
+                    aircraftOperatorsCounter++;
+
+                    if(aircraftOperatorsCounter % 100 == 0){
+                        tx.success();
+                        tx.close();
+                        tx = dbManager.beginTransaction();
+                    }
+                }
+
 
 
                 tx.success();

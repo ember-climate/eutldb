@@ -243,11 +243,11 @@ public class EUTLDBImporter {
 
                     String[] columns = line.split("\t", -1);
 
-                    String countryIdSt = columns[0];
+                    String countryIdSt = columns[0].trim();
                     String installationIdIncompleteSt = columns[1].trim();
                     String installationIdSt = countryIdSt + installationIdIncompleteSt;
-                    String yearSt = columns[2];
-                    String nerAllocationSt = columns[3];
+                    String yearSt = columns[2].trim();
+                    String nerAllocationSt = columns[3].trim();
 
                     Period period = dbManager.getPeriodByName(yearSt);
                     if(period == null){
@@ -314,11 +314,11 @@ public class EUTLDBImporter {
 
                     String[] columns = line.split("\t", -1);
 
-                    String countryIdSt = columns[0];
+                    String countryIdSt = columns[0].trim();
                     String installationIdIncompleteSt = columns[1].trim();
                     String installationIdSt = countryIdSt + installationIdIncompleteSt;
-                    String yearSt = columns[2];
-                    String article10cAllocationSt = columns[3];
+                    String yearSt = columns[2].trim();
+                    String article10cAllocationSt = columns[3].trim();
 
                     Period period = dbManager.getPeriodByName(yearSt);
                     if(period == null){
@@ -395,10 +395,10 @@ public class EUTLDBImporter {
 
                     String[] columns = line.split("\t", -1);
 
-                    String countryNameSt = columns[0];
+                    String countryNameSt = columns[0].trim();
                     String installationIdIncompleteSt = columns[1].trim();
 
-                    String valueSt = columns[2];
+                    String valueSt = columns[2].trim();
                     try{
                         Double value = Double.parseDouble(valueSt);
 
@@ -469,10 +469,10 @@ public class EUTLDBImporter {
 
                     String[] columns = line.split("\t", -1);
 
-                    String countryNameSt = columns[0];
+                    String countryNameSt = columns[0].trim();
                     String aircraftOperatorIncompleteIdSt = columns[1].trim();
 
-                    String valueSt = columns[2];
+                    String valueSt = columns[2].trim();
                     try{
                         Double value = Double.parseDouble(valueSt);
 
@@ -534,14 +534,14 @@ public class EUTLDBImporter {
 
                     String[] columns = line.split("\t", -1);
 
-                    String countryIdSt = columns[0];
+                    String countryIdSt = columns[0].trim();
                     String installationIdIncompleteSt = columns[1].trim();
                     String installationIdSt = countryIdSt + installationIdIncompleteSt;
-                    String yearSt = columns[2];
-                    String allowancesSt = columns[3];
-                    String verifiedEmissionsSt = columns[4];
-                    String unitsSurrenderedSt = columns[5];
-                    String complianceCode = columns[6];
+                    String yearSt = columns[2].trim();
+                    String allowancesSt = columns[3].trim();
+                    String verifiedEmissionsSt = columns[4].trim();
+                    String unitsSurrenderedSt = columns[5].trim();
+                    String complianceCode = columns[6].trim();
 
                     Period period = dbManager.getPeriodByName(yearSt);
                     if(period == null){

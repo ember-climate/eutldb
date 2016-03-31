@@ -3,6 +3,7 @@ package org.sandbag.eutldb.tests;
 import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.DatabaseManager;
 import org.sandbag.model.nodes.Country;
+import org.sandbag.model.nodes.Period;
 
 /**
  * Created by root on 30/03/16.
@@ -24,6 +25,13 @@ public class DBTests {
             System.out.println("country.getId() = " + country.getId());
         }else{
             System.out.println("Country not found");
+        }
+
+        Period period = manager.createPeriod("2005");
+        if(period != null){
+            System.out.println("Period found!");
+        }else{
+            System.out.println("nothing was found... :(");
         }
 
 

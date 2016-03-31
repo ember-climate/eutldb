@@ -1,6 +1,7 @@
 package org.sandbag.programs;
 
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.DatabaseManager;
 import org.sandbag.model.nodes.Company;
 import org.sandbag.model.nodes.Installation;
@@ -63,10 +64,13 @@ public class ExportDBToMegaFiles {
 
                 DatabaseManager dbManager = new DatabaseManager(dbFolder);
 
+                Transaction tx = dbManager.beginTransaction();
+
                 BufferedWriter file1Buff = new BufferedWriter(new FileWriter(new File(outputFile1St)));
 
                 Iterator<Node> installationIterator = dbManager.findNodes(DatabaseManager.INSTALLATION_LABEL);
 
+                int installationsCounter = 0;
 
                 while(installationIterator.hasNext()){
 
@@ -89,9 +93,15 @@ public class ExportDBToMegaFiles {
                             "\t" + installation.getLatitude() + "\t" + installation.getLongitude() + "\t" +
                             sector.getId() + "-" + sector.getName() + "\t";
 
+                    System.out.println("lineSt = " + lineSt);
+
                     for (int yearCounter=2005;yearCounter<=2012;yearCounter++){
 
-                        Period period = dbManager.getPeriodByName(String.valueOf(yearCounter));
+                        String periodSt = String.valueOf(yearCounter);
+                        System.out.println("periodSt = " + periodSt);
+                        Period period = dbManager.getPeriodByName(periodSt);
+
+                        System.out.println("period.getName() = " + period.getName());
 
                         AllowancesInAllocation allowancesInAllocation = installation.getAllowancesInAllocationForPeriod(period);
                         if(allowancesInAllocation != null){
@@ -161,12 +171,20 @@ public class ExportDBToMegaFiles {
 
                     }
 
+                    installationsCounter++;
 
+                    if(installationsCounter % 100 == 0){
+                        tx.success();
+                        tx.close();
+                        tx = dbManager.beginTransaction();
+                    }
 
 
                 }
 
 
+                tx.success();
+                tx.close();
 
 
                 file1Buff.close();

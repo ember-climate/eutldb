@@ -339,11 +339,11 @@ public class DatabaseManager {
         return country;
     }
 
-    public Period createPeriod(String name) {
+    public Period createPeriod(String value) {
         Node periodNode = graphDb.createNode(PERIOD_LABEL);
 
         Period period = new Period(periodNode);
-        period.setName(name);
+        period.setName(value);
 
         return period;
     }
@@ -423,9 +423,9 @@ public class DatabaseManager {
         return aircraftOperator;
     }
 
-    public Period getPeriodByName(String name) {
+    public Period getPeriodByName(String value) {
         Period period = null;
-        Node periodNode = graphDb.findNode(PERIOD_LABEL, PeriodModel.name, name);
+        Node periodNode = graphDb.findNode(PERIOD_LABEL, PeriodModel.name, value);
         if (periodNode != null) {
             period = new Period(periodNode);
         }

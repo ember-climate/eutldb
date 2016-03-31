@@ -228,8 +228,10 @@ public class Installation implements InstallationModel {
 
     public AllowancesInAllocation getAllowancesInAllocationForPeriod(Period period){
         AllowancesInAllocation allowances = null;
+
         Iterator<Relationship> iterator = node.getRelationships(new AllowancesInAllocation((null)),Direction.OUTGOING).iterator();
         boolean allowancesFound = false;
+
         while(iterator.hasNext() && !allowancesFound){
             AllowancesInAllocation tempAllowances = new AllowancesInAllocation(iterator.next());
             if(period.getName().equals(tempAllowances.getPeriod().getName())){

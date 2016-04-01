@@ -20,6 +20,9 @@ public interface OffsetModel extends Label {
 
     double getAmount();
     String getUnitType();
+    Country getOriginatingCountry();
+    Period getPeriod();
+    Project getProject();
 
     void setAmount(double value);
     void setUnitType(String value);

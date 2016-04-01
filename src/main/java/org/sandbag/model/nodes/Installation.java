@@ -149,6 +149,10 @@ public class Installation implements InstallationModel {
         return new Sector(node.getSingleRelationship(new InstallationSector(null), Direction.OUTGOING).getEndNode());
     }
 
+    public Iterator<Relationship> getOffsets(){
+        return node.getRelationships(new Offsets(null),Direction.OUTGOING).iterator();
+    }
+
     @Override
     public void setCity(String city) {
         node.setProperty(InstallationModel.city, city);
@@ -176,12 +180,6 @@ public class Installation implements InstallationModel {
         verifiedEmissions.setValue(value);
     }
 
-    @Override
-    public void setOffsetsForPeriod(Period period, double value, String type){
-        Offsets offsets = new Offsets(node.createRelationshipTo(period.node, new Offsets(null)));
-        offsets.setValue(value);
-        offsets.setType(type);
-    }
     @Override
     public void setOffsetEntitlementForPeriod(Period period, double value){
         OffsetEntitlement offsetEntitlement = new OffsetEntitlement(node.createRelationshipTo(period.node, new OffsetEntitlement(null)));

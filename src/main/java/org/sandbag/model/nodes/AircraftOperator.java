@@ -171,6 +171,10 @@ public class AircraftOperator implements AircraftOperatorModel {
         return new Sector(node.getSingleRelationship(new AircraftOperatorSector(null), Direction.OUTGOING).getEndNode());
     }
 
+    public Iterator<Relationship> getOffsets(){
+        return node.getRelationships(new Offsets(null),Direction.OUTGOING).iterator();
+    }
+
     @Override
     public void setCity(String city) {
         node.setProperty(AircraftOperatorModel.city, city);

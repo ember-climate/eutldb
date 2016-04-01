@@ -2,6 +2,7 @@ package org.sandbag.model.relationships.interfaces;
 
 import org.neo4j.graphdb.RelationshipType;
 import org.sandbag.model.nodes.Installation;
+import org.sandbag.model.nodes.Offset;
 import org.sandbag.model.nodes.Period;
 
 /**
@@ -19,5 +20,5 @@ public interface OffsetsModel extends RelationshipType {
     void setValue(double value);
     void setType(String type);
 
-    Period getPeriod();
+    Offset getOffset();
 }

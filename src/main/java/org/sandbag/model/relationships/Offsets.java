@@ -3,6 +3,7 @@ package org.sandbag.model.relationships;
 import org.neo4j.graphdb.Relationship;
 import org.sandbag.model.nodes.AircraftOperator;
 import org.sandbag.model.nodes.Installation;
+import org.sandbag.model.nodes.Offset;
 import org.sandbag.model.nodes.Period;
 import org.sandbag.model.relationships.interfaces.OffsetsModel;
 
@@ -29,11 +30,6 @@ public class Offsets implements OffsetsModel {
 
 
     @Override
-    public Period getPeriod(){
-        return new Period(relationship.getEndNode());
-    }
-
-    @Override
     public double getValue() {
         return Double.parseDouble(String.valueOf(relationship.getProperty(OffsetsModel.value)));
     }
@@ -49,5 +45,10 @@ public class Offsets implements OffsetsModel {
     @Override
     public void setType(String type) {
         relationship.setProperty(OffsetsModel.type, type);
+    }
+
+    @Override
+    public Offset getOffset() {
+        return new Offset(relationship.getEndNode());
     }
 }

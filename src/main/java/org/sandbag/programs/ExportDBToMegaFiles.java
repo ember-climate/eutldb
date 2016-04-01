@@ -1,13 +1,11 @@
 package org.sandbag.programs;
 
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.DatabaseManager;
 import org.sandbag.model.nodes.*;
-import org.sandbag.model.relationships.AllowancesInAllocation;
-import org.sandbag.model.relationships.Compliance;
-import org.sandbag.model.relationships.SurrenderedUnits;
-import org.sandbag.model.relationships.VerifiedEmissions;
+import org.sandbag.model.relationships.*;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -42,6 +40,9 @@ public class ExportDBToMegaFiles {
             "2019_surrendered\t2019_compliance_code\t2020_allocations\t2020_ten_c\t2020_ner" +
             "\t2020_emissions\t2020_surrendered\t2020_compliance_code";
 
+    public static final String OFFSETS_FILE_HEADER = "Type\tInstallation / Aircraft Operator Country\tInstallation / Aircraft Operator ID\tOriginating Country\tUnit Type\tAmount\t" +
+            "Year of Compliance\tProject Identifier";
+
     public static void main(String[] args){
         if(args.length != 3){
             System.out.println("This program expects the following parameters:\n" +
@@ -52,6 +53,7 @@ public class ExportDBToMegaFiles {
 
             String dbFolder = args[0];
             String outputFile1St = args[1];
+            String offsetsFileSt = args[2];
 
             try{
 
@@ -61,6 +63,9 @@ public class ExportDBToMegaFiles {
 
                 BufferedWriter file1Buff = new BufferedWriter(new FileWriter(new File(outputFile1St)));
                 file1Buff.write(FILE_1_HEADER + "\n");
+
+                BufferedWriter offsetsFileBuff = new BufferedWriter(new FileWriter(new File(offsetsFileSt)));
+                offsetsFileBuff.write(OFFSETS_FILE_HEADER + "\n");
 
                 Iterator<Node> installationIterator = dbManager.findNodes(DatabaseManager.INSTALLATION_LABEL);
 
@@ -162,6 +167,31 @@ public class ExportDBToMegaFiles {
                     }
 
                     file1Buff.write(lineSt.substring(0, lineSt.length() - 1) + "\n");
+
+                    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                    //+++++++++++++++++++++++++ OFFSETS ++++++++++++++++++++++++++++++
+
+                    Iterator<Relationship> offsets = installation.getOffsets();
+
+                    while(offsets.hasNext()){
+
+                        Offsets offsetRel = new Offsets(offsets.next());
+                        Offset offset = offsetRel.getOffset();
+
+                        Project project = offset.getProject();
+                        String projectIdSt = "";
+                        if(project != null){
+                            projectIdSt = project.getId();
+                        }
+
+                        String originatingCountrySt = offset.getOriginatingCountry().getName();
+                        String yearOfComplianceSt = offset.getPeriod().getName();
+
+                        offsetsFileBuff.write("Installation\t" + installation.getCountry().getName() + "\t" +
+                                installation.getId() + "\t" + originatingCountrySt + "\t" + offset.getUnitType() + "\t"
+                                + offset.getAmount() + "\t" + yearOfComplianceSt + "\t" + projectIdSt + "\n");
+
+                    }
 
                     installationsCounter++;
 
@@ -286,6 +316,31 @@ public class ExportDBToMegaFiles {
 
                     file1Buff.write(lineSt.substring(0, lineSt.length() - 1) + "\n");
 
+                    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                    //+++++++++++++++++++++++++ OFFSETS ++++++++++++++++++++++++++++++
+
+                    Iterator<Relationship> offsets = aircraftOperator.getOffsets();
+
+                    while(offsets.hasNext()){
+
+                        Offsets offsetRel = new Offsets(offsets.next());
+                        Offset offset = offsetRel.getOffset();
+
+                        Project project = offset.getProject();
+                        String projectIdSt = "";
+                        if(project != null){
+                            projectIdSt = project.getId();
+                        }
+
+                        String originatingCountrySt = offset.getOriginatingCountry().getName();
+                        String yearOfComplianceSt = offset.getPeriod().getName();
+
+                        offsetsFileBuff.write("Aircraft Operator\t" + aircraftOperator.getCountry().getName() + "\t" +
+                                aircraftOperator.getId() + "\t" + originatingCountrySt + "\t" + offset.getUnitType() +
+                                "\t" + offset.getAmount() + "\t" + yearOfComplianceSt + "\t" + projectIdSt + "\n");
+
+                    }
+
                     aircraftOperatorsCounter++;
 
                     if(aircraftOperatorsCounter % 100 == 0){
@@ -303,6 +358,7 @@ public class ExportDBToMegaFiles {
 
 
                 file1Buff.close();
+                offsetsFileBuff.close();
                 dbManager.shutdown();
 
             }catch (Exception e){

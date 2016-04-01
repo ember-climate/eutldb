@@ -59,7 +59,6 @@ public interface InstallationModel extends Label{
     void setLongitude(String longitude);
     void setSector(Sector sector);
     void setVerifiedEmissionsForPeriod(Period period, double value);
-    void setOffsetsForPeriod(Period period, double value, String type);
     void setOffsetEntitlementForPeriod(Period period, double value);
     void setSurrenderedUnitsForPeriod(Period period, double value);
     void setComplianceForPeriod(Period period, String value);

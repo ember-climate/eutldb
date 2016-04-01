@@ -1,6 +1,8 @@
 package org.sandbag.model.nodes;
 
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
 import org.sandbag.model.nodes.interfaces.OffsetModel;
 import org.sandbag.model.relationships.OffsetOriginatingCountry;
 import org.sandbag.model.relationships.OffsetPeriod;
@@ -26,6 +28,26 @@ public class Offset implements OffsetModel {
     @Override
     public String getUnitType() {
         return String.valueOf(node.getProperty(OffsetModel.unitType));
+    }
+
+    @Override
+    public Country getOriginatingCountry() {
+        return new Country(node.getSingleRelationship(new OffsetOriginatingCountry(null), Direction.OUTGOING).getEndNode());
+    }
+
+    @Override
+    public Period getPeriod() {
+        return new Period(node.getSingleRelationship(new OffsetPeriod(null), Direction.OUTGOING).getEndNode());
+    }
+
+    @Override
+    public Project getProject() {
+        Relationship offsetProject = node.getSingleRelationship(new OffsetProject(null), Direction.OUTGOING);
+        if(offsetProject == null){
+            return null;
+        }else{
+            return new Project(offsetProject.getEndNode());
+        }
     }
 
     @Override

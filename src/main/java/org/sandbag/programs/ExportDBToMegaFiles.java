@@ -12,10 +12,7 @@ import org.sandbag.model.relationships.VerifiedEmissions;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by root on 30/03/16.
@@ -29,11 +26,10 @@ public class ExportDBToMegaFiles {
             "\tPermit ID / Monitoring Plan ID\tPermit Entry Date / Monitoring plan  first year of applicability" +
             "\tPermit Expiry/Revocation Date / Monitoring plan  year of expiry\t" +
             "E-PRTR identification\tCall Sign (ICAO designator)\tAddress\tPostal Code" +
-            "\tCity\tLatitude\tLongitude\tMain Activity\tContact Name\tContact Main Address Line" +
-            "\tContact Secondary Address Line\tContact Postal Code\tContact City\tContact Country\t2005_allocations" +
-            "\t2005_emissions\t2005_surrendered\t2005_compliance_code\t2006_allocations\t2006_emissions\t2006_surrendered\t" +
+            "\tCity\tLatitude\tLongitude\tMain Activity\t2005_allocations\t2005_emissions\t2005_surrendered\t" +
+            "2005_compliance_code\t2006_allocations\t2006_emissions\t2006_surrendered\t" +
             "2006_compliance_code\t2007_allocations\t2007_emissions\t2007_surrendered\t2007_compliance_code\t2008_allocations" +
-            "\t2008_emissions\t2008_surrendered\t2008_compliance_code\t2009_allocations\t2009_emissions\t2009_surrendered\t" +
+            "\t2008_emissions\t2008_surrendered\t2008_compliance_code\t2009_allocations\t2009_emissions\t2009_surrendered" +
             "\t2009_compliance_code\t2010_allocations\t2010_emissions\t2010_surrendered\t2010_compliance_code\t" +
             "2011_allocations\t2011_emissions\t2011_surrendered\t2011_compliance_code\t2012_allocations\t2012_emissions" +
             "\t2012_surrendered\t2012_compliance_code\t2013_allocations\t2013_ten_c\t2013_ner\t2013_emissions\t" +
@@ -64,6 +60,7 @@ public class ExportDBToMegaFiles {
                 Transaction tx = dbManager.beginTransaction();
 
                 BufferedWriter file1Buff = new BufferedWriter(new FileWriter(new File(outputFile1St)));
+                file1Buff.write(FILE_1_HEADER + "\n");
 
                 Iterator<Node> installationIterator = dbManager.findNodes(DatabaseManager.INSTALLATION_LABEL);
 
@@ -77,21 +74,19 @@ public class ExportDBToMegaFiles {
                     lineSt += typeSt + "\t";
 
                     Installation installation = new Installation(installationIterator.next());
-                    System.out.println("installation.getId() = " + installation.getId());
                     Company company = installation.getCompany();
                     Sector sector = installation.getSector();
 
                     lineSt += installation.getCountry().getName() + "\t" + installation.getId() + "\t" +
                             company.getRegistrationNumber() + "\t" + company.getStatus() + "\t" +
-                            company.getName() + "\t" + company.getAddress() + "\t" +
+                            company.getName() + "\t" + company.getAddress().replaceAll("\n", " ") + "\t" +
                             company.getPostalCode() + "\t" + company.getCity() + "\t" + installation.getName() +
                             "\t" + installation.getPermitId() + "\t" + installation.getPermitEntryDate() + "\t" +
                             installation.getPermitExpiryOrRevocationDate() + "\t" + installation.getEprtrId() + "\t\t" +
-                            installation.getAddress() + "\t" + installation.getPostCode() + "\t" + installation.getCity() +
+                            installation.getAddress().replaceAll("\n", " ") + "\t" + installation.getPostCode() + "\t" + installation.getCity() +
                             "\t" + installation.getLatitude() + "\t" + installation.getLongitude() + "\t" +
                             sector.getId() + "-" + sector.getName() + "\t";
 
-                    //System.out.println("lineSt = " + lineSt);
 
                     for (int yearCounter=2005;yearCounter<=2012;yearCounter++){
 
@@ -166,6 +161,8 @@ public class ExportDBToMegaFiles {
 
                     }
 
+                    file1Buff.write(lineSt.substring(0, lineSt.length() - 1) + "\n");
+
                     installationsCounter++;
 
                     if(installationsCounter % 100 == 0){
@@ -195,32 +192,29 @@ public class ExportDBToMegaFiles {
                     Sector sector = aircraftOperator.getSector();
 
                     String lineSt = "";
-                    String typeSt = "Installation";
+                    String typeSt = "Aircraft Operator";
 
                     lineSt += typeSt + "\t";
 
                     lineSt += aircraftOperator.getCountry().getName() + "\t" + aircraftOperator.getId() + "\t" +
                             company.getRegistrationNumber() + "\t" + company.getStatus() + "\t" +
-                            company.getName() + "\t" + company.getAddress() + "\t" +
+                            company.getName() + "\t" + company.getAddress().replaceAll("\n", " ") + "\t" +
                             company.getPostalCode() + "\t" + company.getCity() + "\t"
                             + aircraftOperator.getUniqueCodeUnderCommissionRegulation() + "\t" +
                             aircraftOperator.getMonitoringPlanId() + "\t" +
                             aircraftOperator.getMonitoringPlanFirstYearOfApplicability() + "\t" +
                             aircraftOperator.getMonitoringPlanYearOfExpiry() + "\t" + aircraftOperator.getEprtrId() +
-                            "\t" + aircraftOperator.getIcaoDesignator() + "\t" + aircraftOperator.getAddress() + "\t"
+                            "\t" + aircraftOperator.getIcaoDesignator() + "\t" +
+                            aircraftOperator.getAddress().replaceAll("\n", " ") + "\t"
                             + aircraftOperator.getPostCode() + "\t" + aircraftOperator.getCity() +
                             "\t" + aircraftOperator.getLatitude() + "\t" + aircraftOperator.getLongitude() + "\t" +
                             sector.getId() + "-" + sector.getName() + "\t";
 
-                    System.out.println("lineSt = " + lineSt);
 
                     for (int yearCounter=2005;yearCounter<=2012;yearCounter++){
 
                         String periodSt = String.valueOf(yearCounter);
-                        System.out.println("periodSt = " + periodSt);
                         Period period = dbManager.getPeriodByName(periodSt);
-
-                        System.out.println("period.getName() = " + period.getName());
 
                         AllowancesInAllocation allowancesInAllocation = aircraftOperator.getAllowancesInAllocationForPeriod(period);
                         if(allowancesInAllocation != null){
@@ -289,6 +283,8 @@ public class ExportDBToMegaFiles {
                         lineSt += "\t";
 
                     }
+
+                    file1Buff.write(lineSt.substring(0, lineSt.length() - 1) + "\n");
 
                     aircraftOperatorsCounter++;
 

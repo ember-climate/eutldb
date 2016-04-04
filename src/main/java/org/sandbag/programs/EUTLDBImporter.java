@@ -389,6 +389,7 @@ public class EUTLDBImporter {
                 tx = dbManager.beginTransaction();
             }
 
+
             while((line = reader.readLine()) != null){
 
                 if(!line.trim().isEmpty()){
@@ -422,6 +423,7 @@ public class EUTLDBImporter {
                     }
 
                     if(lineCounter % 100 == 0){
+                        System.out.println(lineCounter + " installation offset entitlements added...");
                         tx.success();
                         tx.close();
                         tx = dbManager.beginTransaction();

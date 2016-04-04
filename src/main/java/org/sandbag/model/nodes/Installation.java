@@ -175,11 +175,6 @@ public class Installation implements InstallationModel {
     }
 
     @Override
-    public boolean getOpen() {
-        return Boolean.valueOf(String.valueOf(node.getProperty(InstallationModel.open)));
-    }
-
-    @Override
     public void setPostCode(String postCode) {
         node.setProperty(InstallationModel.postCode, postCode);
     }

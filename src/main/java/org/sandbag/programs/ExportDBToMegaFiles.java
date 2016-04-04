@@ -73,7 +73,7 @@ public class ExportDBToMegaFiles {
                 offsetsFileBuff.write(OFFSETS_FILE_HEADER + "\n");
 
                 BufferedWriter offsetEntitlementsBuff = new BufferedWriter(new FileWriter(new File(offsetEntitlementsFileSt)));
-                offsetEntitlementsBuff.write(OFFSET_ENTITLEMENTS_FILE_HEADER);
+                offsetEntitlementsBuff.write(OFFSET_ENTITLEMENTS_FILE_HEADER + "\n");
 
                 Iterator<Node> installationIterator = dbManager.findNodes(DatabaseManager.INSTALLATION_LABEL);
 
@@ -204,8 +204,8 @@ public class ExportDBToMegaFiles {
                     //============== 0FFSET ENTITLEMENTS ==================
                     Period tempPeriod = dbManager.getPeriodByName("2008to2020");
                     double offsetEntitlementValue = installation.getOffsetEntitlementForPeriod(tempPeriod);
-                    offsetEntitlementsBuff.write("Aircraft Operator\t" + installation.getId() + "\t" +
-                            offsetEntitlementValue + "\n");
+                    offsetEntitlementsBuff.write("Aircraft Operator\t" + installation.getCountry().getName() + "\t" +
+                            installation.getId() + "\t" + offsetEntitlementValue + "\n");
                     //===================================================
 
                     installationsCounter++;
@@ -359,8 +359,8 @@ public class ExportDBToMegaFiles {
                     //============== 0FFSET ENTITLEMENTS ==================
                     Period tempPeriod = dbManager.getPeriodByName("2008to2020");
                     double offsetEntitlementValue = aircraftOperator.getOffsetEntitlementForPeriod(tempPeriod);
-                    offsetEntitlementsBuff.write("Aircraft Operator\t" + aircraftOperator.getId() + "\t" +
-                            offsetEntitlementValue + "\n");
+                    offsetEntitlementsBuff.write("Aircraft Operator\t" + aircraftOperator.getCountry().getName() +
+                            aircraftOperator.getId() + "\t" + offsetEntitlementValue + "\n");
                     //===================================================
 
                     aircraftOperatorsCounter++;

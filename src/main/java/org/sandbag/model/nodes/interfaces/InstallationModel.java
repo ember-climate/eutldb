@@ -29,7 +29,6 @@ public interface InstallationModel extends Label{
     Country getCountry();
     Company getCompany();
     String getPostCode();
-    boolean getOpen();
     String getName();
     String getCity();
     String getAddress();

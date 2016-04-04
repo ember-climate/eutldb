@@ -11,7 +11,7 @@ import org.sandbag.model.nodes.Sector;
  */
 public interface AircraftOperatorModel extends Label {
 
-    String LABEL = "AIRCRAFT OPERATOR";
+    String LABEL = "AIRCRAFT_OPERATOR";
     String id = "id";
     String name = "name";
     String city = "city";

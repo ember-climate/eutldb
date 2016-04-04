@@ -201,15 +201,21 @@ public class AircraftOperator implements AircraftOperatorModel {
         verifiedEmissions.setValue(value);
     }
     @Override
-    public void setOffsetsForPeriod(Period period, double value, String type){
-        Offsets offsets = new Offsets(node.createRelationshipTo(period.node, new Offsets(null)));
-        offsets.setValue(value);
-        offsets.setType(type);
-    }
-    @Override
     public void setOffsetEntitlementForPeriod(Period period, double value){
         OffsetEntitlement offsetEntitlement = new OffsetEntitlement(node.createRelationshipTo(period.node, new OffsetEntitlement(null)));
         offsetEntitlement.setValue(value);
+    }
+
+    @Override
+    public double getOffsetEntitlementForPeriod(Period period){
+        Relationship rel = node.getSingleRelationship(new OffsetEntitlement((null)),Direction.OUTGOING);
+        if(rel != null){
+            OffsetEntitlement offsetEntitlement = new OffsetEntitlement(rel);
+            return offsetEntitlement.getValue();
+        }else{
+            return -1;
+        }
+
     }
 
     @Override

@@ -135,6 +135,17 @@ public class Installation implements InstallationModel {
     }
 
     @Override
+    public double getOffsetEntitlementForPeriod(Period period){
+        Relationship rel = node.getSingleRelationship(new OffsetEntitlement((null)),Direction.OUTGOING);
+        if(rel != null){
+            OffsetEntitlement offsetEntitlement = new OffsetEntitlement(rel);
+            return offsetEntitlement.getValue();
+        }else{
+            return -1;
+        }
+    }
+
+    @Override
     public String getLatitude() {
         return String.valueOf(node.getProperty(InstallationModel.latitude));
     }

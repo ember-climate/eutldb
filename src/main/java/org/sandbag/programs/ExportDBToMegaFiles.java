@@ -43,17 +43,22 @@ public class ExportDBToMegaFiles {
     public static final String OFFSETS_FILE_HEADER = "Type\tInstallation / Aircraft Operator Country\tInstallation / Aircraft Operator ID\tOriginating Country\tUnit Type\tAmount\t" +
             "Year of Compliance\tProject Identifier";
 
+    public static final String OFFSET_ENTITLEMENTS_FILE_HEADER = "Type\tInstallation / Aircraft Operator Country\t" +
+            "Installation / Aircraft Operator ID\tValue";
+
     public static void main(String[] args){
-        if(args.length != 3){
+        if(args.length != 4){
             System.out.println("This program expects the following parameters:\n" +
                     "1. Database folder \n" +
-                    "2. Output file 1 \n" +
-                    "3. Output file 2");
+                    "2. Output file 1 (Mega file) \n" +
+                    "3. Output file 2 (Offsets file) \n" +
+                    "4. Output file 3 (Offset entitlements)");
         }else{
 
             String dbFolder = args[0];
             String outputFile1St = args[1];
             String offsetsFileSt = args[2];
+            String offsetEntitlementsFileSt = args[3];
 
             try{
 
@@ -66,6 +71,9 @@ public class ExportDBToMegaFiles {
 
                 BufferedWriter offsetsFileBuff = new BufferedWriter(new FileWriter(new File(offsetsFileSt)));
                 offsetsFileBuff.write(OFFSETS_FILE_HEADER + "\n");
+
+                BufferedWriter offsetEntitlementsBuff = new BufferedWriter(new FileWriter(new File(offsetEntitlementsFileSt)));
+                offsetEntitlementsBuff.write(OFFSET_ENTITLEMENTS_FILE_HEADER);
 
                 Iterator<Node> installationIterator = dbManager.findNodes(DatabaseManager.INSTALLATION_LABEL);
 
@@ -192,6 +200,13 @@ public class ExportDBToMegaFiles {
                                 + offset.getAmount() + "\t" + yearOfComplianceSt + "\t" + projectIdSt + "\n");
 
                     }
+
+                    //============== 0FFSET ENTITLEMENTS ==================
+                    Period tempPeriod = dbManager.getPeriodByName("2008to2020");
+                    double offsetEntitlementValue = installation.getOffsetEntitlementForPeriod(tempPeriod);
+                    offsetEntitlementsBuff.write("Aircraft Operator\t" + installation.getId() + "\t" +
+                            offsetEntitlementValue + "\n");
+                    //===================================================
 
                     installationsCounter++;
 
@@ -341,6 +356,13 @@ public class ExportDBToMegaFiles {
 
                     }
 
+                    //============== 0FFSET ENTITLEMENTS ==================
+                    Period tempPeriod = dbManager.getPeriodByName("2008to2020");
+                    double offsetEntitlementValue = aircraftOperator.getOffsetEntitlementForPeriod(tempPeriod);
+                    offsetEntitlementsBuff.write("Aircraft Operator\t" + aircraftOperator.getId() + "\t" +
+                            offsetEntitlementValue + "\n");
+                    //===================================================
+
                     aircraftOperatorsCounter++;
 
                     if(aircraftOperatorsCounter % 100 == 0){
@@ -359,6 +381,7 @@ public class ExportDBToMegaFiles {
 
                 file1Buff.close();
                 offsetsFileBuff.close();
+                offsetEntitlementsBuff.close();
                 dbManager.shutdown();
 
             }catch (Exception e){

@@ -63,5 +63,6 @@ public interface InstallationModel extends Label{
     void setSurrenderedUnitsForPeriod(Period period, double value);
     void setComplianceForPeriod(Period period, String value);
     void setAllowancesInAllocationForPeriod(Period period, double value, String type);
+    double getOffsetEntitlementForPeriod(Period period);
 
 }

@@ -204,7 +204,7 @@ public class ExportDBToMegaFiles {
                     //============== 0FFSET ENTITLEMENTS ==================
                     Period tempPeriod = dbManager.getPeriodByName("2008to2020");
                     double offsetEntitlementValue = installation.getOffsetEntitlementForPeriod(tempPeriod);
-                    offsetEntitlementsBuff.write("Aircraft Operator\t" + installation.getCountry().getName() + "\t" +
+                    offsetEntitlementsBuff.write("Installation \t" + installation.getCountry().getName() + "\t" +
                             installation.getId() + "\t" + offsetEntitlementValue + "\n");
                     //===================================================
 
@@ -360,7 +360,7 @@ public class ExportDBToMegaFiles {
                     Period tempPeriod = dbManager.getPeriodByName("2008to2020");
                     double offsetEntitlementValue = aircraftOperator.getOffsetEntitlementForPeriod(tempPeriod);
                     offsetEntitlementsBuff.write("Aircraft Operator\t" + aircraftOperator.getCountry().getName() +
-                            aircraftOperator.getId() + "\t" + offsetEntitlementValue + "\n");
+                            "\t" + aircraftOperator.getId() + "\t" + offsetEntitlementValue + "\n");
                     //===================================================
 
                     aircraftOperatorsCounter++;

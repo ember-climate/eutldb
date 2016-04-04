@@ -28,7 +28,7 @@ Gets all relationships and nodes associated to the specific installation that ha
 
 ``` sql
 // get installation data
-MATCH (i:INSTALLATION{id:'AT 210'})-[r]->(x)
+MATCH (i:INSTALLATION{id:'AT210'})-[r]->(x)
 RETURN i, x, r
 ```
 
@@ -63,8 +63,8 @@ RegCtryName
 //Dave's query
 MATCH (c:COUNTRY)<-[:INSTALLATION_COUNTRY]-(i:INSTALLATION)-[:INSTALLATION_SECTOR]->(s:SECTOR{name:'Cement and Lime'}),
 (i)-[ve:VERIFIED_EMISSIONS]->(p:PERIOD{name:'2014'}),
-(i)-[fa:FREE_ALLOCATION{type:'FA Standard'}]->(p:PERIOD{name:'2014'})
-RETURN c.name AS Country, sum(ve.value) AS Verified_Emissions, sum(fa.value) AS Free_Allocations, sum(ve.value) - sum(fa.value) AS Surplus_Deficit
+(i)-[aa:ALLOWANCES_IN_ALLOCATION]->(p:PERIOD{name:'2014'})
+RETURN c.name AS Country, sum(ve.value) AS Verified_Emissions, sum(aa.value) AS Allowances_In_Allocation, sum(ve.value) - sum(aa.value) AS Surplus_Deficit
 ORDER BY Country
 ```
 

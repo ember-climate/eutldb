@@ -36,6 +36,8 @@ public class DatabaseManager {
     public static IndexDefinition sectorIdIndex = null;
     public static IndexDefinition companyNameIndex = null;
     public static IndexDefinition companyRegistrationNumberIndex = null;
+    public static IndexDefinition projectIdIndex = null;
+
 
     /**
      * Constructor
@@ -104,6 +106,11 @@ public class DatabaseManager {
                             .on(CompanyModel.registrationNumber)
                             .create();
 
+                    projectIdIndex = schema.indexFor(PROJECT_LABEL)
+                            .on(ProjectModel.id)
+                            .create();
+
+
                     tx.success();
                     tx.close();
                     tx = graphDb.beginTx();
@@ -117,6 +124,7 @@ public class DatabaseManager {
                     schema.awaitIndexOnline(sectorIdIndex, 10, TimeUnit.SECONDS);
                     schema.awaitIndexOnline(companyNameIndex, 10, TimeUnit.SECONDS);
                     schema.awaitIndexOnline(companyRegistrationNumberIndex, 10, TimeUnit.SECONDS);
+                    schema.awaitIndexOnline(projectIdIndex, 10, TimeUnit.SECONDS);
                     System.out.println("Done!");
 
                     tx.success();

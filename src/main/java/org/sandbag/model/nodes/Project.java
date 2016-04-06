@@ -1,7 +1,12 @@
 package org.sandbag.model.nodes;
 
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
 import org.sandbag.model.nodes.interfaces.ProjectModel;
+import org.sandbag.model.relationships.OffsetProject;
+
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by root on 29/03/16.
@@ -27,6 +32,11 @@ public class Project implements ProjectModel {
     @Override
     public String name() {
         return LABEL;
+    }
+
+    @Override
+    public Iterator<Relationship> getOffsetProject(){
+        return  node.getRelationships(new OffsetProject(null)).iterator();
     }
 
 }

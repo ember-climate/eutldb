@@ -5,9 +5,7 @@ import org.sandbag.model.*;
 import org.sandbag.model.nodes.*;
 import org.sandbag.model.relationships.interfaces.AllowancesInAllocationModel;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 
 /**
  *
@@ -400,26 +398,21 @@ public class EUTLDBImporter {
                     String installationIdIncompleteSt = columns[1].trim();
 
                     String valueSt = columns[2].trim();
-                    try{
-                        Double value = Double.parseDouble(valueSt);
 
-                        Country country = dbManager.getCountryByName(countryNameSt);
-                        String countryIdSt = country.getId();
-                        String installationIdSt = countryIdSt + installationIdIncompleteSt;
+                    Country country = dbManager.getCountryByName(countryNameSt);
+                    String countryIdSt = country.getId();
+                    String installationIdSt = countryIdSt + installationIdIncompleteSt;
 
-                        Installation installation = dbManager.getInstallationById(installationIdSt);
+                    Installation installation = dbManager.getInstallationById(installationIdSt);
 
-                        if(installation != null){
+                    if(installation != null){
 
-                            installation.setOffsetEntitlementForPeriod(period, value);
+                        installation.setOffsetEntitlementForPeriod(period, valueSt);
 
-                        }else{
-                            System.out.println("(Offset entitlement) Installation " + installationIdSt + " could not be found...");
-                            System.out.println("installationIdIncompleteSt = '" + installationIdIncompleteSt + "'");
-                            System.out.println("countryIdSt = '" + countryIdSt + "'");
-                        }
-                    }catch(Exception e){
-
+                    }else{
+                        System.out.println("(Offset entitlement) Installation " + installationIdSt + " could not be found...");
+                        System.out.println("installationIdIncompleteSt = '" + installationIdIncompleteSt + "'");
+                        System.out.println("countryIdSt = '" + countryIdSt + "'");
                     }
 
                     if(lineCounter % 100 == 0){
@@ -475,25 +468,20 @@ public class EUTLDBImporter {
                     String aircraftOperatorIncompleteIdSt = columns[1].trim();
 
                     String valueSt = columns[2].trim();
-                    try{
-                        Double value = Double.parseDouble(valueSt);
 
-                        Country country = dbManager.getCountryByName(countryNameSt);
-                        String countryIdSt = country.getId();
-                        String aircraftOperatorIdSt = countryIdSt + aircraftOperatorIncompleteIdSt;
+                    Country country = dbManager.getCountryByName(countryNameSt);
+                    String countryIdSt = country.getId();
+                    String aircraftOperatorIdSt = countryIdSt + aircraftOperatorIncompleteIdSt;
 
-                        AircraftOperator aircraftOperator = dbManager.getAircraftOperatorById(aircraftOperatorIdSt);
-                        if(aircraftOperator != null){
+                    AircraftOperator aircraftOperator = dbManager.getAircraftOperatorById(aircraftOperatorIdSt);
+                    if(aircraftOperator != null){
 
-                            aircraftOperator.setOffsetEntitlementForPeriod(period, value);
+                        aircraftOperator.setOffsetEntitlementForPeriod(period, valueSt);
 
-                        }else{
-                            System.out.println("(Offset entitlement) Aircraft Operator " + aircraftOperatorIdSt + " could not be found...");
-                            System.out.println("aircraftOperatorIncompleteIdSt = '" + aircraftOperatorIncompleteIdSt + "'");
-                            System.out.println("countryIdSt = '" + countryIdSt + "'");
-                        }
-                    }catch(Exception e){
-
+                    }else{
+                        System.out.println("(Offset entitlement) Aircraft Operator " + aircraftOperatorIdSt + " could not be found...");
+                        System.out.println("aircraftOperatorIncompleteIdSt = '" + aircraftOperatorIncompleteIdSt + "'");
+                        System.out.println("countryIdSt = '" + countryIdSt + "'");
                     }
 
                     if(lineCounter % 100 == 0){
@@ -674,7 +662,7 @@ public class EUTLDBImporter {
         String line;
         try{
 
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
             reader.readLine(); //skipping header
 
             int lineCounter = 0;
@@ -713,6 +701,8 @@ public class EUTLDBImporter {
                     String latituteSt = columns[24].trim();
                     String longitudeSt = columns[25].trim();
                     String mainActivitySt = columns[26].trim();
+
+                    //System.out.println("installationNameSt = " + installationNameSt);
 
                     Country country = dbManager.getCountryByName(countryNameSt);
                     if(country == null){
@@ -848,6 +838,9 @@ public class EUTLDBImporter {
                                 tx.success();
                                 tx.close();
                                 tx = dbManager.beginTransaction();
+                            }else{
+                                System.out.println("Project with id: " + projectIdSt + " found!");
+                                System.out.println("project.getId() = " + project.getId());
                             }
                         }
 
@@ -861,6 +854,8 @@ public class EUTLDBImporter {
                                     project,
                                     period,
                                     originatingCountry);
+
+
 
 
                         }else{

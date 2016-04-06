@@ -135,13 +135,13 @@ public class Installation implements InstallationModel {
     }
 
     @Override
-    public double getOffsetEntitlementForPeriod(Period period){
+    public String getOffsetEntitlementForPeriod(Period period){
         Relationship rel = node.getSingleRelationship(new OffsetEntitlement((null)),Direction.OUTGOING);
         if(rel != null){
             OffsetEntitlement offsetEntitlement = new OffsetEntitlement(rel);
             return offsetEntitlement.getValue();
         }else{
-            return -1;
+            return "Not set";
         }
     }
 
@@ -187,7 +187,7 @@ public class Installation implements InstallationModel {
     }
 
     @Override
-    public void setOffsetEntitlementForPeriod(Period period, double value){
+    public void setOffsetEntitlementForPeriod(Period period, String value){
         OffsetEntitlement offsetEntitlement = new OffsetEntitlement(node.createRelationshipTo(period.node, new OffsetEntitlement(null)));
         offsetEntitlement.setValue(value);
     }

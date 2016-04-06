@@ -13,8 +13,8 @@ public interface OffsetEntitlementModel extends RelationshipType {
 
     String value = "value";
 
-    double getValue();
-    void setValue(double value);
+    String getValue();
+    void setValue(String value);
 
     Period getPeriod();
 }

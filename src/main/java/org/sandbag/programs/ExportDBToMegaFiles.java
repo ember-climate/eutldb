@@ -7,9 +7,7 @@ import org.sandbag.model.DatabaseManager;
 import org.sandbag.model.nodes.*;
 import org.sandbag.model.relationships.*;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.Iterator;
 
 /**
@@ -66,13 +64,13 @@ public class ExportDBToMegaFiles {
 
                 Transaction tx = dbManager.beginTransaction();
 
-                BufferedWriter file1Buff = new BufferedWriter(new FileWriter(new File(outputFile1St)));
+                BufferedWriter file1Buff = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile1St),"UTF-8"));
                 file1Buff.write(FILE_1_HEADER + "\n");
 
-                BufferedWriter offsetsFileBuff = new BufferedWriter(new FileWriter(new File(offsetsFileSt)));
+                BufferedWriter offsetsFileBuff = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(offsetsFileSt),"UTF-8"));
                 offsetsFileBuff.write(OFFSETS_FILE_HEADER + "\n");
 
-                BufferedWriter offsetEntitlementsBuff = new BufferedWriter(new FileWriter(new File(offsetEntitlementsFileSt)));
+                BufferedWriter offsetEntitlementsBuff = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(offsetEntitlementsFileSt),"UTF-8"));
                 offsetEntitlementsBuff.write(OFFSET_ENTITLEMENTS_FILE_HEADER + "\n");
 
                 Iterator<Node> installationIterator = dbManager.findNodes(DatabaseManager.INSTALLATION_LABEL);
@@ -89,6 +87,8 @@ public class ExportDBToMegaFiles {
                     Installation installation = new Installation(installationIterator.next());
                     Company company = installation.getCompany();
                     Sector sector = installation.getSector();
+
+                    //System.out.println("installation.getName() = " + installation.getName());
 
                     lineSt += installation.getCountry().getName() + "\t" + installation.getId() + "\t" +
                             company.getRegistrationNumber() + "\t" + company.getStatus() + "\t" +
@@ -203,7 +203,7 @@ public class ExportDBToMegaFiles {
 
                     //============== 0FFSET ENTITLEMENTS ==================
                     Period tempPeriod = dbManager.getPeriodByName("2008to2020");
-                    double offsetEntitlementValue = installation.getOffsetEntitlementForPeriod(tempPeriod);
+                    String offsetEntitlementValue = installation.getOffsetEntitlementForPeriod(tempPeriod);
                     offsetEntitlementsBuff.write("Installation \t" + installation.getCountry().getName() + "\t" +
                             installation.getId() + "\t" + offsetEntitlementValue + "\n");
                     //===================================================
@@ -358,7 +358,7 @@ public class ExportDBToMegaFiles {
 
                     //============== 0FFSET ENTITLEMENTS ==================
                     Period tempPeriod = dbManager.getPeriodByName("2008to2020");
-                    double offsetEntitlementValue = aircraftOperator.getOffsetEntitlementForPeriod(tempPeriod);
+                    String offsetEntitlementValue = aircraftOperator.getOffsetEntitlementForPeriod(tempPeriod);
                     offsetEntitlementsBuff.write("Aircraft Operator\t" + aircraftOperator.getCountry().getName() +
                             "\t" + aircraftOperator.getId() + "\t" + offsetEntitlementValue + "\n");
                     //===================================================

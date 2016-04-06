@@ -34,12 +34,12 @@ public class OffsetEntitlement implements OffsetEntitlementModel {
     }
 
     @Override
-    public double getValue() {
-        return Double.parseDouble(String.valueOf(relationship.getProperty(value)));
+    public String getValue() {
+        return String.valueOf(relationship.getProperty(value));
     }
 
     @Override
-    public void setValue(double value) {
+    public void setValue(String value) {
         relationship.setProperty(OffsetEntitlementModel.value, value);
     }
 

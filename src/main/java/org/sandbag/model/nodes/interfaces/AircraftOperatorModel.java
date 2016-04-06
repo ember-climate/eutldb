@@ -64,10 +64,10 @@ public interface AircraftOperatorModel extends Label {
     void setLongitude(String longitude);
     void setSector(Sector sector);
     void setVerifiedEmissionsForPeriod(Period period, double value);
-    void setOffsetEntitlementForPeriod(Period period, double value);
+    void setOffsetEntitlementForPeriod(Period period, String value);
     void setSurrenderedUnitsForPeriod(Period period, double value);
     void setComplianceForPeriod(Period period, String value);
     void setAllowancesInAllocationForPeriod(Period period, double value, String type);
-    double getOffsetEntitlementForPeriod(Period period);
+    String getOffsetEntitlementForPeriod(Period period);
 
 }

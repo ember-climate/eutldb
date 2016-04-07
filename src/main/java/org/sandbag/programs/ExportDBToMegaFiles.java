@@ -22,7 +22,7 @@ public class ExportDBToMegaFiles {
             "\tPermit ID / Monitoring Plan ID\tPermit Entry Date / Monitoring plan  first year of applicability" +
             "\tPermit Expiry/Revocation Date / Monitoring plan  year of expiry\t" +
             "E-PRTR identification\tCall Sign (ICAO designator)\tAddress\tPostal Code" +
-            "\tCity\tLatitude\tLongitude\tMain Activity\t2005_allocations\t2005_emissions\t2005_surrendered\t" +
+            "\tCity\tLatitude\tLongitude\tMain Activity\tSubsidiary Company\tParent Company\t2005_allocations\t2005_emissions\t2005_surrendered\t" +
             "2005_compliance_code\t2006_allocations\t2006_emissions\t2006_surrendered\t" +
             "2006_compliance_code\t2007_allocations\t2007_emissions\t2007_surrendered\t2007_compliance_code\t2008_allocations" +
             "\t2008_emissions\t2008_surrendered\t2008_compliance_code\t2009_allocations\t2009_emissions\t2009_surrendered" +
@@ -98,7 +98,8 @@ public class ExportDBToMegaFiles {
                             installation.getPermitExpiryOrRevocationDate() + "\t" + installation.getEprtrId() + "\t\t" +
                             installation.getAddress().replaceAll("\n", " ") + "\t" + installation.getPostCode() + "\t" + installation.getCity() +
                             "\t" + installation.getLatitude() + "\t" + installation.getLongitude() + "\t" +
-                            sector.getId() + "-" + sector.getName() + "\t";
+                            sector.getId() + "-" + sector.getName() + "\t" + company.getSubsidiaryCompany() + "\t" +
+                            company.getParentCompany() + "\t";
 
 
                     for (int yearCounter=2005;yearCounter<=2012;yearCounter++){
@@ -253,7 +254,8 @@ public class ExportDBToMegaFiles {
                             aircraftOperator.getAddress().replaceAll("\n", " ") + "\t"
                             + aircraftOperator.getPostCode() + "\t" + aircraftOperator.getCity() +
                             "\t" + aircraftOperator.getLatitude() + "\t" + aircraftOperator.getLongitude() + "\t" +
-                            sector.getId() + "-" + sector.getName() + "\t";
+                            sector.getId() + "-" + sector.getName() + "\t" + company.getSubsidiaryCompany() + "\t" +
+                            company.getParentCompany() + "\t";
 
 
                     for (int yearCounter=2005;yearCounter<=2012;yearCounter++){

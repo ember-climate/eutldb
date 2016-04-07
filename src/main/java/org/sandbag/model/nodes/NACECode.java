@@ -16,12 +16,22 @@ public class NACECode implements NACECodeModel {
 
     @Override
     public String getId() {
-        return id;
+        return String.valueOf(node.getProperty(NACECodeModel.id));
+    }
+
+    @Override
+    public String getDescription() {
+        return String.valueOf(node.getProperty(NACECodeModel.description));
     }
 
     @Override
     public void setId(String id) {
         node.setProperty(NACECodeModel.id, id);
+    }
+
+    @Override
+    public void setDescription(String value) {
+        node.setProperty(NACECodeModel.description, value);
     }
 
 

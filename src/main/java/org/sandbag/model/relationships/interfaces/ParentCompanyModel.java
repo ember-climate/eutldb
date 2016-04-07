@@ -9,8 +9,6 @@ import org.sandbag.model.nodes.Company;
 public interface ParentCompanyModel extends RelationshipType{
     String LABEL = "PARENT_COMPANY";
 
-    String name = "name";
-
     Company getParentCompany();
     Company getCompany();
 

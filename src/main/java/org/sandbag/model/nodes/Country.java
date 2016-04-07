@@ -1,7 +1,12 @@
 package org.sandbag.model.nodes;
 
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
 import org.sandbag.model.nodes.interfaces.CountryModel;
+import org.sandbag.model.relationships.aircraft_ops.AircraftOperatorCountry;
+import org.sandbag.model.relationships.installations.InstallationCountry;
+
+import java.util.Iterator;
 
 /**
  * Created by pablo on 14/02/16.
@@ -29,6 +34,16 @@ public class Country implements CountryModel {
 
     public void setName(String value) {
         node.setProperty(CountryModel.name, value);
+    }
+
+    @Override
+    public Iterator<Relationship> getInstallationCountry() {
+        return node.getRelationships(new InstallationCountry(null)).iterator();
+    }
+
+    @Override
+    public Iterator<Relationship> getAircraftOperatorCountry() {
+        return node.getRelationships(new AircraftOperatorCountry(null)).iterator();
     }
 
     @Override

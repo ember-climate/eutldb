@@ -9,12 +9,12 @@ public interface NACECodeModel extends Label {
 
     String LABEL = "NACE_CODE";
     String id = "id";
-    //String name = "name";
+    String description= "description";
 
     String getId();
-    //String getName();
+    String getDescription();
 
     void setId(String id);
-    //void setName(String name);
+    void setDescription(String name);
 
 }

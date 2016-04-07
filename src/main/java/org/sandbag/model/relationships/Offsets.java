@@ -28,25 +28,6 @@ public class Offsets implements OffsetsModel {
     }
     public AircraftOperator getAircraftOperator(){ return new AircraftOperator(relationship.getStartNode());}
 
-
-    @Override
-    public double getValue() {
-        return Double.parseDouble(String.valueOf(relationship.getProperty(OffsetsModel.value)));
-    }
-    @Override
-    public String getType() {
-        return String.valueOf(relationship.getProperty(OffsetsModel.type));
-    }
-
-    @Override
-    public void setValue(double value) {
-        relationship.setProperty(OffsetsModel.value, value);
-    }
-    @Override
-    public void setType(String type) {
-        relationship.setProperty(OffsetsModel.type, type);
-    }
-
     @Override
     public Offset getOffset() {
         return new Offset(relationship.getEndNode());

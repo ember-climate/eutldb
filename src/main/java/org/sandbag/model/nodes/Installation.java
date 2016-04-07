@@ -100,11 +100,6 @@ public class Installation implements InstallationModel {
     }
 
     @Override
-    public void setOpen(boolean open) {
-        node.setProperty(InstallationModel.open, open);
-    }
-
-    @Override
     public String getCity() {
         return String.valueOf(node.getProperty(InstallationModel.city));
     }

@@ -9,7 +9,9 @@ Prototype of the new EUTL graph database
 
 ![Relationships cardinality](/docs/images/RelationshipsCardinality.PNG)
 
-## [Database query examples](docs/query_examples.md)
+## [Database query examples](/docs/query_examples.md)
+
+## [Next resources to be integrated](/docs/NextResourcesToBeIntegrated.md)
 
 ## Data browser online
 

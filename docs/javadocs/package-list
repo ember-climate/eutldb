@@ -1,0 +1,11 @@
+org.sandbag.eutldb.tests
+org.sandbag.model
+org.sandbag.model.nodes
+org.sandbag.model.nodes.interfaces
+org.sandbag.model.relationships
+org.sandbag.model.relationships.aircraft_ops
+org.sandbag.model.relationships.aircraft_ops.interfaces
+org.sandbag.model.relationships.installations
+org.sandbag.model.relationships.installations.interfaces
+org.sandbag.model.relationships.interfaces
+org.sandbag.programs

@@ -16,7 +16,6 @@ public interface InstallationModel extends Label{
     String name = "name";
     String city = "city";
     String postCode = "post_code";
-    String open = "open";
     String address = "address";
     String eprtrId = "EPRTR_ID";
     String permitId = "permit_id";
@@ -45,7 +44,6 @@ public interface InstallationModel extends Label{
     void setId(String id);
     void setCountry(Country country);
     void setCompany(Company company);
-    void setOpen(boolean open);
     void setCity(String city);
     void setPostCode(String postCode);
     void setName(String name);

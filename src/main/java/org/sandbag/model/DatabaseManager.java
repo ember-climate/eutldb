@@ -380,7 +380,10 @@ public class DatabaseManager {
                                  String postalCode,
                                  String city,
                                  String address,
-                                 String status) {
+                                 String status,
+                                 String subsidiaryCompany,
+                                 String parentCompany) {
+
         Node companyNode = graphDb.createNode(COMPANY_LABEL);
 
         Company company = new Company(companyNode);
@@ -390,6 +393,8 @@ public class DatabaseManager {
         company.setPostalCode(postalCode);
         company.setRegistrationNumber(registrationNumber);
         company.setStatus(status);
+        company.setSubsidiaryCompany(subsidiaryCompany);
+        company.setParentCompany(parentCompany);
 
         return company;
     }

@@ -187,7 +187,8 @@ public class EUTLDBImporter {
                     if(company == null){
                         if(!companyRegistrationNumberSt.isEmpty() || !companyNameSt.isEmpty()){
                             company = dbManager.createCompany(companyNameSt,companyRegistrationNumberSt,companyPostalCodeSt,
-                                    companyCitySt, companyMainAddressSt + "\n" + companySecondaryAddressSt, companyStatusSt);
+                                    companyCitySt, companyMainAddressSt + "\n" + companySecondaryAddressSt, companyStatusSt,
+                                    subsidiaryCompanySt, parentCompanySt);
                         }
                     }
 
@@ -716,7 +717,8 @@ public class EUTLDBImporter {
                     if(company == null){
                         if(!companyRegistrationNumberSt.isEmpty() || !companyNameSt.isEmpty()){
                             company = dbManager.createCompany(companyNameSt,companyRegistrationNumberSt,companyPostalCodeSt,
-                                    companyCitySt, companyMainAddressSt + "\n" + companySecondaryAddressSt, companyStatusSt);
+                                    companyCitySt, companyMainAddressSt + "\n" + companySecondaryAddressSt, companyStatusSt,
+                                    subsidiaryCompanySt, parentCompanySt);
                             tx.success();
                             tx.close();
                             tx = dbManager.beginTransaction();
@@ -832,15 +834,13 @@ public class EUTLDBImporter {
                         Project project = null;
                         if(!projectIdSt.isEmpty()){
                             project = dbManager.getProjectById(projectIdSt);
+
                             if(project == null){
                                 System.out.println("Creating project: " + projectIdSt);
                                 project = dbManager.createProject(projectIdSt);
                                 tx.success();
                                 tx.close();
                                 tx = dbManager.beginTransaction();
-                            }else{
-                                System.out.println("Project with id: " + projectIdSt + " found!");
-                                System.out.println("project.getId() = " + project.getId());
                             }
                         }
 
@@ -854,6 +854,8 @@ public class EUTLDBImporter {
                                     project,
                                     period,
                                     originatingCountry);
+
+                            System.out.println("offset.getUnitType() = " + offset.getUnitType());
 
 
 

@@ -15,6 +15,8 @@ public interface CompanyModel extends Label {
     String city = "city";
     String address = "address";
     String status = "status";
+    String subsidiaryCompany = "subsidiary_company";
+    String parentCompany = "parent_company";
 
     String getName();
     String getRegistrationNumber();
@@ -22,7 +24,9 @@ public interface CompanyModel extends Label {
     String getPostalCode();
     String getAddress();
     String getStatus();
-    Company getParentCompany();
+    String getSubsidiaryCompany();
+    String getParentCompany();
+    //Company getParentCompany();
 
     void setName(String name);
     void setRegistrationNumber(String name);
@@ -30,6 +34,8 @@ public interface CompanyModel extends Label {
     void setAddress(String address);
     void setCity(String city);
     void setStatus(String status);
-    void setParentCompany(Company company);
+    void setSubsidiaryCompany(String value);
+    void setParentCompany(String value);
+    //void setParentCompany(Company company);
 
 }

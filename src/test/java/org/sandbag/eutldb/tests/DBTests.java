@@ -1,7 +1,9 @@
 package org.sandbag.eutldb.tests;
 
+import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Transaction;
+import org.neo4j.unsafe.impl.batchimport.input.csv.Data;
 import org.sandbag.model.DatabaseManager;
 import org.sandbag.model.nodes.Country;
 import org.sandbag.model.nodes.Offset;
@@ -50,16 +52,19 @@ public class DBTests {
 
         System.out.println("hi!");
 
-        Project project = manager.getProjectById("1000292");
-        if(project != null){
-            Iterator<Relationship> iterator = project.getOffsetProject();
-            while(iterator.hasNext()){
-                Offset offset = new OffsetProject(iterator.next()).getOffset();
-                System.out.println("Offset amount: " + offset.getAmount());
-            }
-        }else{
-            System.out.println("Project not found!");
+        Project project = manager.createProject("1");
+        tx.success();
+        tx.close();
+
+        tx = manager.beginTransaction();
+
+        project = manager.getProjectById("1000292");
+        Iterator<Node> iterator = manager.findNodes(DatabaseManager.PROJECT_LABEL);
+        while(iterator.hasNext()){
+            project = new Project(iterator.next());
+            System.out.println("project.getId() = " + project.getId());
         }
+
 
 
         tx.success();

@@ -48,9 +48,13 @@ public class Company implements CompanyModel {
     }
 
     @Override
-    public Company getParentCompany(){
-        return new Company(node.getSingleRelationship(new ParentCompany(null), Direction.OUTGOING).getEndNode());
+    public String getSubsidiaryCompany() {
+        return String.valueOf(node.getProperty(CompanyModel.subsidiaryCompany));
+    }
 
+    @Override
+    public String getParentCompany(){
+        return String.valueOf(node.getProperty(CompanyModel.parentCompany));
     }
 
     @Override
@@ -84,8 +88,13 @@ public class Company implements CompanyModel {
     }
 
     @Override
-    public void setParentCompany(Company company){
-        node.createRelationshipTo(company.node, new ParentCompany(null));
+    public void setSubsidiaryCompany(String value) {
+        node.setProperty(CompanyModel.subsidiaryCompany, value);
+    }
+
+    @Override
+    public void setParentCompany(String value) {
+        node.setProperty(CompanyModel.parentCompany, value);
     }
 
     @Override

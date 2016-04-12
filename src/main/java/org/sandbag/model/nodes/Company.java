@@ -94,7 +94,7 @@ public class Company implements CompanyModel {
 
     @Override
     public void setParentCompany(String value) {
-        node.setProperty(CompanyModel.parentCompany, value);
+        node.setProperty(CompanyModel.parentCompany, value           );
     }
 
     @Override

@@ -725,8 +725,19 @@ public class EUTLDBImporter {
                         }
                     }
 
-                    String sectorId = mainActivitySt.split("-")[0];
+
+                    String[] sectorSplit = mainActivitySt.split("-");
+
+                    String sectorId = sectorSplit[0];
                     String sectorName = mainActivitySt.split("-")[1];
+                    if(sectorSplit.length > 2){
+                        sectorName = "";
+                        for(int i=1;i<sectorSplit.length - 1;i++){
+                            sectorName += sectorSplit[i] + "-";
+                        }
+                        sectorName +=  sectorSplit[sectorSplit.length - 1];
+                    }
+
 
                     Sector sector = dbManager.getSectorById(sectorId);
                     if(sector == null){

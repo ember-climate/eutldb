@@ -27,6 +27,7 @@ public class DatabaseManager {
     public static Label AIRCRAFT_OPERATOR_LABEL = DynamicLabel.label(AircraftOperatorModel.LABEL);
     public static Label PROJECT_LABEL = DynamicLabel.label(ProjectModel.LABEL);
     public static Label OFFSET_LABEL = DynamicLabel.label(OffsetModel.LABEL);
+    public static Label SANDBAG_SECTOR_LABEL = DynamicLabel.label(SandbagSectorModel.LABEL);
 
     public static IndexDefinition installationIdIndex = null;
     public static IndexDefinition countryNameIndex = null;
@@ -37,6 +38,8 @@ public class DatabaseManager {
     public static IndexDefinition companyNameIndex = null;
     public static IndexDefinition companyRegistrationNumberIndex = null;
     public static IndexDefinition projectIdIndex = null;
+    public static IndexDefinition sandbagSectorNameIndex = null;
+    public static IndexDefinition sandbagSectorIdIndex = null;
 
 
     /**
@@ -108,6 +111,14 @@ public class DatabaseManager {
 
                     projectIdIndex = schema.indexFor(PROJECT_LABEL)
                             .on(ProjectModel.id)
+                            .create();
+
+                    sandbagSectorIdIndex = schema.indexFor(SANDBAG_SECTOR_LABEL)
+                            .on(SandbagSectorModel.id)
+                            .create();
+
+                    sandbagSectorNameIndex = schema.indexFor(SANDBAG_SECTOR_LABEL)
+                            .on(SandbagSectorModel.name)
                             .create();
 
 
@@ -375,6 +386,16 @@ public class DatabaseManager {
         return sector;
     }
 
+    public SandbagSector createSandbagSector(String id, String name) {
+        Node sandbagSectorNode = graphDb.createNode(SANDBAG_SECTOR_LABEL);
+
+        SandbagSector sector = new SandbagSector(sandbagSectorNode);
+        sector.setName(name);
+        sector.setId(id);
+
+        return sector;
+    }
+
     public Company createCompany(String name,
                                  String registrationNumber,
                                  String postalCode,
@@ -451,6 +472,15 @@ public class DatabaseManager {
         Node sectorNode = graphDb.findNode(SECTOR_LABEL, SectorModel.id, id);
         if (sectorNode != null) {
             sector = new Sector(sectorNode);
+        }
+        return sector;
+    }
+
+    public SandbagSector getSandbagSectorById(String id) {
+        SandbagSector sector = null;
+        Node sectorNode = graphDb.findNode(SANDBAG_SECTOR_LABEL, SandbagSectorModel.id, id);
+        if (sectorNode != null) {
+            sector = new SandbagSector(sectorNode);
         }
         return sector;
     }

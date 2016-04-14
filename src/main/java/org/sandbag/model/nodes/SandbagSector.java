@@ -17,10 +17,17 @@ public class SandbagSector implements SandbagSectorModel {
     public String getName() {
         return String.valueOf(node.getProperty(SandbagSectorModel.name));
     }
+    public String getId() {
+        return String.valueOf(node.getProperty(SandbagSectorModel.id));
+    }
 
     public void setName(String name) {
         node.setProperty(SandbagSectorModel.name, name);
     }
+    public void setId(String value) {
+        node.setProperty(SandbagSectorModel.id, value);
+    }
+
 
     @Override
     public String name() {

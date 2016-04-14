@@ -9,9 +9,12 @@ public interface SandbagSectorModel extends Label {
 
     String LABEL = "SANDBAG_SECTOR";
     String name = "name";
+    String id = "id";
 
     String getName();
+    String getId();
 
     void setName(String name);
+    void setId(String id);
 
 }

@@ -28,11 +28,15 @@ public class ImportSandbagSectorsAggregation {
 
                 BufferedReader reader = new BufferedReader(new FileReader(new File(fileSt)));
                 String line;
+                reader.readLine();//skipping the header
 
                 while((line = reader.readLine()) != null){
                     String[] columns = line.split(",");
-                    String sectorIdSt = columns[0];
-                    String sandbagSectorNameSt = columns[2];
+                    String sectorIdSt = columns[0].trim();
+                    String sandbagSectorNameSt = columns[2].trim();
+                    String sandbagSectorIdSt = columns[1].trim();
+
+
 
                 }
 

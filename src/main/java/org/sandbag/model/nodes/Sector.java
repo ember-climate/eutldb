@@ -16,17 +16,17 @@ public class Sector implements SectorModel {
     }
 
     public String getName() {
-        return String.valueOf(node.getProperty(InstallationModel.name));
+        return String.valueOf(node.getProperty(SectorModel.name));
     }
     public String getId() {
-        return String.valueOf(node.getProperty(InstallationModel.id));
+        return String.valueOf(node.getProperty(SectorModel.id));
     }
 
     public void setName(String name) {
-        node.setProperty(InstallationModel.name, name);
+        node.setProperty(SectorModel.name, name);
     }
     public void setId(String id) {
-        node.setProperty(InstallationModel.id, id);
+        node.setProperty(SectorModel.id, id);
     }
 
     @Override

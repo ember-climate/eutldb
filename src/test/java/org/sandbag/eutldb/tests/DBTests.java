@@ -5,10 +5,7 @@ import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.unsafe.impl.batchimport.input.csv.Data;
 import org.sandbag.model.DatabaseManager;
-import org.sandbag.model.nodes.Country;
-import org.sandbag.model.nodes.Offset;
-import org.sandbag.model.nodes.Period;
-import org.sandbag.model.nodes.Project;
+import org.sandbag.model.nodes.*;
 import org.sandbag.model.relationships.OffsetProject;
 
 import java.util.Iterator;
@@ -52,18 +49,26 @@ public class DBTests {
 
         System.out.println("hi!");
 
-        Project project = manager.createProject("1");
-        tx.success();
-        tx.close();
+//        Project project = manager.createProject("1");
+//        tx.success();
+//        tx.close();
+//
+//        tx = manager.beginTransaction();
+//
+//        project = manager.getProjectById("1000292");
+//        Iterator<Node> iterator = manager.findNodes(DatabaseManager.PROJECT_LABEL);
+//        while(iterator.hasNext()){
+//            project = new Project(iterator.next());
+//            System.out.println("project.getId() = " + project.getId());
+//        }
 
-        tx = manager.beginTransaction();
-
-        project = manager.getProjectById("1000292");
-        Iterator<Node> iterator = manager.findNodes(DatabaseManager.PROJECT_LABEL);
-        while(iterator.hasNext()){
-            project = new Project(iterator.next());
-            System.out.println("project.getId() = " + project.getId());
-        }
+//        SandbagSector sector = manager.createSandbagSector("a", "AA");
+//        tx.success();
+//        tx.close();
+//
+//        tx = manager.beginTransaction();
+        SandbagSector sector1 = manager.getSandbagSectorById("44");
+        System.out.println("sector1.getName() = " + sector1.getName());
 
 
 

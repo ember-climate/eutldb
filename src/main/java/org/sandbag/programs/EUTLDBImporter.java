@@ -866,7 +866,7 @@ public class EUTLDBImporter {
                                     period,
                                     originatingCountry);
 
-                            System.out.println("offset.getUnitType() = " + offset.getUnitType());
+                            //System.out.println("offset.getUnitType() = " + offset.getUnitType());
 
 
 

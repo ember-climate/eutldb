@@ -2,6 +2,7 @@ package org.sandbag.model.nodes;
 
 import org.neo4j.graphdb.Node;
 import org.sandbag.model.nodes.interfaces.SandbagSectorModel;
+import org.sandbag.model.relationships.AggregatesSector;
 
 /**
  * Created by root on 14/04/16.
@@ -21,8 +22,8 @@ public class SandbagSector implements SandbagSectorModel {
         return String.valueOf(node.getProperty(SandbagSectorModel.id));
     }
 
-    public void setName(String name) {
-        node.setProperty(SandbagSectorModel.name, name);
+    public void setName(String value) {
+        node.setProperty(SandbagSectorModel.name, value);
     }
     public void setId(String value) {
         node.setProperty(SandbagSectorModel.id, value);
@@ -32,6 +33,10 @@ public class SandbagSector implements SandbagSectorModel {
     @Override
     public String name() {
         return LABEL;
+    }
+
+    public void setAggregatesSector(Sector sector){
+        node.createRelationshipTo(sector.node, new AggregatesSector(null));
     }
 }
 

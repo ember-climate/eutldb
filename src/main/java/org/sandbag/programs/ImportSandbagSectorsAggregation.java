@@ -1,6 +1,9 @@
 package org.sandbag.programs;
 
+import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.DatabaseManager;
+import org.sandbag.model.nodes.SandbagSector;
+import org.sandbag.model.nodes.Sector;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,8 +26,11 @@ public class ImportSandbagSectorsAggregation {
             String fileSt = args[1];
 
             DatabaseManager databaseManager = new DatabaseManager(dbFolder);
+            Transaction tx = databaseManager.beginTransaction();
 
             try {
+
+                System.out.println("Reading file...");
 
                 BufferedReader reader = new BufferedReader(new FileReader(new File(fileSt)));
                 String line;
@@ -36,12 +42,42 @@ public class ImportSandbagSectorsAggregation {
                     String sandbagSectorNameSt = columns[2].trim();
                     String sandbagSectorIdSt = columns[1].trim();
 
+                    Sector sector = databaseManager.getSectorById(sectorIdSt);
+                    if(sector != null){
+                        SandbagSector sandbagSector = databaseManager.getSandbagSectorById(sandbagSectorIdSt);
+
+                        if(sandbagSector == null){
+
+                            System.out.println("Creating sector with id: " + sandbagSectorIdSt);
+                            sandbagSector = databaseManager.createSandbagSector(sectorIdSt,sandbagSectorNameSt);
+                            tx.success();
+                            tx.close();
+                            tx = databaseManager.beginTransaction();
+
+                            sandbagSector.setAggregatesSector(sector);
+
+                        }else{
+
+                            System.out.println("Sandbag sector with id " + sandbagSectorIdSt + " found :)");
+
+                        }
+
+
+                    }else{
+                        System.out.println("The sector with id: " + sectorIdSt + " could not be found... :(");
+                    }
+
 
 
                 }
 
+                tx.success();
+                tx.close();
+
                 reader.close();
                 databaseManager.shutdown();
+
+                System.out.println("Finished!");
 
             }catch (Exception e){
                 e.printStackTrace();

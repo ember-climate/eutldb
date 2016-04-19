@@ -2,6 +2,7 @@ package org.sandbag.model;
 
 import org.neo4j.graphdb.*;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+import org.neo4j.graphdb.schema.IndexCreator;
 import org.neo4j.graphdb.schema.IndexDefinition;
 import org.neo4j.graphdb.schema.Schema;
 import org.sandbag.model.nodes.*;
@@ -77,12 +78,21 @@ public class DatabaseManager {
 
                 if(!schema.getIndexes(INSTALLATION_LABEL).iterator().hasNext()){
 
+                    System.out.println("Creating index for Installations");
+
                     installationIdIndex = schema.indexFor(INSTALLATION_LABEL)
                             .on(InstallationModel.id)
                             .create();
+                    tx.success();
+                    tx.close();
+                    tx = graphDb.beginTx();
+
+                    schema.awaitIndexOnline(installationIdIndex, 10, TimeUnit.SECONDS);
                 }
 
                 if(!schema.getIndexes(COUNTRY_LABEL).iterator().hasNext()){
+
+                    System.out.println("Creating indices for countries");
 
                     countryNameIndex = schema.indexFor(COUNTRY_LABEL)
                             .on(CountryModel.name)
@@ -91,16 +101,33 @@ public class DatabaseManager {
                     countryIdIndex = schema.indexFor(COUNTRY_LABEL)
                             .on(CountryModel.id)
                             .create();
+
+                    tx.success();
+                    tx.close();
+                    tx = graphDb.beginTx();
+
+                    schema.awaitIndexOnline(countryNameIndex, 10, TimeUnit.SECONDS);
+                    schema.awaitIndexOnline(countryIdIndex, 10, TimeUnit.SECONDS);
                 }
 
                 if(!schema.getIndexes(PERIOD_LABEL).iterator().hasNext()){
 
+                    System.out.println("Creating indices for Periods");
+
                     periodNameIndex = schema.indexFor(PERIOD_LABEL)
                             .on(PeriodModel.name)
                             .create();
+
+                    tx.success();
+                    tx.close();
+                    tx = graphDb.beginTx();
+
+                    schema.awaitIndexOnline(periodNameIndex, 10, TimeUnit.SECONDS);
                 }
 
                 if(!schema.getIndexes(SECTOR_LABEL).iterator().hasNext()){
+
+                    System.out.println("Creating indices for Sectors");
 
                     sectorNameIndex = schema.indexFor(SECTOR_LABEL)
                             .on(SectorModel.name)
@@ -109,9 +136,18 @@ public class DatabaseManager {
                     sectorIdIndex = schema.indexFor(SECTOR_LABEL)
                             .on(SectorModel.id)
                             .create();
+
+                    tx.success();
+                    tx.close();
+                    tx = graphDb.beginTx();
+
+                    schema.awaitIndexOnline(sectorNameIndex, 10, TimeUnit.SECONDS);
+                    schema.awaitIndexOnline(sectorIdIndex, 10, TimeUnit.SECONDS);
                 }
 
                 if(!schema.getIndexes(COMPANY_LABEL).iterator().hasNext()){
+
+                    System.out.println("Creating indices for Companies");
 
                     companyNameIndex = schema.indexFor(COMPANY_LABEL)
                             .on(CompanyModel.name)
@@ -120,16 +156,33 @@ public class DatabaseManager {
                     companyRegistrationNumberIndex = schema.indexFor(COMPANY_LABEL)
                             .on(CompanyModel.registrationNumber)
                             .create();
+
+                    tx.success();
+                    tx.close();
+                    tx = graphDb.beginTx();
+
+                    schema.awaitIndexOnline(companyNameIndex, 10, TimeUnit.SECONDS);
+                    schema.awaitIndexOnline(companyRegistrationNumberIndex, 10, TimeUnit.SECONDS);
                 }
 
                 if(!schema.getIndexes(PROJECT_LABEL).iterator().hasNext()){
 
+                    System.out.println("Creating indices for Projects");
+
                     projectIdIndex = schema.indexFor(PROJECT_LABEL)
                             .on(ProjectModel.id)
                             .create();
+
+                    tx.success();
+                    tx.close();
+                    tx = graphDb.beginTx();
+
+                    schema.awaitIndexOnline(projectIdIndex, 10, TimeUnit.SECONDS);
                 }
 
                 if(!schema.getIndexes(SANDBAG_SECTOR_LABEL).iterator().hasNext()){
+
+                    System.out.println("Creating indices for Sandbag Sectors");
 
                     sandbagSectorIdIndex = schema.indexFor(SANDBAG_SECTOR_LABEL)
                             .on(SandbagSectorModel.id)
@@ -138,25 +191,15 @@ public class DatabaseManager {
                     sandbagSectorNameIndex = schema.indexFor(SANDBAG_SECTOR_LABEL)
                             .on(SandbagSectorModel.name)
                             .create();
+
+                    tx.success();
+                    tx.close();
+                    tx = graphDb.beginTx();
+
+                    schema.awaitIndexOnline(sandbagSectorIdIndex, 10, TimeUnit.SECONDS);
+                    schema.awaitIndexOnline(sandbagSectorNameIndex, 10, TimeUnit.SECONDS);
                 }
 
-
-                tx.success();
-                tx.close();
-                tx = graphDb.beginTx();
-
-                System.out.println("Waiting for indices to be ready...");
-                schema.awaitIndexOnline(installationIdIndex, 10, TimeUnit.SECONDS);
-                schema.awaitIndexOnline(countryNameIndex, 10, TimeUnit.SECONDS);
-                schema.awaitIndexOnline(countryIdIndex, 10, TimeUnit.SECONDS);
-                schema.awaitIndexOnline(periodNameIndex, 10, TimeUnit.SECONDS);
-                schema.awaitIndexOnline(sectorNameIndex, 10, TimeUnit.SECONDS);
-                schema.awaitIndexOnline(sectorIdIndex, 10, TimeUnit.SECONDS);
-                schema.awaitIndexOnline(companyNameIndex, 10, TimeUnit.SECONDS);
-                schema.awaitIndexOnline(companyRegistrationNumberIndex, 10, TimeUnit.SECONDS);
-                schema.awaitIndexOnline(projectIdIndex, 10, TimeUnit.SECONDS);
-                schema.awaitIndexOnline(sandbagSectorIdIndex, 10, TimeUnit.SECONDS);
-                schema.awaitIndexOnline(sandbagSectorNameIndex, 10, TimeUnit.SECONDS);
                 System.out.println("Done!");
 
                 tx.success();

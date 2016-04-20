@@ -40,7 +40,7 @@ public class ImportSandbagSectorsAggregation {
                     String[] columns = line.split(",");
                     String sectorIdSt = columns[0].trim();
                     String sandbagSectorNameSt = columns[2].trim();
-                    String sandbagSectorIdSt = columns[1].trim();
+                    String sandbagSectorIdSt = columns[3].trim();
 
                     Sector sector = databaseManager.getSectorById(sectorIdSt);
                     if(sector != null){

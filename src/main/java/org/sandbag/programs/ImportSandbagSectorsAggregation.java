@@ -49,7 +49,7 @@ public class ImportSandbagSectorsAggregation {
                         if(sandbagSector == null){
 
                             System.out.println("Creating sector with id: " + sandbagSectorIdSt);
-                            sandbagSector = databaseManager.createSandbagSector(sectorIdSt,sandbagSectorNameSt);
+                            sandbagSector = databaseManager.createSandbagSector(sandbagSectorIdSt,sandbagSectorNameSt);
                             tx.success();
                             tx.close();
                             tx = databaseManager.beginTransaction();

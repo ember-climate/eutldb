@@ -174,6 +174,10 @@ public class Installation implements InstallationModel {
         node.setProperty(InstallationModel.postCode, postCode);
     }
 
+    @Override
+    public void setNACECode(NACECode naceCode){
+        node.createRelationshipTo(naceCode.node, new InstallationNACECode(null));
+    }
 
     @Override
     public void setVerifiedEmissionsForPeriod(Period period, double value){

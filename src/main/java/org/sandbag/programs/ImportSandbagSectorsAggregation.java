@@ -37,12 +37,14 @@ public class ImportSandbagSectorsAggregation {
                 reader.readLine();//skipping the header
 
                 while((line = reader.readLine()) != null){
+
                     String[] columns = line.split(",");
                     String sectorIdSt = columns[0].trim();
                     String sandbagSectorNameSt = columns[2].trim();
                     String sandbagSectorIdSt = columns[3].trim();
 
                     Sector sector = databaseManager.getSectorById(sectorIdSt);
+
                     if(sector != null){
                         SandbagSector sandbagSector = databaseManager.getSandbagSectorById(sandbagSectorIdSt);
 
@@ -54,13 +56,13 @@ public class ImportSandbagSectorsAggregation {
                             tx.close();
                             tx = databaseManager.beginTransaction();
 
-                            sandbagSector.setAggregatesSector(sector);
-
                         }else{
 
                             System.out.println("Sandbag sector with id " + sandbagSectorIdSt + " found :)");
 
                         }
+
+                        sandbagSector.setAggregatesSector(sector);
 
 
                     }else{

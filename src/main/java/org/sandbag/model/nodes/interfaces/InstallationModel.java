@@ -1,10 +1,7 @@
 package org.sandbag.model.nodes.interfaces;
 
 import org.neo4j.graphdb.Label;
-import org.sandbag.model.nodes.Company;
-import org.sandbag.model.nodes.Country;
-import org.sandbag.model.nodes.Period;
-import org.sandbag.model.nodes.Sector;
+import org.sandbag.model.nodes.*;
 
 /**
  * Created by pablo on 15/02/16.
@@ -60,6 +57,8 @@ public interface InstallationModel extends Label{
     void setSurrenderedUnitsForPeriod(Period period, double value);
     void setComplianceForPeriod(Period period, String value);
     void setAllowancesInAllocationForPeriod(Period period, double value, String type);
+    void setNACECode(NACECode naceCode);
+
     String getOffsetEntitlementForPeriod(Period period);
 
 }

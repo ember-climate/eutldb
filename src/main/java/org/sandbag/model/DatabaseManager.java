@@ -29,6 +29,7 @@ public class DatabaseManager {
     public static Label PROJECT_LABEL = DynamicLabel.label(ProjectModel.LABEL);
     public static Label OFFSET_LABEL = DynamicLabel.label(OffsetModel.LABEL);
     public static Label SANDBAG_SECTOR_LABEL = DynamicLabel.label(SandbagSectorModel.LABEL);
+    public static Label NACE_CODE_LABEL = DynamicLabel.label(NACECodeModel.LABEL);
 
     public static IndexDefinition installationIdIndex = null;
     public static IndexDefinition countryNameIndex = null;
@@ -41,6 +42,7 @@ public class DatabaseManager {
     public static IndexDefinition projectIdIndex = null;
     public static IndexDefinition sandbagSectorNameIndex = null;
     public static IndexDefinition sandbagSectorIdIndex = null;
+    public static IndexDefinition naceCodeIdIndex = null;
 
 
     /**
@@ -198,6 +200,21 @@ public class DatabaseManager {
 
                     schema.awaitIndexOnline(sandbagSectorIdIndex, 10, TimeUnit.SECONDS);
                     schema.awaitIndexOnline(sandbagSectorNameIndex, 10, TimeUnit.SECONDS);
+                }
+
+                if(!schema.getIndexes(NACE_CODE_LABEL).iterator().hasNext()){
+
+                    System.out.println("Creating indices for NACECodes");
+
+                    naceCodeIdIndex = schema.indexFor(NACE_CODE_LABEL)
+                            .on(NACECodeModel.id)
+                            .create();
+
+                    tx.success();
+                    tx.close();
+                    tx = graphDb.beginTx();
+
+                    schema.awaitIndexOnline(naceCodeIdIndex, 10, TimeUnit.SECONDS);
                 }
 
                 System.out.println("Done!");
@@ -420,6 +437,16 @@ public class DatabaseManager {
         return country;
     }
 
+    public NACECode createNACECode(String id, String description) {
+        Node naceCodeNode = graphDb.createNode(NACE_CODE_LABEL);
+
+        NACECode naceCode = new NACECode(naceCodeNode);
+        naceCode.setDescription(description);
+        naceCode.setId(id);
+
+        return naceCode;
+    }
+
     public Period createPeriod(String value) {
         Node periodNode = graphDb.createNode(PERIOD_LABEL);
 
@@ -500,6 +527,16 @@ public class DatabaseManager {
         }
         return country;
     }
+
+    public NACECode getNACECodeById(String id) {
+        NACECode naceCode = null;
+        Node naceCodeNode = graphDb.findNode(NACE_CODE_LABEL, NACECodeModel.id, id);
+        if (naceCodeNode != null) {
+            naceCode = new NACECode(naceCodeNode);
+        }
+        return naceCode;
+    }
+
 
     public Installation getInstallationById(String id) {
         Installation installation = null;

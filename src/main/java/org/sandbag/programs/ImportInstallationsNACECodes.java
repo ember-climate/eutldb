@@ -2,6 +2,7 @@ package org.sandbag.programs;
 
 import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.DatabaseManager;
+import org.sandbag.model.nodes.AircraftOperator;
 import org.sandbag.model.nodes.Installation;
 import org.sandbag.model.nodes.NACECode;
 
@@ -64,7 +65,24 @@ public class ImportInstallationsNACECodes {
                         installation.setNACECode(naceCode);
 
                     }else{
-                        System.out.println("The installation with id: " + installationCompleteID + " could not be found... :(");
+
+                        AircraftOperator aircraftOperator = databaseManager.getAircraftOperatorById(installationCompleteID);
+                        if(aircraftOperator != null){
+
+                            NACECode naceCode = databaseManager.getNACECodeById(naceCodeSt);
+                            if(naceCode == null){
+                                System.out.println("Creating NACE code with id: " + naceCodeSt);
+                                naceCode = databaseManager.createNACECode(naceCodeSt, "");
+                                tx.success();
+                                tx.close();
+                                tx = databaseManager.beginTransaction();
+                            }
+                            aircraftOperator.setNACECode(naceCode);
+
+                        }else{
+                            System.out.println("The installation with id: " + installationCompleteID + " could not be found... :(");
+                        }
+
                     }
 
                     lineCounter++;

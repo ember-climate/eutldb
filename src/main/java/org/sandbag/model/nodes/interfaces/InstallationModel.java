@@ -20,6 +20,7 @@ public interface InstallationModel extends Label{
     String permitExpiryOrRevocationDate = "permit_expiry_or_revocation_date";
     String latitude = "latitude";
     String longitude = "longitude";
+    String powerFlag = "power_flag";
 
     String getId();
     Country getCountry();
@@ -34,6 +35,7 @@ public interface InstallationModel extends Label{
     String getPermitExpiryOrRevocationDate();
     String getLatitude();
     String getLongitude();
+    String getPowerFlag();
     Sector getSector();
 
 
@@ -51,6 +53,7 @@ public interface InstallationModel extends Label{
     void setPermitExpiryOrRevocationDate(String date);
     void setLatitude(String latitude);
     void setLongitude(String longitude);
+    void setPowerFlag(String value);
     void setSector(Sector sector);
     void setVerifiedEmissionsForPeriod(Period period, double value);
     void setOffsetEntitlementForPeriod(Period period, String value);

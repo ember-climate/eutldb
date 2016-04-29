@@ -95,6 +95,11 @@ public class Installation implements InstallationModel {
     }
 
     @Override
+    public void setPowerFlag(String value) {
+        node.setProperty(InstallationModel.powerFlag, value);
+    }
+
+    @Override
     public void setSector(Sector sector) {
         node.createRelationshipTo(sector.node, new InstallationSector(null));
     }
@@ -148,6 +153,11 @@ public class Installation implements InstallationModel {
     @Override
     public String getLongitude() {
         return String.valueOf(node.getProperty(InstallationModel.longitude));
+    }
+
+    @Override
+    public String getPowerFlag() {
+        return String.valueOf(node.getProperty(InstallationModel.powerFlag));
     }
 
     @Override

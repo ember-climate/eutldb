@@ -7,6 +7,7 @@ import org.sandbag.model.nodes.interfaces.AircraftOperatorModel;
 import org.sandbag.model.relationships.*;
 import org.sandbag.model.relationships.aircraft_ops.AircraftOperatorCompany;
 import org.sandbag.model.relationships.aircraft_ops.AircraftOperatorCountry;
+import org.sandbag.model.relationships.aircraft_ops.AircraftOperatorNACECode;
 import org.sandbag.model.relationships.aircraft_ops.AircraftOperatorSector;
 
 import java.util.Iterator;
@@ -193,6 +194,11 @@ public class AircraftOperator implements AircraftOperatorModel {
     @Override
     public void setPostCode(String postCode) {
         node.setProperty(AircraftOperatorModel.postCode, postCode);
+    }
+
+    @Override
+    public void setNACECode(NACECode naceCode){
+        node.createRelationshipTo(naceCode.node, new AircraftOperatorNACECode(null));
     }
 
     @Override

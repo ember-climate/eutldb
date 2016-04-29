@@ -1,10 +1,7 @@
 package org.sandbag.model.nodes.interfaces;
 
 import org.neo4j.graphdb.Label;
-import org.sandbag.model.nodes.Company;
-import org.sandbag.model.nodes.Country;
-import org.sandbag.model.nodes.Period;
-import org.sandbag.model.nodes.Sector;
+import org.sandbag.model.nodes.*;
 
 /**
  * Created by root on 18/03/16.
@@ -68,6 +65,7 @@ public interface AircraftOperatorModel extends Label {
     void setSurrenderedUnitsForPeriod(Period period, double value);
     void setComplianceForPeriod(Period period, String value);
     void setAllowancesInAllocationForPeriod(Period period, double value, String type);
+    void setNACECode(NACECode naceCode);
     String getOffsetEntitlementForPeriod(Period period);
 
 }

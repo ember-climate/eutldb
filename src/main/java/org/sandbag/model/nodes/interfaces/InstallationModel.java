@@ -37,6 +37,7 @@ public interface InstallationModel extends Label{
     String getLongitude();
     String getPowerFlag();
     Sector getSector();
+    public NACECode getNACECode();
 
 
 

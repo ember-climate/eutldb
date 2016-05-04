@@ -8,6 +8,8 @@ import org.sandbag.model.relationships.*;
 import org.sandbag.model.relationships.installations.*;
 
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by pablo on 14/02/16.
@@ -39,6 +41,16 @@ public class Installation implements InstallationModel {
     @Override
     public Company getCompany() {
         return new Company(node.getSingleRelationship(new InstallationCompany(null), Direction.OUTGOING).getEndNode());
+    }
+
+    @Override
+    public NACECode getNACECode(){
+        NACECode naceCode = null;
+        Relationship relationship = node.getSingleRelationship(new InstallationNACECode(null), Direction.OUTGOING);
+        if(relationship != null){
+            naceCode = new NACECode(relationship.getEndNode());
+        }
+        return naceCode;
     }
 
     @Override
@@ -237,6 +249,20 @@ public class Installation implements InstallationModel {
             }
         }
         return emissions;
+    }
+
+    public List<AllowancesInAllocation> getAllowancesInAllocationByType(String type){
+        List<AllowancesInAllocation> list = new LinkedList<>();
+
+        Iterator<Relationship> iterator = node.getRelationships(new AllowancesInAllocation((null)),Direction.OUTGOING).iterator();
+        while (iterator.hasNext()){
+            AllowancesInAllocation allowancesInAllocation = new AllowancesInAllocation(iterator.next());
+            if(allowancesInAllocation.getType().equals(type)){
+                list.add(allowancesInAllocation);
+            }
+        }
+
+        return list;
     }
 
     public AllowancesInAllocation getAllowancesInAllocationForPeriod(Period period){

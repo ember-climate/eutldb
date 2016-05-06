@@ -8,6 +8,9 @@ import org.sandbag.model.nodes.*;
  */
 public interface InstallationModel extends Label{
 
+    public static String POWER_FLAG_REASON_ARTICLE10C = "Article10c";
+    public static String POWER_FLAG_REASON_NACE_CODES = "Has one of these NACE codes: 35.00, 35.10, 35.11, 35.12, 35.13, 35.14, 35.30";
+
     String LABEL = "INSTALLATION";
     String id = "id";
     String name = "name";
@@ -21,6 +24,7 @@ public interface InstallationModel extends Label{
     String latitude = "latitude";
     String longitude = "longitude";
     String powerFlag = "power_flag";
+    String powerFlagReason = "power_flag_reason";
 
     String getId();
     Country getCountry();
@@ -36,6 +40,7 @@ public interface InstallationModel extends Label{
     String getLatitude();
     String getLongitude();
     String getPowerFlag();
+    String getPowerFlagReason();
     Sector getSector();
     public NACECode getNACECode();
 
@@ -55,6 +60,7 @@ public interface InstallationModel extends Label{
     void setLatitude(String latitude);
     void setLongitude(String longitude);
     void setPowerFlag(String value);
+    void setPowerFlagReason(String value);
     void setSector(Sector sector);
     void setVerifiedEmissionsForPeriod(Period period, double value);
     void setOffsetEntitlementForPeriod(Period period, String value);

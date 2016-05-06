@@ -41,6 +41,7 @@ public interface AircraftOperatorModel extends Label {
     String getLatitude();
     String getLongitude();
     Sector getSector();
+    NACECode getNACECode();
 
 
     void setId(String id);

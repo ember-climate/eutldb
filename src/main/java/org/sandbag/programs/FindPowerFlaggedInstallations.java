@@ -5,6 +5,7 @@ import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.DatabaseManager;
 import org.sandbag.model.nodes.Installation;
 import org.sandbag.model.nodes.NACECode;
+import org.sandbag.model.nodes.interfaces.InstallationModel;
 import org.sandbag.model.relationships.AllowancesInAllocation;
 import org.sandbag.model.relationships.interfaces.AllowancesInAllocationModel;
 
@@ -46,6 +47,8 @@ public class FindPowerFlaggedInstallations {
             while(iterator.hasNext()){
                 Installation installation = new Installation(iterator.next());
 
+                System.out.println("installation.getId() = " + installation.getId());
+
                 NACECode naceCode = installation.getNACECode();
 
                 boolean alreadyPowerFlagged = false;
@@ -55,8 +58,9 @@ public class FindPowerFlaggedInstallations {
                     System.out.println("naceCodeIdSt = " + naceCodeIdSt);
                     if(powerFlagNaceCodesSet.contains(naceCodeIdSt)){
                         installation.setPowerFlag("true");
+                        installation.setPowerFlagReason(InstallationModel.POWER_FLAG_REASON_NACE_CODES);
                         alreadyPowerFlagged = true;
-                        System.out.println("hola!");
+                        //System.out.println("hola!");
                     }
                 }
 
@@ -64,6 +68,7 @@ public class FindPowerFlaggedInstallations {
                     List<AllowancesInAllocation> list = installation.getAllowancesInAllocationByType(AllowancesInAllocationModel.ARTICLE_10C_TYPE);
                     if(list.size() > 0){
                         installation.setPowerFlag("true");
+                        installation.setPowerFlagReason(InstallationModel.POWER_FLAG_REASON_ARTICLE10C);
                     }else{
                         installation.setPowerFlag("false");
                     }

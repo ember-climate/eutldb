@@ -172,6 +172,11 @@ public class AircraftOperator implements AircraftOperatorModel {
         return new Sector(node.getSingleRelationship(new AircraftOperatorSector(null), Direction.OUTGOING).getEndNode());
     }
 
+    @Override
+    public NACECode getNACECode() {
+        return new NACECode(node.getSingleRelationship(new AircraftOperatorNACECode(null), Direction.OUTGOING).getEndNode());
+    }
+
     public Iterator<Relationship> getOffsets(){
         return node.getRelationships(new Offsets(null),Direction.OUTGOING).iterator();
     }

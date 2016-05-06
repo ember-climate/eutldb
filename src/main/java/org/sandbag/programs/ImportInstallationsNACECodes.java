@@ -53,6 +53,7 @@ public class ImportInstallationsNACECodes {
                     if(installation != null){
 
                         NACECode naceCode = databaseManager.getNACECodeById(naceCodeSt);
+
                         if(naceCode == null){
                             System.out.println("Creating NACE code with id: " + naceCodeSt);
                             naceCode = databaseManager.createNACECode(naceCodeSt, "");
@@ -62,7 +63,13 @@ public class ImportInstallationsNACECodes {
                         }
 
 
-                        installation.setNACECode(naceCode);
+                        if(installation.getNACECode() == null){
+                            installation.setNACECode(naceCode);
+                        }else{
+                            System.out.println("Repeated row found for installation: " + installationCompleteID);
+                        }
+
+
 
                     }else{
 
@@ -77,7 +84,12 @@ public class ImportInstallationsNACECodes {
                                 tx.close();
                                 tx = databaseManager.beginTransaction();
                             }
-                            aircraftOperator.setNACECode(naceCode);
+
+                            if(aircraftOperator.getNACECode() == null){
+                                aircraftOperator.setNACECode(naceCode);
+                            }else{
+                                System.out.println("Repeated row found for installation: " + installationCompleteID);
+                            }
 
                         }else{
                             System.out.println("The installation with id: " + installationCompleteID + " could not be found... :(");

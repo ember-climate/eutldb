@@ -88,7 +88,7 @@ public class ImportInstallationsNACECodes {
                             if(aircraftOperator.getNACECode() == null){
                                 aircraftOperator.setNACECode(naceCode);
                             }else{
-                                System.out.println("Repeated row found for installation: " + installationCompleteID);
+                                System.out.println("Repeated row found for aircraft operator: " + installationCompleteID);
                             }
 
                         }else{

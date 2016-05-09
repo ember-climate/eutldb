@@ -36,7 +36,7 @@ public class ExportDBToMegaFiles {
             "2017_surrendered\t2017_compliance_code\t2018_allocations\t2018_ten_c\t2018_ner\t2018_emissions" +
             "\t2018_surrendered\t2018_compliance_code\t2019_allocations\t2019_ten_c\t2019_ner\t2019_emissions\t" +
             "2019_surrendered\t2019_compliance_code\t2020_allocations\t2020_ten_c\t2020_ner" +
-            "\t2020_emissions\t2020_surrendered\t2020_compliance_code";
+            "\t2020_emissions\t2020_surrendered\t2020_compliance_code\tPower Flag";
 
     public static final String OFFSETS_FILE_HEADER = "Type\tInstallation / Aircraft Operator Country\tInstallation / Aircraft Operator ID\tOriginating Country\tUnit Type\tAmount\t" +
             "Year of Compliance\tProject Identifier";
@@ -175,7 +175,9 @@ public class ExportDBToMegaFiles {
 
                     }
 
-                    file1Buff.write(lineSt.substring(0, lineSt.length() - 1) + "\n");
+                    lineSt += installation.getPowerFlag();
+
+                    file1Buff.write(lineSt + "\n");
 
                     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     //+++++++++++++++++++++++++ OFFSETS ++++++++++++++++++++++++++++++
@@ -331,7 +333,7 @@ public class ExportDBToMegaFiles {
 
                     }
 
-                    file1Buff.write(lineSt.substring(0, lineSt.length() - 1) + "\n");
+                    file1Buff.write(lineSt + "false" + "\n");
 
                     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
                     //+++++++++++++++++++++++++ OFFSETS ++++++++++++++++++++++++++++++

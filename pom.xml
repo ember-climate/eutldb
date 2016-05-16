@@ -38,7 +38,7 @@
         </plugins>
     </build>
 
-    <groupId>groupId</groupId>
+    <groupId>org.sandbag</groupId>
     <artifactId>eutldb</artifactId>
     <version>1.0-SNAPSHOT</version>
     <dependencies>

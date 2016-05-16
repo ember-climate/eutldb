@@ -1,6 +1,10 @@
 package org.sandbag.programs;
 
+import org.neo4j.cypher.internal.compiler.v1_9.commands.expressions.Count;
+import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.DatabaseManager;
+import org.sandbag.model.nodes.Country;
+import org.sandbag.model.nodes.Period;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,11 +30,14 @@ public class ImportAuctionData {
 
                 File file = new File(fileSt);
                 DatabaseManager databaseManager = new DatabaseManager(dbFolder);
+                Transaction tx = databaseManager.beginTransaction();
 
                 BufferedReader reader = new BufferedReader(new FileReader(file));
                 reader.readLine();//skipping the header
 
                 String line;
+
+                System.out.println("reading file...");
 
                 while((line = reader.readLine()) != null){
                     String[] columns = line.split("\t");
@@ -40,11 +47,34 @@ public class ImportAuctionData {
                     String amountSt = columns[4].trim();
                     String sourceSt = columns[5].trim();
 
+                    Country country = databaseManager.getCountryById(countryIdst);
+                    if(country != null){
+
+                        Period period = databaseManager.getPeriodByName(periodSt);
+
+                        if(period != null){
+
+                            country.setAuctionedForPeriod(period, amountSt, sourceSt);
+
+                        }else{
+                            System.out.println("Period: " + periodSt + " could not be found...");
+                            System.out.println("Data won't be stored for country: " + countryIdst + " and the aforementioned period :(");
+                        }
+
+                    }else{
+                        System.out.println("The country with id: " + countryIdst + " could not be found...");
+                        System.out.println("No information was stored for it :(");
+                    }
+
 
                 }
 
                 reader.close();
+                tx.success();
+                tx.close();
                 databaseManager.shutdown();
+
+                System.out.println("Done! :)");
 
             }catch (Exception e){
                 e.printStackTrace();

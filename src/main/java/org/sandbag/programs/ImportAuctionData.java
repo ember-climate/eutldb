@@ -39,6 +39,8 @@ public class ImportAuctionData {
                     String periodSt = columns[3].trim();
                     String amountSt = columns[4].trim();
                     String sourceSt = columns[5].trim();
+
+
                 }
 
                 reader.close();

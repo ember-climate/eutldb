@@ -3,6 +3,7 @@ package org.sandbag.model.nodes;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.sandbag.model.nodes.interfaces.CountryModel;
+import org.sandbag.model.relationships.Auctioned;
 import org.sandbag.model.relationships.aircraft_ops.AircraftOperatorCountry;
 import org.sandbag.model.relationships.installations.InstallationCountry;
 
@@ -49,5 +50,12 @@ public class Country implements CountryModel {
     @Override
     public String name() {
         return LABEL;
+    }
+
+    @Override
+    public void setAuctionedForPeriod(Period period, String value, String source){
+        Auctioned auctioned = new Auctioned(node.createRelationshipTo(period.node, new Auctioned(null)));
+        auctioned.setAmount(value);
+        auctioned.setSource(source);
     }
 }

@@ -30,6 +30,7 @@ public class DatabaseManager {
     public static Label OFFSET_LABEL = DynamicLabel.label(OffsetModel.LABEL);
     public static Label SANDBAG_SECTOR_LABEL = DynamicLabel.label(SandbagSectorModel.LABEL);
     public static Label NACE_CODE_LABEL = DynamicLabel.label(NACECodeModel.LABEL);
+    public static Label NER300_LABEL = DynamicLabel.label(NER300Model.LABEL);
 
     public static IndexDefinition installationIdIndex = null;
     public static IndexDefinition countryNameIndex = null;
@@ -606,6 +607,17 @@ public class DatabaseManager {
     public void shutdown() {
         graphDb.shutdown();
         graphDb = null;
+    }
+
+    public NER300 getNER300Node(){
+        NER300 ner300 = null;
+        Iterator<Node> iterator = findNodes(NER300_LABEL);
+        if(!iterator.hasNext()){
+            ner300 = new NER300(graphDb.createNode(NER300_LABEL));
+        }else{
+            ner300 = new NER300(iterator.next());
+        }
+        return ner300;
     }
 
     public Iterator<Node> findNodes(Label label){

@@ -4,6 +4,7 @@ import org.neo4j.cypher.internal.compiler.v1_9.commands.expressions.Count;
 import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.DatabaseManager;
 import org.sandbag.model.nodes.Country;
+import org.sandbag.model.nodes.NER300;
 import org.sandbag.model.nodes.Period;
 import org.sandbag.util.Executable;
 
@@ -55,25 +56,41 @@ public class ImportAuctionData implements Executable{
                     String amountSt = columns[4].trim();
                     String sourceSt = columns[5].trim();
 
-                    Country country = databaseManager.getCountryById(countryIdst);
-                    if(country != null){
+                    if(countryIdst.equals("N3")){
 
+                        NER300 ner300 = databaseManager.getNER300Node();
                         Period period = databaseManager.getPeriodByName(periodSt);
 
                         if(period != null){
 
-                            country.setAuctionedForPeriod(period, amountSt, sourceSt);
+                            ner300.setAuctionedForPeriod(period, amountSt, sourceSt);
 
                         }else{
                             System.out.println("Period: " + periodSt + " could not be found...");
-                            System.out.println("Data won't be stored for country: " + countryIdst + " and the aforementioned period :(");
+                            System.out.println("Data won't be stored for NER300 and the aforementioned period :(");
                         }
 
-                    }else{
-                        System.out.println("The country with id: " + countryIdst + " could not be found...");
-                        System.out.println("No information was stored for it :(");
-                    }
 
+                    }else{
+                        Country country = databaseManager.getCountryById(countryIdst);
+                        if(country != null){
+
+                            Period period = databaseManager.getPeriodByName(periodSt);
+
+                            if(period != null){
+
+                                country.setAuctionedForPeriod(period, amountSt, sourceSt);
+
+                            }else{
+                                System.out.println("Period: " + periodSt + " could not be found...");
+                                System.out.println("Data won't be stored for country: " + countryIdst + " and the aforementioned period :(");
+                            }
+
+                        }else{
+                            System.out.println("The country with id: " + countryIdst + " could not be found...");
+                            System.out.println("No information was stored for it :(");
+                        }
+                    }
 
                 }
 

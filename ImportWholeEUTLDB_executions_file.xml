@@ -1,4 +1,5 @@
 <scheduled_executions>
+	<!--
 	<execution>
 		<class_full_name>org.sandbag.programs.ImportEUTLData</class_full_name>
 		<arguments>
@@ -38,6 +39,14 @@
 		<arguments>
 			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
 			<argument>/home/pablo/sandbag/EUTL_data/PowerFlagData.tsv</argument>
+		</arguments>
+	</execution>
+	-->
+	<execution>
+		<class_full_name>org.sandbag.programs.ImportAuctionData</class_full_name>
+		<arguments>
+			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/Auction data/AuctionDataFile.csv</argument>
 		</arguments>
 	</execution>
 </scheduled_executions>

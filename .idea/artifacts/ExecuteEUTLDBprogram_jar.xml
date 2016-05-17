@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="EUTLDBImporter:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/EUTLDBImporter_jar</output-path>
+  <artifact type="jar" build-on-make="true" name="ExecuteEUTLDBprogram:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ExecuteEUTLDBprogram_jar</output-path>
     <root id="archive" name="EUTLDBImporter.jar">
       <element id="module-output" name="eutldb" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../../apps/neo4j-community-2.3.2/lib/jline-2.12.jar" path-in-jar="/" />

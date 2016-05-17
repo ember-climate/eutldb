@@ -8,6 +8,7 @@ import org.sandbag.model.nodes.NACECode;
 import org.sandbag.model.nodes.interfaces.InstallationModel;
 import org.sandbag.model.relationships.AllowancesInAllocation;
 import org.sandbag.model.relationships.interfaces.AllowancesInAllocationModel;
+import org.sandbag.util.Executable;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -17,7 +18,13 @@ import java.util.Set;
 /**
  * Created by root on 29/04/16.
  */
-public class FindPowerFlaggedInstallations {
+public class FindPowerFlaggedInstallations implements Executable{
+
+    @Override
+    public void execute(List<String> args) {
+        System.out.println(args.toArray(new String[0]));
+        main(args.toArray(new String[0]));
+    }
 
     public static String[] POWER_FLAG_NACE_CODES = {"35.00", "35.10", "35.11", "35.12", "35.13", "35.14", "35.30"};
 

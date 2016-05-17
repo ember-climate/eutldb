@@ -6,14 +6,22 @@ import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.DatabaseManager;
 import org.sandbag.model.nodes.*;
 import org.sandbag.model.relationships.*;
+import org.sandbag.util.Executable;
 
 import java.io.*;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by root on 30/03/16.
  */
-public class ExportDBToMegaFiles {
+public class ExportDBToMegaFiles implements Executable{
+
+    @Override
+    public void execute(List<String> args) {
+        System.out.println(args.toArray(new String[0]));
+        main(args.toArray(new String[0]));
+    }
 
     public static final String FILE_1_HEADER = "Type\tOHA National Administrator\t" +
             "OHA Installation ID / OHA Aircraft Operator ID\tOHA Company Registration No\t" +

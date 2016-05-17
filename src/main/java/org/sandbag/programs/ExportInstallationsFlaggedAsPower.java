@@ -4,16 +4,24 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.DatabaseManager;
 import org.sandbag.model.nodes.Installation;
+import org.sandbag.util.Executable;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by root on 10/05/16.
  */
-public class ExportInstallationsFlaggedAsPower {
+public class ExportInstallationsFlaggedAsPower implements Executable {
+
+    @Override
+    public void execute(List<String> args) {
+        System.out.println(args.toArray(new String[0]));
+        main(args.toArray(new String[0]));
+    }
 
     public static String HEADER = "Country\tInstallation ID\tPower flag reason";
 

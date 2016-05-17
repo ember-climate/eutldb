@@ -5,15 +5,23 @@ import org.sandbag.model.DatabaseManager;
 import org.sandbag.model.nodes.AircraftOperator;
 import org.sandbag.model.nodes.Installation;
 import org.sandbag.model.nodes.NACECode;
+import org.sandbag.util.Executable;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.List;
 
 /**
  * Created by root on 27/04/16.
  */
-public class ImportInstallationsNACECodes {
+public class ImportInstallationsNACECodes implements Executable{
+
+    @Override
+    public void execute(List<String> args) {
+        System.out.println(args.toArray(new String[0]));
+        main(args.toArray(new String[0]));
+    }
 
     public static void main(String[] args){
 

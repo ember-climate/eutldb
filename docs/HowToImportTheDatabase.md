@@ -31,6 +31,8 @@ sudo yum install java-1.8.0
   * Web Scrape files: **web_scrape.tar.gz** _(s3://eutldb/data/web_scrape.tar.gz)_
   * Sandgab Sectors aggregation: **SandbagSectorsAggregation.csv** _(s3://eutldb/data/SandbagSectorsAggregation.csv)_
   * NACE codes file: **installation_nace_rev2_matching_en.tsv** _(s3://eutldb/data/installation_nace_rev2_matching_en.tsv)_
+  * Auction data: **AuctionDataFile.csv** _(s3://eutldb/data/AuctionDataFile.csv)_
+  * Power Flag data: **PowerFlagData.tsv** _(s3://eutldb/data/PowerFlagData.tsv)_
   
 * Neo4j files
   

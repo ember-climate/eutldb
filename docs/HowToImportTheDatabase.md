@@ -20,7 +20,7 @@ sudo yum install java-1.8.0
 
 * JAR files
 
-  * **ExecuteEUTLDBProgram.jar** _(s3://eutldb/jars/ExecuteEUTLDBProgram.jar)_
+  * **eutldb-1.0-SNAPSHOT-jar-with-dependencies.jar** _(s3://eutldb/jars/	eutldb-1.0-SNAPSHOT-jar-with-dependencies.jar)_
   
 * Configuration files
   

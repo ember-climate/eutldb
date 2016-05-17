@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Class-Path: neo4j-community-2.3.3/lib/*
-Main-Class: org.sandbag.programs.ImportOldPowerFlags
-

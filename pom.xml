@@ -17,23 +17,27 @@
             </plugin>
             <!-- Make this jar runnable/executable -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.6</version>
-                <!-- documentation: https://maven.apache.org/plugins/maven-jar-plugin/jar-mojo.html -->
-                <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <!-- custom output directory -->
-                    <outputDirectory>${project.build.directory}/jars</outputDirectory>
-                    <!-- custom Name of the generated JAR (default: ${project.build.finalName} e.g. de.oveits.provisioningengine_recent-0.5.2.21_stable). Note, that .jar is always appended -->
-                    <finalName>EUTLDBImporter</finalName>
                     <archive>
                         <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>org.sandbag.programs.EUTLMegaFileImporter</mainClass>
-                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>org.sandbag.util.ExecuteEUTLDBProgram</mainClass>
                         </manifest>
                     </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                        <phase>package</phase> <!-- bind to the packaging phase -->
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -46,16 +50,19 @@
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j</artifactId>
             <version>2.3.2</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.6.2</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.jdom</groupId>
             <artifactId>jdom2</artifactId>
             <version>2.0.6</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

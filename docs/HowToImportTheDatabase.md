@@ -24,7 +24,7 @@ sudo yum install java-1.8.0
   
 * Configuration files
   
-  * **ImportWholeEUTLDB_executions_file.xml** _(s3://eutldb/conf/ImportWholeEUTLDB_executions_file.xml)_
+  * **ImportWholeEUTLDB_executions_file_AWS.xml** _(s3://eutldb/conf/ImportWholeEUTLDB_executions_file_AWS.xml)_
   
 * Data files
 

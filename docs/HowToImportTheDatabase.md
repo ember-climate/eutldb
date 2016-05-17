@@ -42,24 +42,59 @@ sudo yum install java-1.8.0
 tar -xvf *.tar.gz
 ```
 
-### 5. Run the following set of commands
-
-1. Basic EUTL database
+### 5. Run the following command
 
 ``` bash
-sudo java -d64 -classpath ".:EUTLDBImporter.jar:neo4j-community-2.3.3/lib/*" org.sandbag.programs.ImportEUTLData eutldb web_scrape/installations web_scrape/aircraft_operators web_scrape/compliance web_scrape/ner.tsv web_scrape/article10c.tsv web_scrape/InstallationsEntitlements.tsv web_scrape/AircraftOperatorsEntitlements.tsv web_scrape/offsets
+sudo java -d64 -jar eutldb-1.0-SNAPSHOT-jar-with-dependencies.jar ImportWholeEUTLDB_executions_file.xml
 ```
 
-2. Sandbag Sectors aggregation
+Just be aware that the programs that will be executed are those stated in the _**executions.xml**_ file.
+The follow example shows the different programs that must be executed in order to import everything into the database:
 
-``` bash
-sudo java -d64 -classpath ".:ImportSandbagSectorsAggregation_jar.jar:neo4j-community-2.3.3/lib/*" org.sandbag.programs.ImportSandbagSectorsAggregation eutldb SandbagSectorsAggregation.csv 
-```
-
-3. NACE codes
-
-``` bash
-sudo java -d64 -classpath ".:ImportInstallationsNACECodes.jar:neo4j-community-2.3.3/lib/*" org.sandbag.programs.ImportInstallationsNACECodes eutldb_new installation_nace_rev2_matching_en.tsv 
+``` xml
+<scheduled_executions>
+	<execution>
+		<class_full_name>org.sandbag.programs.ImportEUTLData</class_full_name>
+		<arguments>
+			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/web_scrape/installations</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/web_scrape/aircraft_operators</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/web_scrape/compliance</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/web_scrape/NER.tsv</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/web_scrape/Article10c.tsv</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/web_scrape/InstallationsEntitlements.tsv</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/web_scrape/AircraftOperatorsEntitlements.tsv</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/web_scrape/offsets</argument>
+		</arguments>
+	</execution>
+	<execution>
+		<class_full_name>org.sandbag.programs.ImportSandbagSectorsAggregation</class_full_name>
+		<arguments>
+			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/SandbagSectorsAggregation.csv</argument>
+		</arguments>
+	</execution>
+	<execution>
+		<class_full_name>org.sandbag.programs.ImportInstallationsNACECodes</class_full_name>
+		<arguments>
+			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/installation_nace_rev2_matching_en.tsv</argument>
+		</arguments>
+	</execution>
+	<execution>
+		<class_full_name>org.sandbag.programs.FindPowerFlaggedInstallations</class_full_name>
+		<arguments>
+			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
+		</arguments>
+	</execution>
+	<execution>
+		<class_full_name>org.sandbag.programs.ImportOldPowerFlags</class_full_name>
+		<arguments>
+			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/PowerFlagData.tsv</argument>
+		</arguments>
+	</execution>
+</scheduled_executions>
 ```
 
 

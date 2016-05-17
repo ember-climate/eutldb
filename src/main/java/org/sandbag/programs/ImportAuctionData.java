@@ -13,7 +13,7 @@ import java.io.FileReader;
 /**
  * Created by root on 16/05/16.
  */
-public class ImportAuctionData {
+public class ImportAuctionData{
 
     public static void main(String[] args){
 

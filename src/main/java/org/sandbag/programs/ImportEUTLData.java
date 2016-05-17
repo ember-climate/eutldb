@@ -4,8 +4,10 @@ import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.*;
 import org.sandbag.model.nodes.*;
 import org.sandbag.model.relationships.interfaces.AllowancesInAllocationModel;
+import org.sandbag.util.Executable;
 
 import java.io.*;
+import java.util.List;
 
 /**
  *
@@ -13,9 +15,9 @@ import java.io.*;
  * @author Pablo Pareja Tobes
  *
  */
-public class EUTLDBImporter {
+public class ImportEUTLData implements Executable{
 
-    private static DatabaseManager dbManager;
+    private static DatabaseManager DBMANAGER;
 
     public static void main(String[] args){
         if(args.length != 9){
@@ -31,7 +33,9 @@ public class EUTLDBImporter {
                     "9. Offsets folder");
         }else{
 
-            EUTLDBImporter importer = new EUTLDBImporter(args[0]);
+
+            DBMANAGER = new DatabaseManager(args[0]);
+            ImportEUTLData importer = new ImportEUTLData();
 
             importer.importInstallationsFromFolder(args[1]);
             importer.importAircraftOperatorsFromFolder(args[2]);
@@ -43,14 +47,10 @@ public class EUTLDBImporter {
             importer.importAircraftOperatorsOffsetEntitlements(new File(args[7]));
             importer.importOffsetsFromFolder(args[8]);
 
-            dbManager.shutdown();
+            DBMANAGER.shutdown();
 
 
         }
-    }
-
-    public EUTLDBImporter(String dbFolder){
-        dbManager = new DatabaseManager(dbFolder);
     }
 
     public void importOffsetsFromFolder(String folderSt){
@@ -144,7 +144,7 @@ public class EUTLDBImporter {
 
             while((line = reader.readLine()) != null){
 
-                Transaction tx = dbManager.beginTransaction();
+                Transaction tx = DBMANAGER.beginTransaction();
 
                 String[] columns = line.split("\t", -1);
                 //System.out.println("columns.length = " + columns.length);
@@ -178,15 +178,15 @@ public class EUTLDBImporter {
                     String longitudeSt = columns[26].trim();
                     String mainActivitySt = columns[27].trim();
 
-                    Country country = dbManager.getCountryByName(countryNameSt);
+                    Country country = DBMANAGER.getCountryByName(countryNameSt);
                     if(country == null){
                         System.out.println("Creating country: [" + countryIdSt + "," + countryNameSt + "]" );
-                        country = dbManager.createCountry(countryNameSt, countryIdSt);
+                        country = DBMANAGER.createCountry(countryNameSt, countryIdSt);
                     }
-                    Company company = dbManager.getCompanyByRegistrationNumber(companyRegistrationNumberSt);
+                    Company company = DBMANAGER.getCompanyByRegistrationNumber(companyRegistrationNumberSt);
                     if(company == null){
                         if(!companyRegistrationNumberSt.isEmpty() || !companyNameSt.isEmpty()){
-                            company = dbManager.createCompany(companyNameSt,companyRegistrationNumberSt,companyPostalCodeSt,
+                            company = DBMANAGER.createCompany(companyNameSt,companyRegistrationNumberSt,companyPostalCodeSt,
                                     companyCitySt, companyMainAddressSt + "\n" + companySecondaryAddressSt, companyStatusSt,
                                     subsidiaryCompanySt, parentCompanySt);
                         }
@@ -195,16 +195,16 @@ public class EUTLDBImporter {
                     String sectorId = mainActivitySt.split("-")[0];
                     String sectorName = mainActivitySt.split("-")[1];
 
-                    Sector sector = dbManager.getSectorById(sectorId);
+                    Sector sector = DBMANAGER.getSectorById(sectorId);
                     if(sector == null){
                         if(!sectorId.isEmpty()){
-                            sector = dbManager.createSector(sectorId, sectorName);
+                            sector = DBMANAGER.createSector(sectorId, sectorName);
                         }
                     }
 
                     String aircraftOperatorCompleteIDSt = countryIdSt + aircraftOperatorIdSt;
 
-                    AircraftOperator aircraftOperator = dbManager.createAircraftOperator(aircraftOperatorCompleteIDSt,companyNameSt,
+                    AircraftOperator aircraftOperator = DBMANAGER.createAircraftOperator(aircraftOperatorCompleteIDSt,companyNameSt,
                             aircraftOperatorCitySt,aircraftOperatorPostalCodeSt,aircraftOperatorMainAddressSt + aircraftOperatorSecondaryAddressSt,
                             eprtrIdSt, companyStatusSt, uniqueCodeUnderComissionioRegulationSt, monitoringPlanIDSt,
                             monitoringPlanFirstYearOfApplicabilitySt,monitoringPlanYearOfExpiry, icaoDesignator,
@@ -234,7 +234,7 @@ public class EUTLDBImporter {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             reader.readLine(); //skipping header
 
-            Transaction tx = dbManager.beginTransaction();
+            Transaction tx = DBMANAGER.beginTransaction();
 
             while((line = reader.readLine()) != null){
 
@@ -248,15 +248,15 @@ public class EUTLDBImporter {
                     String yearSt = columns[2].trim();
                     String nerAllocationSt = columns[3].trim();
 
-                    Period period = dbManager.getPeriodByName(yearSt);
+                    Period period = DBMANAGER.getPeriodByName(yearSt);
                     if(period == null){
                         System.out.println("Creating period: " + yearSt);
-                        period = dbManager.createPeriod(yearSt);
+                        period = DBMANAGER.createPeriod(yearSt);
                         tx.success();
                         tx.close();
-                        tx = dbManager.beginTransaction();
+                        tx = DBMANAGER.beginTransaction();
                     }
-                    Installation installation = dbManager.getInstallationById(installationIdSt);
+                    Installation installation = DBMANAGER.getInstallationById(installationIdSt);
                     if(installation != null){
 
                         if(!nerAllocationSt.isEmpty()){
@@ -278,7 +278,7 @@ public class EUTLDBImporter {
                     if(lineCounter % 100 == 0){
                         tx.success();
                         tx.close();
-                        tx = dbManager.beginTransaction();
+                        tx = DBMANAGER.beginTransaction();
                     }
 
                     lineCounter++;
@@ -305,7 +305,7 @@ public class EUTLDBImporter {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             reader.readLine(); //skipping header
 
-            Transaction tx = dbManager.beginTransaction();
+            Transaction tx = DBMANAGER.beginTransaction();
 
             while((line = reader.readLine()) != null){
 
@@ -319,15 +319,15 @@ public class EUTLDBImporter {
                     String yearSt = columns[2].trim();
                     String article10cAllocationSt = columns[3].trim();
 
-                    Period period = dbManager.getPeriodByName(yearSt);
+                    Period period = DBMANAGER.getPeriodByName(yearSt);
                     if(period == null){
                         System.out.println("Creating period: " + yearSt);
-                        period = dbManager.createPeriod(yearSt);
+                        period = DBMANAGER.createPeriod(yearSt);
                         tx.success();
                         tx.close();
-                        tx = dbManager.beginTransaction();
+                        tx = DBMANAGER.beginTransaction();
                     }
-                    Installation installation = dbManager.getInstallationById(installationIdSt);
+                    Installation installation = DBMANAGER.getInstallationById(installationIdSt);
                     if(installation != null){
 
                         if(!article10cAllocationSt.isEmpty()){
@@ -349,7 +349,7 @@ public class EUTLDBImporter {
                     if(lineCounter % 100 == 0){
                         tx.success();
                         tx.close();
-                        tx = dbManager.beginTransaction();
+                        tx = DBMANAGER.beginTransaction();
                     }
 
                     lineCounter++;
@@ -377,15 +377,15 @@ public class EUTLDBImporter {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             reader.readLine(); //skipping header
 
-            Transaction tx = dbManager.beginTransaction();
+            Transaction tx = DBMANAGER.beginTransaction();
 
-            Period period = dbManager.getPeriodByName(offsetEntitlementsPeriod);
+            Period period = DBMANAGER.getPeriodByName(offsetEntitlementsPeriod);
             if(period == null){
                 System.out.println("Creating period: " + offsetEntitlementsPeriod);
-                period = dbManager.createPeriod(offsetEntitlementsPeriod);
+                period = DBMANAGER.createPeriod(offsetEntitlementsPeriod);
                 tx.success();
                 tx.close();
-                tx = dbManager.beginTransaction();
+                tx = DBMANAGER.beginTransaction();
             }
 
 
@@ -400,11 +400,11 @@ public class EUTLDBImporter {
 
                     String valueSt = columns[2].trim();
 
-                    Country country = dbManager.getCountryByName(countryNameSt);
+                    Country country = DBMANAGER.getCountryByName(countryNameSt);
                     String countryIdSt = country.getId();
                     String installationIdSt = countryIdSt + installationIdIncompleteSt;
 
-                    Installation installation = dbManager.getInstallationById(installationIdSt);
+                    Installation installation = DBMANAGER.getInstallationById(installationIdSt);
 
                     if(installation != null){
 
@@ -420,7 +420,7 @@ public class EUTLDBImporter {
                         System.out.println(lineCounter + " installation offset entitlements added...");
                         tx.success();
                         tx.close();
-                        tx = dbManager.beginTransaction();
+                        tx = DBMANAGER.beginTransaction();
                     }
 
                     lineCounter++;
@@ -448,15 +448,15 @@ public class EUTLDBImporter {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             reader.readLine(); //skipping header
 
-            Transaction tx = dbManager.beginTransaction();
+            Transaction tx = DBMANAGER.beginTransaction();
 
-            Period period = dbManager.getPeriodByName(offsetEntitlementsPeriod);
+            Period period = DBMANAGER.getPeriodByName(offsetEntitlementsPeriod);
             if(period == null){
                 System.out.println("Creating period: " + offsetEntitlementsPeriod);
-                period = dbManager.createPeriod(offsetEntitlementsPeriod);
+                period = DBMANAGER.createPeriod(offsetEntitlementsPeriod);
                 tx.success();
                 tx.close();
-                tx = dbManager.beginTransaction();
+                tx = DBMANAGER.beginTransaction();
             }
 
             while((line = reader.readLine()) != null){
@@ -470,11 +470,11 @@ public class EUTLDBImporter {
 
                     String valueSt = columns[2].trim();
 
-                    Country country = dbManager.getCountryByName(countryNameSt);
+                    Country country = DBMANAGER.getCountryByName(countryNameSt);
                     String countryIdSt = country.getId();
                     String aircraftOperatorIdSt = countryIdSt + aircraftOperatorIncompleteIdSt;
 
-                    AircraftOperator aircraftOperator = dbManager.getAircraftOperatorById(aircraftOperatorIdSt);
+                    AircraftOperator aircraftOperator = DBMANAGER.getAircraftOperatorById(aircraftOperatorIdSt);
                     if(aircraftOperator != null){
 
                         aircraftOperator.setOffsetEntitlementForPeriod(period, valueSt);
@@ -488,7 +488,7 @@ public class EUTLDBImporter {
                     if(lineCounter % 100 == 0){
                         tx.success();
                         tx.close();
-                        tx = dbManager.beginTransaction();
+                        tx = DBMANAGER.beginTransaction();
                     }
 
                     lineCounter++;
@@ -517,7 +517,7 @@ public class EUTLDBImporter {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             reader.readLine(); //skipping header
 
-            Transaction tx = dbManager.beginTransaction();
+            Transaction tx = DBMANAGER.beginTransaction();
 
             while((line = reader.readLine()) != null){
 
@@ -534,15 +534,15 @@ public class EUTLDBImporter {
                     String unitsSurrenderedSt = columns[5].trim();
                     String complianceCode = columns[6].trim();
 
-                    Period period = dbManager.getPeriodByName(yearSt);
+                    Period period = DBMANAGER.getPeriodByName(yearSt);
                     if(period == null){
                         System.out.println("Creating period: " + yearSt);
-                        period = dbManager.createPeriod(yearSt);
+                        period = DBMANAGER.createPeriod(yearSt);
                         tx.success();
                         tx.close();
-                        tx = dbManager.beginTransaction();
+                        tx = DBMANAGER.beginTransaction();
                     }
-                    Installation installation = dbManager.getInstallationById(installationIdSt);
+                    Installation installation = DBMANAGER.getInstallationById(installationIdSt);
                     if(installation != null){
 
                         //+++++++++++++++++++++ SURRENDERED UNITS++++++++++++++++++++++++++++++++
@@ -584,7 +584,7 @@ public class EUTLDBImporter {
 
                     }else{
 
-                        AircraftOperator aircraftOperator = dbManager.getAircraftOperatorById(installationIdSt);
+                        AircraftOperator aircraftOperator = DBMANAGER.getAircraftOperatorById(installationIdSt);
 
                         if(aircraftOperator != null){
 
@@ -634,7 +634,7 @@ public class EUTLDBImporter {
                     if(lineCounter % 100 == 0){
                         tx.success();
                         tx.close();
-                        tx = dbManager.beginTransaction();
+                        tx = DBMANAGER.beginTransaction();
                     }
 
 
@@ -668,7 +668,7 @@ public class EUTLDBImporter {
 
             int lineCounter = 0;
 
-            Transaction tx = dbManager.beginTransaction();
+            Transaction tx = DBMANAGER.beginTransaction();
 
             while((line = reader.readLine()) != null){
 
@@ -705,23 +705,23 @@ public class EUTLDBImporter {
 
                     //System.out.println("installationNameSt = " + installationNameSt);
 
-                    Country country = dbManager.getCountryByName(countryNameSt);
+                    Country country = DBMANAGER.getCountryByName(countryNameSt);
                     if(country == null){
                         System.out.println("Creating country: [" + countryIdSt + "," + countryNameSt + "]" );
-                        country = dbManager.createCountry(countryNameSt, countryIdSt);
+                        country = DBMANAGER.createCountry(countryNameSt, countryIdSt);
                         tx.success();
                         tx.close();
-                        tx = dbManager.beginTransaction();
+                        tx = DBMANAGER.beginTransaction();
                     }
-                    Company company = dbManager.getCompanyByRegistrationNumber(companyRegistrationNumberSt);
+                    Company company = DBMANAGER.getCompanyByRegistrationNumber(companyRegistrationNumberSt);
                     if(company == null){
                         if(!companyRegistrationNumberSt.isEmpty() || !companyNameSt.isEmpty()){
-                            company = dbManager.createCompany(companyNameSt,companyRegistrationNumberSt,companyPostalCodeSt,
+                            company = DBMANAGER.createCompany(companyNameSt,companyRegistrationNumberSt,companyPostalCodeSt,
                                     companyCitySt, companyMainAddressSt + "\n" + companySecondaryAddressSt, companyStatusSt,
                                     subsidiaryCompanySt, parentCompanySt);
                             tx.success();
                             tx.close();
-                            tx = dbManager.beginTransaction();
+                            tx = DBMANAGER.beginTransaction();
                         }
                     }
 
@@ -739,14 +739,14 @@ public class EUTLDBImporter {
                     }
 
 
-                    Sector sector = dbManager.getSectorById(sectorId);
+                    Sector sector = DBMANAGER.getSectorById(sectorId);
                     if(sector == null){
                         if(!sectorId.isEmpty()){
                             System.out.println("Creating sector: " + sectorName);
-                            sector = dbManager.createSector(sectorId, sectorName);
+                            sector = DBMANAGER.createSector(sectorId, sectorName);
                             tx.success();
                             tx.close();
-                            tx = dbManager.beginTransaction();
+                            tx = DBMANAGER.beginTransaction();
                         }
                     }
 
@@ -755,7 +755,7 @@ public class EUTLDBImporter {
 //                    System.out.println("installationCompleteIDSt = " + installationCompleteIDSt);
 
 
-                    Installation installation = dbManager.createInstallation(installationCompleteIDSt,installationNameSt,
+                    Installation installation = DBMANAGER.createInstallation(installationCompleteIDSt,installationNameSt,
                             installationCitySt, installationPostalCodeSt, installationMainAddressSt + " " + installationSecondaryAddressSt,
                             eprtrIdSt, permitIDSt, permitEntryDateSt, permitExpiryRevocationDateSt, latituteSt, longitudeSt,
                             country, company, sector);
@@ -768,7 +768,7 @@ public class EUTLDBImporter {
                 if(lineCounter % 1000 == 0){
                     tx.success();
                     tx.close();
-                    tx = dbManager.beginTransaction();
+                    tx = DBMANAGER.beginTransaction();
                     System.out.println(lineCounter + " lines imported...");
                 }
 
@@ -796,7 +796,7 @@ public class EUTLDBImporter {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             reader.readLine(); //skipping header
 
-            Transaction tx = dbManager.beginTransaction();
+            Transaction tx = DBMANAGER.beginTransaction();
 
             while((line = reader.readLine()) != null){
 
@@ -826,39 +826,39 @@ public class EUTLDBImporter {
                     if(!yearOfComplianceSt.isEmpty() && !originatingRegistrySt.isEmpty() &&
                             !installationIdIncompleteSt.isEmpty()){
 
-                        Period period = dbManager.getPeriodByName(yearOfComplianceSt);
+                        Period period = DBMANAGER.getPeriodByName(yearOfComplianceSt);
                         if(period == null){
                             System.out.println("Creating period: " + yearOfComplianceSt);
-                            period = dbManager.createPeriod(yearOfComplianceSt);
+                            period = DBMANAGER.createPeriod(yearOfComplianceSt);
                             tx.success();
                             tx.close();
-                            tx = dbManager.beginTransaction();
+                            tx = DBMANAGER.beginTransaction();
                         }
-                        Country originatingCountry = dbManager.getCountryByName(originatingRegistrySt);
+                        Country originatingCountry = DBMANAGER.getCountryByName(originatingRegistrySt);
                         if(originatingCountry == null){
                             System.out.println("Creating country: " + originatingRegistrySt);
-                            originatingCountry = dbManager.createCountry(originatingRegistrySt,"");
+                            originatingCountry = DBMANAGER.createCountry(originatingRegistrySt,"");
                             tx.success();
                             tx.close();
-                            tx = dbManager.beginTransaction();
+                            tx = DBMANAGER.beginTransaction();
                         }
                         Project project = null;
                         if(!projectIdSt.isEmpty()){
-                            project = dbManager.getProjectById(projectIdSt);
+                            project = DBMANAGER.getProjectById(projectIdSt);
 
                             if(project == null){
                                 System.out.println("Creating project: " + projectIdSt);
-                                project = dbManager.createProject(projectIdSt);
+                                project = DBMANAGER.createProject(projectIdSt);
                                 tx.success();
                                 tx.close();
-                                tx = dbManager.beginTransaction();
+                                tx = DBMANAGER.beginTransaction();
                             }
                         }
 
-                        Installation installation = dbManager.getInstallationById(installationIdSt);
+                        Installation installation = DBMANAGER.getInstallationById(installationIdSt);
                         if(installation != null){
 
-                            Offset offset = dbManager.createOffset(
+                            Offset offset = DBMANAGER.createOffset(
                                     amountSt,
                                     unitTypeSt,
                                     installation,
@@ -873,11 +873,11 @@ public class EUTLDBImporter {
 
                         }else{
 
-                            AircraftOperator aircraftOperator = dbManager.getAircraftOperatorById(installationIdSt);
+                            AircraftOperator aircraftOperator = DBMANAGER.getAircraftOperatorById(installationIdSt);
 
                             if(aircraftOperator != null){
 
-                                Offset offset = dbManager.createOffset(
+                                Offset offset = DBMANAGER.createOffset(
                                         amountSt,
                                         unitTypeSt,
                                         aircraftOperator,
@@ -897,7 +897,7 @@ public class EUTLDBImporter {
                     if(lineCounter % 100 == 0){
                         tx.success();
                         tx.close();
-                        tx = dbManager.beginTransaction();
+                        tx = DBMANAGER.beginTransaction();
                     }
 
 
@@ -917,5 +917,11 @@ public class EUTLDBImporter {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void execute(List<String> args) {
+        System.out.println(args.toArray(new String[0]));
+        main(args.toArray(new String[0]));
     }
 }

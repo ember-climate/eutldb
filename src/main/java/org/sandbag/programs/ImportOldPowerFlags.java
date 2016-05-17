@@ -3,15 +3,21 @@ package org.sandbag.programs;
 import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.DatabaseManager;
 import org.sandbag.model.nodes.Installation;
+import org.sandbag.util.Executable;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.List;
 
 /**
  * Created by root on 06/05/16.
  */
-public class ImportOldPowerFlags {
+public class ImportOldPowerFlags implements Executable{
+
+    public void execute(List<String> list){
+        main(list.toArray(new String[0]));
+    }
 
     public static void main(String[] args){
 

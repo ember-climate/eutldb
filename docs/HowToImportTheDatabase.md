@@ -46,7 +46,7 @@ tar -xvf *.tar.gz
 1. Basic EUTL database
 
 ``` bash
-sudo java -d64 -classpath ".:EUTLDBImporter.jar:neo4j-community-2.3.3/lib/*" org.sandbag.programs.EUTLDBImporter eutldb web_scrape/installations web_scrape/aircraft_operators web_scrape/compliance web_scrape/ner.tsv web_scrape/article10c.tsv web_scrape/InstallationsEntitlements.tsv web_scrape/AircraftOperatorsEntitlements.tsv web_scrape/offsets 
+sudo java -d64 -classpath ".:EUTLDBImporter.jar:neo4j-community-2.3.3/lib/*" org.sandbag.programs.ImportEUTLData eutldb web_scrape/installations web_scrape/aircraft_operators web_scrape/compliance web_scrape/ner.tsv web_scrape/article10c.tsv web_scrape/InstallationsEntitlements.tsv web_scrape/AircraftOperatorsEntitlements.tsv web_scrape/offsets
 ```
 
 2. Sandbag Sectors aggregation

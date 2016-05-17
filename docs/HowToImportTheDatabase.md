@@ -20,10 +20,11 @@ sudo yum install java-1.8.0
 
 * JAR files
 
-  * **EUTLDBImporter.jar** _(s3://eutldb/jars/eutl-web-scraper.jar)_
-  * **ImportInstallationsNACECodes.jar** _(s3://eutldb/jars/ImportInstallationsNACECodes.jar)_
-  * **ImportSandbagSectorsAggregation.jar** _(s3://eutldb/jars/ImportSandbagSectorsAggregation.jar)_
-  * **ImportOldPowerFlags.jar** _(s3://eutldb/jars/ImportOldPowerFlags.jar)_
+  * **ExecuteEUTLDBProgram.jar** _(s3://eutldb/jars/ExecuteEUTLDBProgram.jar)_
+  
+* Configuration files
+  
+  * **ImportWholeEUTLDB_executions_file.xml** _(s3://eutldb/conf/ImportWholeEUTLDB_executions_file.xml)_
   
 * Data files
 

@@ -77,10 +77,12 @@ public class ImportAuctionData implements Executable{
 
                 }
 
-                reader.close();
+
                 tx.success();
                 tx.close();
                 databaseManager.shutdown();
+
+                reader.close();
 
                 System.out.println("Done! :)");
 

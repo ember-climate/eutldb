@@ -605,6 +605,7 @@ public class DatabaseManager {
 
     public void shutdown() {
         graphDb.shutdown();
+        graphDb = null;
     }
 
     public Iterator<Node> findNodes(Label label){

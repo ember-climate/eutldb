@@ -66,9 +66,10 @@ public class ImportOldPowerFlags implements Executable{
 
                 tx.success();
                 tx.close();
+                databaseManager.shutdown();
 
                 reader.close();
-                databaseManager.shutdown();
+
 
                 System.out.println("Done! :)");
 

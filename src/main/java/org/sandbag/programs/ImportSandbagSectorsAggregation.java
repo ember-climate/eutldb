@@ -83,9 +83,10 @@ public class ImportSandbagSectorsAggregation implements Executable{
 
                 tx.success();
                 tx.close();
+                databaseManager.shutdown();
 
                 reader.close();
-                databaseManager.shutdown();
+
 
                 System.out.println("Finished!");
 

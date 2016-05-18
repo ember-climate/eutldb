@@ -59,6 +59,8 @@ Parameters:
 
 Imports all auction data included in the input CSV file.
 
+Parameters:
+
 1. Database folder
 2. Input CSV Auction data folder
 

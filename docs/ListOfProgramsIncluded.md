@@ -30,7 +30,6 @@ Parameters:
 
 1. Database folder
 2. Installations <-> NACE code file (.tsv)
-3. 
 
 ### FindPowerFlaggedInstallations
 

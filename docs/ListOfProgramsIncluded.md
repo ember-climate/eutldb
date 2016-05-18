@@ -30,5 +30,19 @@ Parameters:
 
 1. Database folder
 2. Installations <-> NACE code file (.tsv)
+3. 
+
+### FindPowerFlaggedInstallations
+
+Looks for installations fullfilling at least one of the following two rules:
+
+* Being associated to one of the NACE codes included in this list: [35.00, 35.10, 35.11, 35.12, 35.13, 35.14, 35.30]
+* Having Article 10c free allocation values associated
+
+All installations complying to either of the aforementioned rules are flagged as **Power**. 
+
+Parameters: 
+
+1. Database folder
 
 

@@ -23,5 +23,12 @@ The following set of parameters are expected:
 1. Database folder
 2. Sandbag Sectors aggregation file (.csv)
 
+### ImportInstallationsNACECodes
+
+Imports NACE codes into the database and their links to the installations provided in the input file.
+Parameters:
+
+1. Database folder
+2. Installations <-> NACE code file (.tsv)
 
 

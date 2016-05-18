@@ -55,3 +55,21 @@ Parameters:
 1. Database folder
 2. Power flag file
 
+### ImportAuctionData
+
+Imports all auction data included in the input CSV file.
+
+1. Database folder
+2. Input CSV Auction data folder
+
+### ExportDBToMegaFiles
+
+Program that exports EUTL web scrape related data to a format that's easy to import from the legacy database system. 
+
+Parameters:
+
+1. Database folder 
+2. Output file 1 (Mega file)
+3. Output file 2 (Offsets file) 
+4. Output file 3 (Offset entitlements)
+

@@ -15,4 +15,13 @@ It expects the following set of parameters:
 8. Aircraft Operators Offset Entitlements file
 9. Offsets folder
 
+### ImportSandbagSectorsAggregation
+
+Imports a more meaningful sectors aggregation elaborated by Sandbag's team.
+The following set of parameters are expected:
+
+1. Database folder
+2. Sandbag Sectors aggregation file (.csv)
+
+
 

@@ -6,11 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1791405-db16-46c5-a8f5-ae2548907d3c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/images/DataModel.png" afterPath="$PROJECT_DIR$/docs/images/DataModel.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/DataModel.graphml" afterPath="$PROJECT_DIR$/docs/DataModel.graphml" />
-    </list>
+    <list default="true" id="d1791405-db16-46c5-a8f5-ae2548907d3c" name="Default" comment="" />
     <ignored path="eutldb.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -32,56 +28,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="UsesFuelModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/UsesFuelModel.java">
+      <file leaf-file-name="ImportFuelType.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/ImportFuelType.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.68383235">
+              <caret line="42" column="27" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1425#1426#0" expanded="true" />
+                <element signature="e#1474#1475#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UsesFuel.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/UsesFuel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4742515">
-              <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AuctionedModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/AuctionedModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="56" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="56" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Period.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Period.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="5" selection-start-line="10" selection-start-column="4" selection-end-line="29" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PeriodModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/interfaces/PeriodModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="42" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="42" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -121,6 +77,7 @@
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/interfaces/FuelTypeModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/UsesFuel.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/UsesFuelModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/sandbag/programs/ImportFuelType.java" />
       </list>
     </option>
   </component>
@@ -1030,10 +987,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/UsesFuel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4742515">
+        <state vertical-scroll-proportion="0.0">
           <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/ImportFuelType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.68383235">
+          <caret line="42" column="27" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1425#1426#0" expanded="true" />
+            <element signature="e#1474#1475#0" expanded="true" />
           </folding>
         </state>
       </provider>

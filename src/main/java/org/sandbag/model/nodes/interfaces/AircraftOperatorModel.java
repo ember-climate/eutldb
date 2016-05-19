@@ -67,6 +67,7 @@ public interface AircraftOperatorModel extends Label {
     void setComplianceForPeriod(Period period, String value);
     void setAllowancesInAllocationForPeriod(Period period, double value, String type);
     void setNACECode(NACECode naceCode);
+    void setFuelType(FuelType fuelType, String note, String source);
     String getOffsetEntitlementForPeriod(Period period);
 
 }

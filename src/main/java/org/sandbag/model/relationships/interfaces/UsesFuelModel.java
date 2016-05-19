@@ -10,5 +10,13 @@ public interface UsesFuelModel extends RelationshipType {
 
     String LABEL = "USES_FUEL";
 
+    String note = "note";
+    String source = "source";
+
+    String getNote();
+    String getSource();
+    void setNote(String note);
+    void setSource(String value);
+
     FuelType getFuelType();
 }

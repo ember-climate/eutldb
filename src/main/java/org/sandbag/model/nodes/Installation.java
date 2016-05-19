@@ -212,6 +212,13 @@ public class Installation implements InstallationModel {
     }
 
     @Override
+    public void setFuelType(FuelType fuelType, String note, String source){
+        UsesFuel usesFuel = new UsesFuel(node.createRelationshipTo(fuelType.node, new UsesFuel(null)));
+        usesFuel.setNote(note);
+        usesFuel.setSource(source);
+    }
+
+    @Override
     public void setVerifiedEmissionsForPeriod(Period period, double value){
         VerifiedEmissions verifiedEmissions = new VerifiedEmissions(node.createRelationshipTo(period.node, new VerifiedEmissions(null)));
         verifiedEmissions.setValue(value);

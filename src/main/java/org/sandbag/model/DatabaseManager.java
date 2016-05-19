@@ -31,6 +31,7 @@ public class DatabaseManager {
     public static Label SANDBAG_SECTOR_LABEL = DynamicLabel.label(SandbagSectorModel.LABEL);
     public static Label NACE_CODE_LABEL = DynamicLabel.label(NACECodeModel.LABEL);
     public static Label NER300_LABEL = DynamicLabel.label(NER300Model.LABEL);
+    public static Label FUEL_TYPE_LABEL = DynamicLabel.label(FuelType.LABEL);
 
     public static IndexDefinition installationIdIndex = null;
     public static IndexDefinition countryNameIndex = null;
@@ -44,6 +45,7 @@ public class DatabaseManager {
     public static IndexDefinition sandbagSectorNameIndex = null;
     public static IndexDefinition sandbagSectorIdIndex = null;
     public static IndexDefinition naceCodeIdIndex = null;
+    public static IndexDefinition fuelTypeNameIndex = null;
 
 
     /**
@@ -216,6 +218,21 @@ public class DatabaseManager {
                     tx = graphDb.beginTx();
 
                     schema.awaitIndexOnline(naceCodeIdIndex, 10, TimeUnit.SECONDS);
+                }
+
+                if(!schema.getIndexes(FUEL_TYPE_LABEL).iterator().hasNext()){
+
+                    System.out.println("Creating indices for FuelTypes");
+
+                    fuelTypeNameIndex = schema.indexFor(FUEL_TYPE_LABEL)
+                            .on(FuelTypeModel.name)
+                            .create();
+
+                    tx.success();
+                    tx.close();
+                    tx = graphDb.beginTx();
+
+                    schema.awaitIndexOnline(fuelTypeNameIndex, 10, TimeUnit.SECONDS);
                 }
 
                 System.out.println("Done!");
@@ -457,6 +474,15 @@ public class DatabaseManager {
         return period;
     }
 
+    public FuelType createFuelType(String value) {
+        Node fuelTypeNode = graphDb.createNode(FUEL_TYPE_LABEL);
+
+        FuelType fuelType = new FuelType(fuelTypeNode);
+        fuelType.setName(value);
+
+        return fuelType;
+    }
+
     public Project createProject(String id) {
         Node projectNode = graphDb.createNode(PROJECT_LABEL);
 
@@ -564,7 +590,15 @@ public class DatabaseManager {
             period = new Period(periodNode);
         }
         return period;
+    }
 
+    public FuelType getFuelType(String value) {
+        FuelType fuelType = null;
+        Node fuelTypeNode = graphDb.findNode(FUEL_TYPE_LABEL, FuelTypeModel.name, value);
+        if (fuelTypeNode != null) {
+            fuelType = new FuelType(fuelTypeNode);
+        }
+        return fuelType;
     }
 
     public Sector getSectorById(String id) {

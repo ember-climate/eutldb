@@ -42,7 +42,7 @@ public interface InstallationModel extends Label{
     String getPowerFlag();
     String getPowerFlagReason();
     Sector getSector();
-    public NACECode getNACECode();
+    NACECode getNACECode();
 
 
 
@@ -68,6 +68,7 @@ public interface InstallationModel extends Label{
     void setComplianceForPeriod(Period period, String value);
     void setAllowancesInAllocationForPeriod(Period period, double value, String type);
     void setNACECode(NACECode naceCode);
+    void setFuelType(FuelType fuelType, String note, String source);
 
     String getOffsetEntitlementForPeriod(Period period);
 

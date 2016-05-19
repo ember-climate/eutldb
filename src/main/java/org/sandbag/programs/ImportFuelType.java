@@ -2,6 +2,9 @@ package org.sandbag.programs;
 
 import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.DatabaseManager;
+import org.sandbag.model.nodes.AircraftOperator;
+import org.sandbag.model.nodes.FuelType;
+import org.sandbag.model.nodes.Installation;
 import org.sandbag.util.Executable;
 
 import java.io.BufferedReader;
@@ -32,9 +35,67 @@ public class ImportFuelType implements Executable{
 
                 String line;
 
+                int lineCounter = 0;
+
+                System.out.println("Reading file...");
+
+                reader.readLine(); //skipping the header of the file
+
                 while((line = reader.readLine()) != null){
 
                     String[] columns = line.split("\t");
+
+                    String installationIdSt = columns[0].trim().replace(" ","");
+                    String fuelTypeSt = columns[1].trim();
+                    String noteSt = columns[2].trim();
+                    String sourceSt = columns[3].trim();
+
+                    Installation installation = databaseManager.getInstallationById(installationIdSt);
+
+                    String[] fuelTypeList = fuelTypeSt.split(",");
+
+                    for (String currentFuelType : fuelTypeList){
+
+                        String currentFuelTypeSt = currentFuelType.trim().toLowerCase();
+
+                        if(!currentFuelTypeSt.isEmpty() && currentFuelTypeSt.indexOf("?") < 0){
+
+                            FuelType fuelType = databaseManager.getFuelType(currentFuelTypeSt);
+
+                            if(fuelType == null){
+                                fuelType = databaseManager.createFuelType(currentFuelTypeSt);
+                                tx.success();
+                                tx.close();
+                                tx = databaseManager.beginTransaction();
+                            }
+
+                            if(installation != null){
+
+                                installation.setFuelType(fuelType, noteSt, sourceSt);
+
+                            }else{
+                                AircraftOperator aircraftOperator = databaseManager.getAircraftOperatorById(installationIdSt);
+                                if(aircraftOperator != null){
+
+                                    aircraftOperator.setFuelType(fuelType, noteSt, sourceSt);
+
+                                }else{
+                                    System.out.println("No installation or aircraft operator could be found for the id: "
+                                            + installationIdSt);
+                                }
+                            }
+                        }
+
+                    }
+
+                    lineCounter++;
+
+                    if(lineCounter % 100 == 0){
+                        System.out.println(lineCounter + " lines already processed...");
+                        tx.success();
+                        tx.close();
+                        tx = databaseManager.beginTransaction();
+                    }
 
 
                 }
@@ -45,6 +106,8 @@ public class ImportFuelType implements Executable{
                 reader.close();
 
                 databaseManager.shutdown();
+
+                System.out.println("Done! :)");
 
             }catch (Exception e){
                 e.printStackTrace();

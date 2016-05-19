@@ -31,4 +31,24 @@ public class UsesFuel implements UsesFuelModel{
     public FuelType getFuelType() {
         return new FuelType(relationship.getEndNode());
     }
+
+    @Override
+    public String getNote() {
+        return String.valueOf(relationship.getProperty(UsesFuel.note));
+    }
+
+    @Override
+    public String getSource() {
+        return String.valueOf(relationship.getProperty(UsesFuel.source));
+    }
+
+    @Override
+    public void setNote(String note) {
+        relationship.setProperty(UsesFuel.note, note);
+    }
+
+    @Override
+    public void setSource(String source) {
+        relationship.setProperty(UsesFuel.source, source);
+    }
 }

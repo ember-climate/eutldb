@@ -222,6 +222,13 @@ public class AircraftOperator implements AircraftOperatorModel {
     }
 
     @Override
+    public void setFuelType(FuelType fuelType, String note, String source){
+        UsesFuel usesFuel = new UsesFuel(node.createRelationshipTo(fuelType.node, new UsesFuel(null)));
+        usesFuel.setNote(note);
+        usesFuel.setSource(source);
+    }
+
+    @Override
     public String getOffsetEntitlementForPeriod(Period period){
         Relationship rel = node.getSingleRelationship(new OffsetEntitlement((null)),Direction.OUTGOING);
         if(rel != null){

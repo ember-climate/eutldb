@@ -4,6 +4,7 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.sandbag.model.nodes.interfaces.CountryModel;
 import org.sandbag.model.relationships.Auctioned;
+import org.sandbag.model.relationships.Offsets2013Onwards;
 import org.sandbag.model.relationships.aircraft_ops.AircraftOperatorCountry;
 import org.sandbag.model.relationships.installations.InstallationCountry;
 
@@ -57,5 +58,9 @@ public class Country implements CountryModel {
         Auctioned auctioned = new Auctioned(node.createRelationshipTo(period.node, new Auctioned(null)));
         auctioned.setAmount(value);
         auctioned.setSource(source);
+    }
+
+    public void setOffsets2013Onwards(Offset offset){
+        node.createRelationshipTo(offset.node, new Offsets2013Onwards(null));
     }
 }

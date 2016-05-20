@@ -301,6 +301,34 @@ public class DatabaseManager {
         return aircraftOperator;
     }
 
+    public Offset createOffset2013Onwards(String amountSt,
+                                          String unitTypeSt,
+                                          Country euCountry,
+                                          Period period){
+
+        Double amount = Double.parseDouble(amountSt);
+        Node offsetNode = graphDb.createNode(OFFSET_LABEL);
+        Offset offset = new Offset(offsetNode);
+        offset.setAmount(amount);
+
+        if (unitTypeSt.startsWith("CER")) {
+            offset.setUnitType(OffsetModel.CER_UNIT_TYPE);
+        } else if (unitTypeSt.startsWith("AAU")) {
+            offset.setUnitType(OffsetModel.AAU_UNIT_TYPE);
+        } else if (unitTypeSt.startsWith("ERU")) {
+            offset.setUnitType(OffsetModel.ERU_UNIT_TYPE);
+        } else {
+            offset.setUnitType(unitTypeSt);
+        }
+
+        offset.setPeriod(period);
+
+        euCountry.setOffsets2013Onwards(offset);
+
+        return offset;
+
+    }
+
     public Offset createOffset(String amountSt,
                                String unitTypeSt,
                                Installation installation,

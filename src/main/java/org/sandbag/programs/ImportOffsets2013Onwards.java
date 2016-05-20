@@ -1,5 +1,9 @@
 package org.sandbag.programs;
 
+import org.neo4j.graphdb.Transaction;
+import org.sandbag.model.DatabaseManager;
+import org.sandbag.model.nodes.Country;
+import org.sandbag.model.nodes.Period;
 import org.sandbag.util.Executable;
 
 import java.io.BufferedReader;
@@ -25,9 +29,25 @@ public class ImportOffsets2013Onwards implements Executable{
 
             try{
 
+                DatabaseManager databaseManager = new DatabaseManager(dbFolder);
+                Transaction tx = databaseManager.beginTransaction();
+
                 BufferedReader reader = new BufferedReader(new FileReader(new File(offsetsFileSt)));
 
                 String line;
+
+                reader.readLine(); //skig header
+
+                Country euCountry = databaseManager.getCountryById("EU");
+                if(euCountry == null){
+                    System.out.println("Creating country for the European Union...");
+                    databaseManager.createCountry("European Union", "EU");
+                    tx.success();
+                    tx.close();
+                    tx = databaseManager.beginTransaction();
+                }
+
+                System.out.println("Reading file...");
 
                 while((line = reader.readLine()) != null){
 
@@ -35,11 +55,28 @@ public class ImportOffsets2013Onwards implements Executable{
 
                     String offsetTypeSt = columns[2].trim();
                     String periodSt = columns[3].trim();
-                    String amount = columns[4].trim();
+                    String amountSt = columns[4].trim();
                     String referenceSt = columns[5].trim();
+
+                    Period period = databaseManager.getPeriodByName(periodSt);
+
+                    if(period != null){
+                        databaseManager.createOffset2013Onwards(amountSt,offsetTypeSt,euCountry,period);
+                    }else{
+                        System.out.println("The period " + periodSt + " could not be found... :(");
+                    }
+
                 }
 
                 reader.close();
+
+                tx.success();
+                tx.close();
+
+                databaseManager.shutdown();
+
+
+                System.out.println("Done!!");
 
             }catch (Exception e){
                 e.printStackTrace();

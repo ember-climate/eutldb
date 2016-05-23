@@ -29,7 +29,7 @@ public class ImportAuctionData implements Executable{
         if(args.length != 2){
             System.out.println("This program expects the following parameters\n" +
                     "1. Database folder\n" +
-                    "2. Input CSV Auction data folder");
+                    "2. Input CSV Auction data file");
         }else{
 
             String dbFolder = args[0];

@@ -50,11 +50,12 @@
 		</arguments>
 	</execution>
 
+
 	<execution>
 		<class_full_name>org.sandbag.programs.ImportOffsets2013Onwards</class_full_name>
 		<arguments>
 			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
-			<argument>/home/pablo/sandbag/EUTL_data/Offsets2013Onwards.tsvv</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/Offsets2013Onwards.tsv</argument>
 		</arguments>
 	</execution>
 	<!--

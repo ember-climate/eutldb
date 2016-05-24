@@ -64,7 +64,7 @@ public class ImportLegalCap implements Executable {
                     Period period = databaseManager.getPeriodByName(periodSt);
 
                     if(period != null){
-                        
+
                     }else{
                         System.out.println("The period " + periodSt + " could not be found... :(");
                     }

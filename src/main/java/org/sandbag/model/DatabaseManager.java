@@ -647,6 +647,15 @@ public class DatabaseManager {
         return sector;
     }
 
+    public SandbagSector getSandbagSectorByName(String value) {
+        SandbagSector sector = null;
+        Node sectorNode = graphDb.findNode(SANDBAG_SECTOR_LABEL, SandbagSectorModel.name, value);
+        if (sectorNode != null) {
+            sector = new SandbagSector(sectorNode);
+        }
+        return sector;
+    }
+
     public Project getProjectById(String id) {
         Project project = null;
         Node projectNode = graphDb.findNode(PROJECT_LABEL, ProjectModel.id, id);

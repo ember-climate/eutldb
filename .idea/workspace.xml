@@ -7,9 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1791405-db16-46c5-a8f5-ae2548907d3c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/DatabaseManager.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/DatabaseManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/SandbagSector.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/SandbagSector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Country.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Country.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/sandbag/programs/ImportLegalCap.java" afterPath="$PROJECT_DIR$/src/main/java/org/sandbag/programs/ImportLegalCap.java" />
     </list>
     <ignored path="eutldb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,10 +31,42 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="ImportAviationLegalCap.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ImportLegalCap.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/ImportLegalCap.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.8494353">
+              <caret line="67" column="78" selection-start-line="67" selection-start-column="78" selection-end-line="67" selection-end-column="78" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Country.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Country.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="70" column="35" selection-start-line="70" selection-start-column="35" selection-end-line="70" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SandbagSector.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/SandbagSector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="45" column="35" selection-start-line="43" selection-start-column="8" selection-end-line="45" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImportAviationLegalCap.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/ImportAviationLegalCap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.5520703">
+            <state vertical-scroll-proportion="0.0">
               <caret line="67" column="83" selection-start-line="67" selection-start-column="83" selection-end-line="67" selection-end-column="83" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -84,16 +115,16 @@
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/programs/ImportFuelType.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/Offsets2013Onwards.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/Offsets2013OnwardsModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Country.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/programs/ImportOffsets2013Onwards.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/programs/ImportAuctionData.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/sandbag/programs/ImportLegalCap.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/DatabaseManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/LegalCap.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/interfaces/LegalCapModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/relationships/LegalCap.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/SandbagSector.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/sandbag/programs/ImportAviationLegalCap.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Country.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/sandbag/programs/ImportLegalCap.java" />
       </list>
     </option>
   </component>
@@ -1117,14 +1148,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Country.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1799761">
-          <caret line="63" column="77" selection-start-line="63" selection-start-column="77" selection-end-line="63" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/ImportOffsets2013Onwards.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.13053893">
@@ -1140,16 +1163,6 @@
         <state vertical-scroll-proportion="1.9748503">
           <caret line="108" column="9" selection-start-line="32" selection-start-column="9" selection-end-line="108" selection-end-column="9" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/ImportLegalCap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="66" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1214,18 +1227,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/ImportAviationLegalCap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="83" selection-start-line="67" selection-start-column="83" selection-end-line="67" selection-end-column="83" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/SandbagSector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="35" selection-start-line="45" selection-start-column="35" selection-end-line="45" selection-end-column="35" />
+          <caret line="45" column="35" selection-start-line="43" selection-start-column="8" selection-end-line="45" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/ImportAviationLegalCap.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/model/nodes/Country.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.5520703">
-          <caret line="67" column="83" selection-start-line="67" selection-start-column="83" selection-end-line="67" selection-end-column="83" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="70" column="35" selection-start-line="70" selection-start-column="35" selection-end-line="70" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/sandbag/programs/ImportLegalCap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.8494353">
+          <caret line="67" column="78" selection-start-line="67" selection-start-column="78" selection-end-line="67" selection-end-column="78" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

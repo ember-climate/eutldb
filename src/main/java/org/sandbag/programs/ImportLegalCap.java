@@ -65,6 +65,8 @@ public class ImportLegalCap implements Executable {
 
                     if(period != null){
 
+                        euCountry.setLegalCap(period, amountSt, dataSourceSt);
+
                     }else{
                         System.out.println("The period " + periodSt + " could not be found... :(");
                     }

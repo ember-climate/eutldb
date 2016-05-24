@@ -74,6 +74,40 @@ Parameters:
 
 ---
 
+### ImportOffsets2013Onwards
+
+Imports offsets data from the period 2013 onwards.
+
+Parameters:
+
+1. Database folder
+2. Offsets TSV file
+
+---
+
+### ImportLegalCap
+
+Imports stationary installations legal cap data
+
+Parameters:
+
+1. Database folder
+2. Input TSV Legal Cap data file
+
+---
+
+### ImportAviationLegalCap
+
+Imports aviation legal cap data.
+
+Parameters:
+
+1. Database folder
+2. Input TSV Legal Cap data file
+
+
+----
+
 ### ExportDBToMegaFiles
 
 Program that exports EUTL web scrape related data to a format that's easy to import from the legacy database system. 

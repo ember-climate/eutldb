@@ -41,7 +41,7 @@ public class ImportOffsets2013Onwards implements Executable{
                 Country euCountry = databaseManager.getCountryById("EU");
                 if(euCountry == null){
                     System.out.println("Creating country for the European Union...");
-                    databaseManager.createCountry("European Union", "EU");
+                    euCountry = databaseManager.createCountry("European Union", "EU");
                     tx.success();
                     tx.close();
                     tx = databaseManager.beginTransaction();

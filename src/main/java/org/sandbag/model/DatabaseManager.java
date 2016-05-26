@@ -457,6 +457,8 @@ public class DatabaseManager {
         installation.setPermitExpiryOrRevocationDate(permitExpiryOrRevocationDate);
         installation.setLatitude(latitude);
         installation.setLongitude(longitude);
+        installation.setPowerFlag("false");
+        installation.setPowerFlagReason("");
 
         if (country != null) {
             installation.setCountry(country);

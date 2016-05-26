@@ -185,7 +185,7 @@ public class ImportEUTLData implements Executable{
                     }
                     Company company = DBMANAGER.getCompanyByName(companyNameSt);
                     if(company == null){
-                        if(!companyRegistrationNumberSt.isEmpty() || !companyNameSt.isEmpty()){
+                        if(!companyNameSt.isEmpty()){
                             company = DBMANAGER.createCompany(companyNameSt,companyRegistrationNumberSt,companyPostalCodeSt,
                                     companyCitySt, companyMainAddressSt + "\n" + companySecondaryAddressSt, companyStatusSt,
                                     subsidiaryCompanySt, parentCompanySt);
@@ -715,9 +715,9 @@ public class ImportEUTLData implements Executable{
                         tx.close();
                         tx = DBMANAGER.beginTransaction();
                     }
-                    Company company = DBMANAGER.getCompanyByRegistrationNumber(companyRegistrationNumberSt);
+                    Company company = DBMANAGER.getCompanyByName(companyNameSt);
                     if(company == null){
-                        if(!companyRegistrationNumberSt.isEmpty() || !companyNameSt.isEmpty()){
+                        if(!companyNameSt.isEmpty()){
                             company = DBMANAGER.createCompany(companyNameSt,companyRegistrationNumberSt,companyPostalCodeSt,
                                     companyCitySt, companyMainAddressSt + "\n" + companySecondaryAddressSt, companyStatusSt,
                                     subsidiaryCompanySt, parentCompanySt);

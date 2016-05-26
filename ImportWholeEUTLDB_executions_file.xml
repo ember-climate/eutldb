@@ -69,6 +69,15 @@
 			<argument>/home/pablo/sandbag/EUTL_data/LegalCapAviationData.tsv</argument>
 		</arguments>
 	</execution>
+	<execution>
+		<class_full_name>org.sandbag.programs.ExportDBToMegaFiles</class_full_name>
+		<arguments>
+			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/GeneralMegaFile.tsv</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/OffsetsMegaFile.tsv</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/OffsetEntitlementsMegaFile.tsv</argument>
+		</arguments>
+	</execution>
 	<!--
 	<execution>
 		<class_full_name>org.sandbag.programs.ImportFuelType</class_full_name>

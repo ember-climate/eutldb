@@ -78,6 +78,7 @@ public class FindPowerFlaggedInstallations implements Executable{
                         installation.setPowerFlagReason(InstallationModel.POWER_FLAG_REASON_ARTICLE10C);
                     }else{
                         installation.setPowerFlag("false");
+                        installation.setPowerFlagReason("");
                     }
                 }
 

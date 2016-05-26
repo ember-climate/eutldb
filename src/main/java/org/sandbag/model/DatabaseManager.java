@@ -672,7 +672,15 @@ public class DatabaseManager {
             company = new Company(companyNode);
         }
         return company;
+    }
 
+    public Company getCompanyByName(String value) {
+        Company company = null;
+        Node companyNode = graphDb.findNode(COMPANY_LABEL, CompanyModel.name, value);
+        if (companyNode != null) {
+            company = new Company(companyNode);
+        }
+        return company;
     }
 
     public void shutdown() {

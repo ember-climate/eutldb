@@ -183,7 +183,7 @@ public class ImportEUTLData implements Executable{
                         System.out.println("Creating country: [" + countryIdSt + "," + countryNameSt + "]" );
                         country = DBMANAGER.createCountry(countryNameSt, countryIdSt);
                     }
-                    Company company = DBMANAGER.getCompanyByRegistrationNumber(companyRegistrationNumberSt);
+                    Company company = DBMANAGER.getCompanyByName(companyNameSt);
                     if(company == null){
                         if(!companyRegistrationNumberSt.isEmpty() || !companyNameSt.isEmpty()){
                             company = DBMANAGER.createCompany(companyNameSt,companyRegistrationNumberSt,companyPostalCodeSt,

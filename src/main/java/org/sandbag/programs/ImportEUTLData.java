@@ -555,6 +555,7 @@ public class ImportEUTLData implements Executable{
 //                                System.out.println("Units surrendered value: " + unitsSurrenderedSt + " is not a number. It won't be stored");
                             }
                         }
+
                         //+++++++++++++++++++++ VERIFIED EMISSIONS++++++++++++++++++++++++++++++++
                         if(!verifiedEmissionsSt.isEmpty()){
                             try{
@@ -598,6 +599,7 @@ public class ImportEUTLData implements Executable{
 //                                System.out.println("Units surrendered value: " + unitsSurrenderedSt + " is not a number. It won't be stored");
                                 }
                             }
+
                             //+++++++++++++++++++++ VERIFIED EMISSIONS++++++++++++++++++++++++++++++++
                             if(!verifiedEmissionsSt.isEmpty()){
                                 try{

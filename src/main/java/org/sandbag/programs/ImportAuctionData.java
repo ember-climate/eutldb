@@ -63,7 +63,7 @@ public class ImportAuctionData implements Executable{
 
                         if(period != null){
 
-                            ner300.setAuctionedForPeriod(period, amountSt, sourceSt);
+                            ner300.setAuctionedForPeriod(period, Double.parseDouble(amountSt), sourceSt);
 
                         }else{
                             System.out.println("Period: " + periodSt + " could not be found...");
@@ -79,7 +79,7 @@ public class ImportAuctionData implements Executable{
 
                             if(period != null){
 
-                                country.setAuctionedForPeriod(period, amountSt, sourceSt);
+                                country.setAuctionedForPeriod(period, Double.parseDouble(amountSt), sourceSt);
 
                             }else{
                                 System.out.println("Period: " + periodSt + " could not be found...");

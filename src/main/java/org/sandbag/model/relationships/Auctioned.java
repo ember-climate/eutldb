@@ -29,8 +29,8 @@ public class Auctioned implements AuctionedModel {
     public Country getCountry() { return new Country(relationship.getStartNode()); }
 
     @Override
-    public String getAmount() {
-        return String.valueOf(relationship.getProperty(AuctionedModel.amount));
+    public double getAmount() {
+        return Double.parseDouble(String.valueOf(relationship.getProperty(AuctionedModel.amount)));
     }
 
     @Override
@@ -39,7 +39,7 @@ public class Auctioned implements AuctionedModel {
     }
 
     @Override
-    public void setAmount(String amount) {
+    public void setAmount(double amount) {
         relationship.setProperty(AuctionedModel.amount, amount);
     }
 

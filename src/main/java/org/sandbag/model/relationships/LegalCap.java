@@ -34,8 +34,8 @@ public class LegalCap implements LegalCapModel {
     }
 
     @Override
-    public String getAmount() {
-        return String.valueOf(relationship.getProperty(LegalCapModel.amount));
+    public double getAmount() {
+        return Double.parseDouble(String.valueOf(relationship.getProperty(LegalCapModel.amount)));
     }
 
     @Override
@@ -44,7 +44,7 @@ public class LegalCap implements LegalCapModel {
     }
 
     @Override
-    public void setAmount(String amount) {
+    public void setAmount(double amount) {
         relationship.setProperty(LegalCapModel.amount, amount);
     }
 

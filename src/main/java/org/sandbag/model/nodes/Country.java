@@ -55,7 +55,7 @@ public class Country implements CountryModel {
     }
 
     @Override
-    public void setAuctionedForPeriod(Period period, String value, String source){
+    public void setAuctionedForPeriod(Period period, double value, String source){
         Auctioned auctioned = new Auctioned(node.createRelationshipTo(period.node, new Auctioned(null)));
         auctioned.setAmount(value);
         auctioned.setSource(source);
@@ -65,7 +65,7 @@ public class Country implements CountryModel {
         node.createRelationshipTo(offset.node, new Offsets2013Onwards(null));
     }
 
-    public void setLegalCap(Period period, String amount, String source){
+    public void setLegalCap(Period period, double amount, String source){
         LegalCap legalCap = new LegalCap(node.createRelationshipTo(period.node, new LegalCap(null)));
         legalCap.setAmount(amount);
         legalCap.setSource(source);

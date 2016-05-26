@@ -13,9 +13,9 @@ public interface LegalCapModel extends RelationshipType {
     String amount = "amount";
     String source = "source";
 
-    String getAmount();
+    double getAmount();
     String getSource();
-    void setAmount(String amount);
+    void setAmount(double amount);
     void setSource(String value);
 
     Period getPeriod();

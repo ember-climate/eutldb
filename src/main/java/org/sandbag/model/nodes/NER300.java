@@ -21,7 +21,7 @@ public class NER300 implements NER300Model{
     }
 
     @Override
-    public void setAuctionedForPeriod(Period period, String value, String source){
+    public void setAuctionedForPeriod(Period period, double value, String source){
         Auctioned auctioned = new Auctioned(node.createRelationshipTo(period.node, new Auctioned(null)));
         auctioned.setAmount(value);
         auctioned.setSource(source);

@@ -10,7 +10,7 @@ public interface NER300Model extends Label{
 
     String LABEL = "NER300";
 
-    void setAuctionedForPeriod(Period period, String value, String source);
+    void setAuctionedForPeriod(Period period, double value, String source);
 
 }
 

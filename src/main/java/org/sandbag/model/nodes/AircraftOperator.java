@@ -323,6 +323,7 @@ public class AircraftOperator implements AircraftOperatorModel {
         return surrenderedUnits;
     }
 
+
     public Compliance getComplianceForPeriod(Period period){
         Compliance compliance = null;
         Iterator<Relationship> iterator = node.getRelationships(new Compliance((null)),Direction.OUTGOING).iterator();

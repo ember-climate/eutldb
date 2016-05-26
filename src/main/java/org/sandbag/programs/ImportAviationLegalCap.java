@@ -65,7 +65,7 @@ public class ImportAviationLegalCap implements Executable {
                             tx = databaseManager.beginTransaction();
                         }
 
-                        aviationSector.setLegalCap(period, amountSt, dataSourceSt);
+                        aviationSector.setLegalCap(period, Double.parseDouble(amountSt), dataSourceSt);
                     }
 
                     reader.close();

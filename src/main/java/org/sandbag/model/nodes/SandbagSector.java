@@ -40,7 +40,7 @@ public class SandbagSector implements SandbagSectorModel {
         node.createRelationshipTo(sector.node, new AggregatesSector(null));
     }
 
-    public void setLegalCap(Period period, String amount, String source){
+    public void setLegalCap(Period period, double amount, String source){
         LegalCap legalCap = new LegalCap(node.createRelationshipTo(period.node, new LegalCap(null)));
         legalCap.setAmount(amount);
         legalCap.setSource(source);

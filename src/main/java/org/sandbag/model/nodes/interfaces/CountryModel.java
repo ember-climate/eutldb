@@ -21,7 +21,7 @@ public interface CountryModel extends Label{
 
     void setId(String id);
     void setName(String name);
-    void setAuctionedForPeriod(Period period, String value, String source);
+    void setAuctionedForPeriod(Period period, double value, String source);
 
     Iterator<Relationship> getInstallationCountry();
     Iterator<Relationship> getAircraftOperatorCountry();

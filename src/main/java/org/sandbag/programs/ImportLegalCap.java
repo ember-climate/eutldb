@@ -18,7 +18,7 @@ public class ImportLegalCap implements Executable {
 
     @Override
     public void execute(List<String> args) {
-
+        main(args.toArray(new String[0]));
     }
 
     public static void main(String[] args){
@@ -49,6 +49,8 @@ public class ImportLegalCap implements Executable {
                     tx.success();
                     tx.close();
                     tx = databaseManager.beginTransaction();
+                }else{
+                    System.out.println("EU country found");
                 }
 
                 System.out.println("Reading file...");
@@ -77,7 +79,6 @@ public class ImportLegalCap implements Executable {
 
                 tx.success();
                 tx.close();
-
                 databaseManager.shutdown();
 
 

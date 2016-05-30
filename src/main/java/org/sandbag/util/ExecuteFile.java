@@ -41,6 +41,7 @@ public class ExecuteFile {
                     Element execution = executions.get(i);
 
                     classFullName = execution.getChildText("class_full_name");
+
                     List<Element> argumentElems = execution.getChild("arguments").getChildren("argument");
 
                     for (int j = 0; j < argumentElems.size(); j++) {

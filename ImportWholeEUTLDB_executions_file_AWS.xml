@@ -1,4 +1,5 @@
 <scheduled_executions>
+<!-- -->
 	<execution>
 		<class_full_name>org.sandbag.programs.ImportEUTLData</class_full_name>
 		<arguments>
@@ -38,6 +39,37 @@
 		<arguments>
 			<argument>eutldb</argument>
 			<argument>PowerFlagData.tsv</argument>
+		</arguments>
+	</execution>
+	<execution>
+		<class_full_name>org.sandbag.programs.ImportAuctionData</class_full_name>
+		<arguments>
+			<argument>eutldb</argument>
+			<argument>AuctionDataFile.csv</argument>
+		</arguments>
+	</execution>
+
+	<execution>
+		<class_full_name>org.sandbag.programs.ImportOffsets2013Onwards</class_full_name>
+		<arguments>
+			<argument>eutldb</argument>
+			<argument>Offsets2013Onwards.tsv</argument>
+		</arguments>
+	</execution>
+
+	<execution>
+		<class_full_name>org.sandbag.programs.ImportLegalCap</class_full_name>
+		<arguments>
+			<argument>eutldb</argument>
+			<argument>LegalCapData.tsv</argument>
+		</arguments>
+	</execution>
+
+	<execution>
+		<class_full_name>org.sandbag.programs.ImportAviationLegalCap</class_full_name>
+		<arguments>
+			<argument>eutldb</argument>
+			<argument>LegalCapAviationData.tsv</argument>
 		</arguments>
 	</execution>
 </scheduled_executions>

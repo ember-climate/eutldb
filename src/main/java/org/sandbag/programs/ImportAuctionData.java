@@ -20,7 +20,6 @@ public class ImportAuctionData implements Executable{
 
     @Override
     public void execute(List<String> args) {
-        System.out.println(args.toArray(new String[0]));
         main(args.toArray(new String[0]));
     }
 

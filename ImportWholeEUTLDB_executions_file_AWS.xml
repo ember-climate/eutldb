@@ -1,5 +1,5 @@
 <scheduled_executions>
-<!-- -->
+<!-- 
 	<execution>
 		<class_full_name>org.sandbag.programs.ImportEUTLData</class_full_name>
 		<arguments>
@@ -64,7 +64,7 @@
 			<argument>LegalCapData.tsv</argument>
 		</arguments>
 	</execution>
-
+-->
 	<execution>
 		<class_full_name>org.sandbag.programs.ImportAviationLegalCap</class_full_name>
 		<arguments>

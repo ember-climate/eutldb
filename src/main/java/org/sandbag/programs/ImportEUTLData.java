@@ -1,12 +1,19 @@
 package org.sandbag.programs;
 
+import org.neo4j.cypher.internal.compiler.v1_9.commands.expressions.Count;
+import org.neo4j.graphdb.Direction;
+import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.*;
 import org.sandbag.model.nodes.*;
+import org.sandbag.model.nodes.interfaces.AircraftOperatorModel;
+import org.sandbag.model.relationships.aircraft_ops.AircraftOperatorCountry;
 import org.sandbag.model.relationships.interfaces.AllowancesInAllocationModel;
 import org.sandbag.util.Executable;
 
 import java.io.*;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -39,6 +46,9 @@ public class ImportEUTLData implements Executable{
 
             importer.importInstallationsFromFolder(args[1]);
             importer.importAircraftOperatorsFromFolder(args[2]);
+
+            importer.fixProblematicAircraftOperatorHR200696();
+
             importer.importComplianceDataFromFolder(args[3]);
 
             importer.importNERAllocationData(new File(args[4]));
@@ -51,6 +61,29 @@ public class ImportEUTLData implements Executable{
 
 
         }
+    }
+
+    public void fixProblematicAircraftOperatorHR200696(){
+
+        System.out.println("Fixing problematic Aircraft Operator HR200696...");
+
+        Transaction tx = DBMANAGER.beginTransaction();
+
+        Node aircraftOp = DBMANAGER.graphDb.findNode(DBMANAGER.AIRCRAFT_OPERATOR_LABEL, AircraftOperatorModel.id, "DE200696");
+        Iterator<Relationship> oldRelIterator = aircraftOp.getRelationships(Direction.OUTGOING, new AircraftOperatorCountry(null)).iterator();
+        if(oldRelIterator.hasNext()){
+            oldRelIterator.next().delete();
+        }
+
+        Country croatia = DBMANAGER.getCountryById("HR");
+        AircraftOperator aircraftOperator = new AircraftOperator(aircraftOp);
+        aircraftOperator.setCountry(croatia);
+        aircraftOperator.setId("HR200696");
+
+        tx.success();
+        tx.close();
+
+        System.out.println("Done!");
     }
 
     public void importOffsetsFromFolder(String folderSt){
@@ -849,7 +882,7 @@ public class ImportEUTLData implements Executable{
                             project = DBMANAGER.getProjectById(projectIdSt);
 
                             if(project == null){
-                                System.out.println("Creating project: " + projectIdSt);
+                                //System.out.println("Creating project: " + projectIdSt);
                                 project = DBMANAGER.createProject(projectIdSt);
                                 tx.success();
                                 tx.close();

@@ -54,7 +54,7 @@ public class FindPowerFlaggedInstallations implements Executable{
             while(iterator.hasNext()){
                 Installation installation = new Installation(iterator.next());
 
-                System.out.println("installation.getId() = " + installation.getId());
+                //System.out.println("installation.getId() = " + installation.getId());
 
                 NACECode naceCode = installation.getNACECode();
 
@@ -62,7 +62,7 @@ public class FindPowerFlaggedInstallations implements Executable{
 
                 if(naceCode != null){
                     String naceCodeIdSt = installation.getNACECode().getId();
-                    System.out.println("naceCodeIdSt = " + naceCodeIdSt);
+                    //System.out.println("naceCodeIdSt = " + naceCodeIdSt);
                     if(powerFlagNaceCodesSet.contains(naceCodeIdSt)){
                         installation.setPowerFlag("true");
                         installation.setPowerFlagReason(InstallationModel.POWER_FLAG_REASON_NACE_CODES);

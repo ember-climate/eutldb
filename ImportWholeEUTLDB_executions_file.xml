@@ -7,8 +7,8 @@
 			<argument>/home/pablo/sandbag/EUTL_data/web_scrape/installations</argument>
 			<argument>/home/pablo/sandbag/EUTL_data/web_scrape/aircraft_operators</argument>
 			<argument>/home/pablo/sandbag/EUTL_data/web_scrape/compliance</argument>
-			<argument>/home/pablo/sandbag/EUTL_data/web_scrape/NER.tsv</argument>
-			<argument>/home/pablo/sandbag/EUTL_data/web_scrape/Article10c.tsv</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/web_scrape/ner.tsv</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/web_scrape/article10c.tsv</argument>
 			<argument>/home/pablo/sandbag/EUTL_data/web_scrape/InstallationsEntitlements.tsv</argument>
 			<argument>/home/pablo/sandbag/EUTL_data/web_scrape/AircraftOperatorsEntitlements.tsv</argument>
 			<argument>/home/pablo/sandbag/EUTL_data/web_scrape/offsets</argument>

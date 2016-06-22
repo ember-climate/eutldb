@@ -71,4 +71,13 @@
 			<argument>LegalCapAviationData.tsv</argument>
 		</arguments>
 	</execution>
+	<execution>
+		<class_full_name>org.sandbag.programs.ExportDBToMegaFiles</class_full_name>
+		<arguments>
+			<argument>eutldb</argument>
+			<argument>GeneralMegaFile.tsv</argument>
+			<argument>OffsetsMegaFile.tsv</argument>
+			<argument>OffsetEntitlementsMegaFile.tsv</argument>
+		</arguments>
+	</execution>
 </scheduled_executions>

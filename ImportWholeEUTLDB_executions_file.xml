@@ -72,7 +72,8 @@
 			<argument>/home/pablo/sandbag/EUTL_data/LegalCapAviationData.tsv</argument>
 		</arguments>
 	</execution>
-<!--
+
+<!-- 
 	<execution>
 		<class_full_name>org.sandbag.programs.ExportDBToMegaFiles</class_full_name>
 		<arguments>
@@ -90,5 +91,13 @@
 			<argument>/home/pablo/sandbag/EUTL_data/FuelTypeData.csv</argument>
 		</arguments>
 	</execution>
-	-->
+	
+	<execution>
+		<class_full_name>org.sandbag.programs.GeocodingInfoImporter</class_full_name>
+		<arguments>
+			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
+			<argument>PT</argument>
+		</arguments>
+	</execution>
+-->
 </scheduled_executions>

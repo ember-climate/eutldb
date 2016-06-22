@@ -108,6 +108,17 @@ Parameters:
 
 ----
 
+### ImportGeocodingInfo
+
+Imports latitude and longitude data of installations and aircraft operators
+
+Parameters:
+
+1. Database folder
+2. Folder including TSV files with Geocoding information
+
+----
+
 ### ExportDBToMegaFiles
 
 Program that exports EUTL web scrape related data to a format that's easy to import from the legacy database system. 

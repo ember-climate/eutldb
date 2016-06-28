@@ -35,8 +35,68 @@ public class Country implements CountryModel {
         return String.valueOf(node.getProperty(CountryModel.name));
     }
 
+    @Override
+    public double getCenterLatitude() {
+        return Double.parseDouble(String.valueOf(node.getProperty(CountryModel.centerLatitude)));
+    }
+
+    @Override
+    public double getCenterLongitude() {
+        return Double.parseDouble(String.valueOf(node.getProperty(CountryModel.centerLongitude)));
+    }
+
+    @Override
+    public double getBoundingBoxMaxLatitude() {
+        return Double.parseDouble(String.valueOf(node.getProperty(CountryModel.boundingBoxMaxLatitude)));
+    }
+
+    @Override
+    public double getBoundingBoxMinLatitude() {
+        return Double.parseDouble(String.valueOf(node.getProperty(CountryModel.boundingBoxMinLatitude)));
+    }
+
+    @Override
+    public double getBoundingBoxMaxLongitude() {
+        return Double.parseDouble(String.valueOf(node.getProperty(CountryModel.boundingBoxMaxLongitude)));
+    }
+
+    @Override
+    public double getBoundingBoxMinLongitude() {
+        return Double.parseDouble(String.valueOf(node.getProperty(CountryModel.boundingBoxMinLongitude)));
+    }
+
     public void setName(String value) {
         node.setProperty(CountryModel.name, value);
+    }
+
+    @Override
+    public void setCenterLatitude(double value) {
+        node.setProperty(CountryModel.centerLatitude, value);
+    }
+
+    @Override
+    public void setCenterLongitude(double value) {
+        node.setProperty(CountryModel.centerLongitude, value);
+    }
+
+    @Override
+    public void setBoundingBoxMaxLatitude(double value) {
+        node.setProperty(CountryModel.boundingBoxMaxLatitude, value);
+    }
+
+    @Override
+    public void setBoundingBoxMaxLongitude(double value) {
+        node.setProperty(CountryModel.boundingBoxMaxLongitude, value);
+    }
+
+    @Override
+    public void setBoundingBoxMinLatitude(double value) {
+        node.setProperty(CountryModel.boundingBoxMinLatitude, value);
+    }
+
+    @Override
+    public void setBoundingBoxMinLongitude(double value) {
+        node.setProperty(CountryModel.boundingBoxMinLongitude, value);
     }
 
     @Override

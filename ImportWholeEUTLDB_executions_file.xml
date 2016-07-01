@@ -45,7 +45,7 @@
 		<class_full_name>org.sandbag.programs.ImportAuctionData</class_full_name>
 		<arguments>
 			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
-			<argument>/home/pablo/sandbag/EUTL_data/Auction data/AuctionDataFile.csv</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/Auction data/AuctionDataFile.tsv</argument>
 		</arguments>
 	</execution>
 

@@ -5,8 +5,10 @@ import org.apache.http.client.utils.URIBuilder;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Transaction;
 import org.sandbag.model.DatabaseManager;
+import org.sandbag.model.nodes.AircraftOperator;
 import org.sandbag.model.nodes.Country;
 import org.sandbag.model.nodes.Installation;
+import org.sandbag.model.relationships.aircraft_ops.AircraftOperatorCountry;
 import org.sandbag.model.relationships.installations.InstallationCountry;
 import org.sandbag.util.Executable;
 import org.sandbag.util.gson.Geometry;
@@ -138,6 +140,90 @@ public class GeocodingInfoImporter implements Executable {
                         installationCounter++;
                         if (installationCounter % 50 == 0) {
                             System.out.println(installationCounter + " installations analyzed so far...");
+                        }
+                    }
+                }
+
+                relIterator = country.getAircraftOperatorCountry();
+
+                gson = new Gson();
+
+                System.out.println("Looping through aircraft operators...");
+                int aircraftOperatorCounter = 0;
+
+                while (relIterator.hasNext()) {
+
+                    AircraftOperator aircraftOperator = new AircraftOperatorCountry(relIterator.next()).getAircraftOperator();
+                    String tempLatitude = aircraftOperator.getLatitude();
+                    String tempLongitude = aircraftOperator.getLongitude();
+
+                    if (tempLatitude.isEmpty() || tempLongitude.isEmpty() || tempLatitude.equals("0") || tempLongitude.equals("0")) {
+
+                        System.out.println("Aircraft Operator found to be completed: " + aircraftOperator.getId());
+
+                        String address = aircraftOperator.getAddress();
+                        String city = aircraftOperator.getCity();
+                        String postalCode = aircraftOperator.getPostCode();
+
+                        String querySt = "";
+                        if (!address.isEmpty()) {
+                            querySt += address + ",";
+                        }
+                        querySt += city + ",";
+                        if (!postalCode.isEmpty()) {
+                            querySt += postalCode + ",";
+                        }
+                        querySt += countryName;
+                        System.out.println("querySt = " + querySt);
+
+
+                        URIBuilder builder = new URIBuilder("http://api.opencagedata.com/geocode/v1/json");
+                        builder.addParameter("q", querySt);
+                        builder.addParameter("key", "fe12a67561caa821b7daa8baed0a7c8e");
+
+                        String tempSt = builder.toString();
+
+                        System.out.println("tempSt = " + tempSt);
+
+                        URL url = new URI(tempSt).toURL();
+                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        connection.setRequestMethod("GET");
+                        connection.setRequestProperty("Content-length", "0");
+                        connection.setUseCaches(false);
+                        connection.setAllowUserInteraction(false);
+                        connection.connect();
+                        int status = connection.getResponseCode();
+
+                        switch (status) {
+                            case 200:
+                                BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                                StringBuilder sb = new StringBuilder();
+                                String line;
+                                while ((line = br.readLine()) != null) {
+                                    sb.append(line + "\n");
+                                }
+                                br.close();
+                                OpenCageDataResult result = gson.fromJson(sb.toString(), OpenCageDataResult.class);
+                                Result[] results = result.results;
+                                if (results.length > 0) {
+                                    Geometry geometry = results[0].geometry;
+                                    aircraftOperator.setLatitude(geometry.lat);
+                                    aircraftOperator.setLongitude(geometry.lng);
+                                    System.out.println("Latitude/longitude found for aircraft operator: " + aircraftOperator.getId() +
+                                            " [" + geometry.lat + "," + geometry.lng + "]");
+
+                                    writer.write(aircraftOperator.getId() + "\t" + geometry.lat + "\t" + geometry.lng + "\n");
+                                }
+                                break;
+                            default:
+                                System.out.println("There was a problem with the request :(");
+                                System.out.println(connection.getResponseMessage());
+
+                        }
+
+                        aircraftOperatorCounter++;
+                        if (aircraftOperatorCounter % 50 == 0) {
+                            System.out.println(aircraftOperatorCounter + " aircraft operators analyzed so far...");
                         }
                     }
 

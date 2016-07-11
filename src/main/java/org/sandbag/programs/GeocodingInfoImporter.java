@@ -65,6 +65,7 @@ public class GeocodingInfoImporter implements Executable {
 
 
                 while (relIterator.hasNext()) {
+
                     Installation installation = new InstallationCountry(relIterator.next()).getInstallation();
                     String tempLatitude = installation.getLatitude();
                     String tempLongitude = installation.getLongitude();

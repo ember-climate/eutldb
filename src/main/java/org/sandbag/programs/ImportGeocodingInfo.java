@@ -61,34 +61,39 @@ public class ImportGeocodingInfo implements Executable{
                             while((line = reader.readLine()) != null){
 
                                 String[] columns = line.split("\t");
-                                String installationIdSt = columns[0];
-                                String latitudeSt = columns[1];
-                                String longitudeSt = columns[2];
 
-                                Installation installation = manager.getInstallationById(installationIdSt);
-                                if(installation != null){
+                                if(columns.length == 3){
 
-                                    installation.setLatitude(latitudeSt);
-                                    installation.setLongitude(longitudeSt);
+                                    String installationIdSt = columns[0];
+                                    String latitudeSt = columns[1];
+                                    String longitudeSt = columns[2];
 
-                                    installationsUpdatedCounter++;
+                                    Installation installation = manager.getInstallationById(installationIdSt);
+                                    if(installation != null){
 
-                                }else{
-
-                                    AircraftOperator aircraftOperator = manager.getAircraftOperatorById(installationIdSt);
-
-                                    if(aircraftOperator != null){
+                                        installation.setLatitude(latitudeSt);
+                                        installation.setLongitude(longitudeSt);
 
                                         installationsUpdatedCounter++;
 
-                                        aircraftOperator.setLatitude(latitudeSt);
-                                        aircraftOperator.setLongitude(longitudeSt);
-
                                     }else{
-                                        System.out.println("The installation/aircraft operator with id: " + installationIdSt +
-                                                            " could not be found in the database...");
+
+                                        AircraftOperator aircraftOperator = manager.getAircraftOperatorById(installationIdSt);
+
+                                        if(aircraftOperator != null){
+
+                                            installationsUpdatedCounter++;
+
+                                            aircraftOperator.setLatitude(latitudeSt);
+                                            aircraftOperator.setLongitude(longitudeSt);
+
+                                        }else{
+                                            System.out.println("The installation/aircraft operator with id: " + installationIdSt +
+                                                    " could not be found in the database...");
+                                        }
                                     }
                                 }
+
 
                                 if(installationsUpdatedCounter % 100 == 0){
                                     System.out.println(installationsUpdatedCounter + " installations + aircraft operators updated");

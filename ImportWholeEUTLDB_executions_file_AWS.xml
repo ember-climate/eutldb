@@ -1,5 +1,5 @@
 <scheduled_executions>
-<!--  -->
+<!--  
 	<execution>
 		<class_full_name>org.sandbag.programs.ImportEUTLData</class_full_name>
 		<arguments>
@@ -71,7 +71,7 @@
 			<argument>LegalCapAviationData.tsv</argument>
 		</arguments>
 	</execution>
-	
+	-->
 	<execution>
 		<class_full_name>org.sandbag.programs.ImportGeocodingInfo</class_full_name>
 		<arguments>
@@ -79,6 +79,7 @@
 			<argument>coordinates</argument>
 		</arguments>
 	</execution>
+	<!--
 	<execution>
 		<class_full_name>org.sandbag.programs.ExportDBToMegaFiles</class_full_name>
 		<arguments>
@@ -88,4 +89,5 @@
 			<argument>OffsetEntitlementsMegaFile.tsv</argument>
 		</arguments>
 	</execution>
+	-->
 </scheduled_executions>

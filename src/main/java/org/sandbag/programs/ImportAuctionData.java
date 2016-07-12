@@ -51,7 +51,7 @@ public class ImportAuctionData implements Executable{
                     String[] columns = line.split("\t");
 
                     String countryIdst = columns[0].trim().split(" ")[0];
-                    boolean isInstallation = columns[2].trim().toLowerCase().indexOf("aviation") >= 0;
+                    boolean isInstallation = columns[2].trim().toLowerCase().indexOf("aviation") < 0;
                     String typeSt;
                     if(isInstallation){
                         typeSt = "Installation";

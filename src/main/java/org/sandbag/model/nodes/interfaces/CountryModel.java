@@ -39,7 +39,7 @@ public interface CountryModel extends Label{
     void setBoundingBoxMaxLongitude(double value);
     void setBoundingBoxMinLatitude(double value);
     void setBoundingBoxMinLongitude(double value);
-    void setAuctionedForPeriod(Period period, double value, String source);
+    void setAuctionedForPeriod(Period period, double value, String source, String type);
 
     Iterator<Relationship> getInstallationCountry();
     Iterator<Relationship> getAircraftOperatorCountry();

@@ -115,10 +115,11 @@ public class Country implements CountryModel {
     }
 
     @Override
-    public void setAuctionedForPeriod(Period period, double value, String source){
+    public void setAuctionedForPeriod(Period period, double value, String source, String type){
         Auctioned auctioned = new Auctioned(node.createRelationshipTo(period.node, new Auctioned(null)));
         auctioned.setAmount(value);
         auctioned.setSource(source);
+        auctioned.setType(type);
     }
 
     public void setOffsets2013Onwards(Offset offset){

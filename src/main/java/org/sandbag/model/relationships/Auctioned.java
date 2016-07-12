@@ -39,6 +39,11 @@ public class Auctioned implements AuctionedModel {
     }
 
     @Override
+    public String getType() {
+        return String.valueOf(relationship.getProperty(AuctionedModel.type));
+    }
+
+    @Override
     public void setAmount(double amount) {
         relationship.setProperty(AuctionedModel.amount, amount);
     }
@@ -46,5 +51,10 @@ public class Auctioned implements AuctionedModel {
     @Override
     public void setSource(String source) {
         relationship.setProperty(AuctionedModel.source, source);
+    }
+
+    @Override
+    public void setType(String value) {
+        relationship.setProperty(AuctionedModel.type, value);
     }
 }

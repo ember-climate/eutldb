@@ -51,6 +51,13 @@ public class ImportAuctionData implements Executable{
                     String[] columns = line.split("\t");
 
                     String countryIdst = columns[0].trim().split(" ")[0];
+                    boolean isInstallation = columns[2].trim().toLowerCase().indexOf("aviation") >= 0;
+                    String typeSt;
+                    if(isInstallation){
+                        typeSt = "Installation";
+                    }else{
+                        typeSt = "Aircraft Operator";
+                    }
                     String periodSt = columns[3].trim();
                     String amountSt = columns[4].trim();
                     String sourceSt = columns[5].trim();
@@ -78,7 +85,7 @@ public class ImportAuctionData implements Executable{
 
                             if(period != null){
 
-                                country.setAuctionedForPeriod(period, Double.parseDouble(amountSt), sourceSt);
+                                country.setAuctionedForPeriod(period, Double.parseDouble(amountSt), sourceSt, typeSt);
 
                             }else{
                                 System.out.println("Period: " + periodSt + " could not be found...");

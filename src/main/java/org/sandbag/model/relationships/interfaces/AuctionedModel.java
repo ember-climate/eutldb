@@ -13,11 +13,14 @@ public interface AuctionedModel extends RelationshipType {
 
     String amount = "amount";
     String source = "source";
+    String type = "type";
 
     double getAmount();
     String getSource();
+    String getType();
     void setAmount(double amount);
     void setSource(String value);
+    void setType(String value);
 
     Period getPeriod();
     Country getCountry();

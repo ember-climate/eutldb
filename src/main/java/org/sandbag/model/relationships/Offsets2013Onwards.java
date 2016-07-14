@@ -27,6 +27,26 @@ public class Offsets2013Onwards implements Offsets2013OnwardsModel{
     }
 
     @Override
+    public String getType() {
+        return String.valueOf(relationship.getProperty(Offsets2013OnwardsModel.type));
+    }
+
+    @Override
+    public String getReference() {
+        return String.valueOf(relationship.getProperty(Offsets2013OnwardsModel.reference));
+    }
+
+    @Override
+    public void setType(String value) {
+        relationship.setProperty(Offsets2013OnwardsModel.type, value);
+    }
+
+    @Override
+    public void setReference(String value) {
+        relationship.setProperty(Offsets2013OnwardsModel.reference, value);
+    }
+
+    @Override
     public Country getCountry(){
         return new Country(relationship.getStartNode());
     }

@@ -9,8 +9,15 @@ import org.sandbag.model.nodes.Period;
  */
 public interface Offsets2013OnwardsModel extends RelationshipType
 {
-
     String LABEL = "OFFSETS_2013_ONWARDS";
+
+    String type = "type";
+    String reference = "reference";
+
+    String getType();
+    String getReference();
+    void setType(String value);
+    void setReference(String value);
 
     Country getCountry();
     Period getPeriod();

@@ -54,6 +54,25 @@
 		<arguments>
 			<argument>eutldb</argument>
 			<argument>Offsets2013Onwards.tsv</argument>
+			<argument>all</argument>
+		</arguments>
+	</execution>
+
+	<execution>
+		<class_full_name>org.sandbag.programs.ImportOffsets2013Onwards</class_full_name>
+		<arguments>
+			<argument>eutldb</argument>
+			<argument>Offsets2013OnwardsAviation.tsv</argument>
+			<argument>aviation</argument>
+		</arguments>
+	</execution>
+
+	<execution>
+		<class_full_name>org.sandbag.programs.ImportOffsets2013Onwards</class_full_name>
+		<arguments>
+			<argument>eutldb</argument>
+			<argument>Offsets2013OnwardsInstallations.tsv</argument>
+			<argument>installations</argument>
 		</arguments>
 	</execution>
 

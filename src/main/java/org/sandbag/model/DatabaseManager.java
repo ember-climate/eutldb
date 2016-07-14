@@ -303,6 +303,8 @@ public class DatabaseManager {
 
     public Offset createOffset2013Onwards(String amountSt,
                                           String unitTypeSt,
+                                          String typeSt,
+                                          String referenceSt,
                                           Country euCountry,
                                           Period period){
 
@@ -323,7 +325,7 @@ public class DatabaseManager {
 
         offset.setPeriod(period);
 
-        euCountry.setOffsets2013Onwards(offset);
+        euCountry.setOffsets2013Onwards(offset, typeSt, referenceSt);
 
         return offset;
 

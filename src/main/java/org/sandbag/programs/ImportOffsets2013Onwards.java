@@ -18,14 +18,16 @@ public class ImportOffsets2013Onwards implements Executable{
 
     public static void main(String[] args){
 
-        if(args.length != 2){
+        if(args.length != 3){
             System.out.println("This program expects the following parameters: \n" +
                     "1. Database folder \n" +
-                    "2. Offsets TSV file");
+                    "2. Offsets TSV file \n" +
+                    "3. Offsets type: ('installations', 'aviation', 'all'" );
         }else{
 
             String dbFolder = args[0];
             String offsetsFileSt = args[1];
+            String offsetsTypeSt = args[2];
 
             try{
 
@@ -53,15 +55,15 @@ public class ImportOffsets2013Onwards implements Executable{
 
                     String[] columns = line.split("\t");
 
+                    String periodSt = columns[0].trim();
+                    String amountSt = columns[1].trim();
                     String offsetTypeSt = columns[2].trim();
-                    String periodSt = columns[3].trim();
-                    String amountSt = columns[4].trim();
-                    String referenceSt = columns[5].trim();
+                    String referenceSt = columns[3].trim();
 
                     Period period = databaseManager.getPeriodByName(periodSt);
 
                     if(period != null){
-                        databaseManager.createOffset2013Onwards(amountSt,offsetTypeSt,euCountry,period);
+                        databaseManager.createOffset2013Onwards(amountSt,offsetTypeSt, offsetsTypeSt, referenceSt, euCountry,period);
                     }else{
                         System.out.println("The period " + periodSt + " could not be found... :(");
                     }

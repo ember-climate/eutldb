@@ -122,8 +122,10 @@ public class Country implements CountryModel {
         auctioned.setType(type);
     }
 
-    public void setOffsets2013Onwards(Offset offset){
-        node.createRelationshipTo(offset.node, new Offsets2013Onwards(null));
+    public void setOffsets2013Onwards(Offset offset, String type, String reference){
+        Offsets2013Onwards rel = new Offsets2013Onwards(node.createRelationshipTo(offset.node, new Offsets2013Onwards(null)));
+        rel.setType(type);
+        rel.setReference(reference);
     }
 
     public void setLegalCap(Period period, double amount, String source){

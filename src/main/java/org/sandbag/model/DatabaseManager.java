@@ -46,6 +46,8 @@ public class DatabaseManager {
     public static IndexDefinition sandbagSectorIdIndex = null;
     public static IndexDefinition naceCodeIdIndex = null;
     public static IndexDefinition fuelTypeNameIndex = null;
+    public static IndexDefinition aircraftOperatorUniqueCodeUnderCommissionIndex = null;
+    public static IndexDefinition aircraftOperatorIdIndex = null;
 
 
     /**
@@ -80,6 +82,39 @@ public class DatabaseManager {
                 schema = graphDb.schema();
 
                 System.out.println("Creating/checking indices...");
+
+                if(!schema.getIndexes(INSTALLATION_LABEL).iterator().hasNext()){
+
+                    System.out.println("Creating index for Installations");
+
+                    installationIdIndex = schema.indexFor(INSTALLATION_LABEL)
+                            .on(InstallationModel.id)
+                            .create();
+                    tx.success();
+                    tx.close();
+                    tx = graphDb.beginTx();
+
+                    schema.awaitIndexOnline(installationIdIndex, 10, TimeUnit.SECONDS);
+                }
+
+                if(!schema.getIndexes(AIRCRAFT_OPERATOR_LABEL).iterator().hasNext()){
+
+                    System.out.println("Creating index for Aircraft Operators");
+
+                    aircraftOperatorIdIndex = schema.indexFor(AIRCRAFT_OPERATOR_LABEL)
+                            .on(AircraftOperatorModel.id)
+                            .create();
+                    aircraftOperatorUniqueCodeUnderCommissionIndex = schema.indexFor(AIRCRAFT_OPERATOR_LABEL)
+                            .on(AircraftOperatorModel.uniqueCodeUnderCommissionRegulation)
+                            .create();
+
+                    tx.success();
+                    tx.close();
+                    tx = graphDb.beginTx();
+
+                    schema.awaitIndexOnline(aircraftOperatorIdIndex, 10, TimeUnit.SECONDS);
+                    schema.awaitIndexOnline(aircraftOperatorUniqueCodeUnderCommissionIndex, 10, TimeUnit.SECONDS);
+                }
 
                 if(!schema.getIndexes(INSTALLATION_LABEL).iterator().hasNext()){
 
@@ -609,6 +644,16 @@ public class DatabaseManager {
     public AircraftOperator getAircraftOperatorById(String id) {
         AircraftOperator aircraftOperator = null;
         Node aircraftOperatorNode = graphDb.findNode(AIRCRAFT_OPERATOR_LABEL, AircraftOperatorModel.id, id);
+        if (aircraftOperatorNode != null) {
+            aircraftOperator = new AircraftOperator(aircraftOperatorNode);
+        }
+        return aircraftOperator;
+    }
+
+    public AircraftOperator getAircraftOperatorByUniqueCodeUnderCommissionRegulation(String id) {
+        AircraftOperator aircraftOperator = null;
+        Node aircraftOperatorNode = graphDb.findNode(AIRCRAFT_OPERATOR_LABEL,
+                AircraftOperatorModel.uniqueCodeUnderCommissionRegulation, id);
         if (aircraftOperatorNode != null) {
             aircraftOperator = new AircraftOperator(aircraftOperatorNode);
         }

@@ -77,8 +77,16 @@ public class ImportAuctionData implements Executable{
                         }
 
 
-                    }else{
-                        Country country = databaseManager.getCountryById(countryIdst);
+                    }else {
+
+                        Country country = null;
+
+                        if(countryIdst.equals("ZZ")){
+                            countryIdst = "Eu";
+                        }
+
+                        country = databaseManager.getCountryById(countryIdst);
+
                         if(country != null){
 
                             Period period = databaseManager.getPeriodByName(periodSt);

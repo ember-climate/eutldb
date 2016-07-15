@@ -91,6 +91,13 @@
 		</arguments>
 	</execution>
 	<execution>
+		<class_full_name>org.sandbag.programs.Import2012AllowancesCorrectionsForAviation</class_full_name>
+		<arguments>
+			<argument>eutldb</argument>
+			<argument>2012_corrections_for_aviation_allowances.csv</argument>
+		</arguments>
+	</execution>
+	<execution>
 		<class_full_name>org.sandbag.programs.ImportCountriesCoordinates</class_full_name>
 		<arguments>
 			<argument>eutldb</argument>

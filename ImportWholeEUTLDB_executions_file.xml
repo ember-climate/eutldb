@@ -41,11 +41,13 @@
 			<argument>/home/pablo/sandbag/EUTL_data/PowerFlagData.tsv</argument>
 		</arguments>
 	</execution>
+
 	<execution>
-		<class_full_name>org.sandbag.programs.ImportAuctionData</class_full_name>
+		<class_full_name>org.sandbag.programs.ImportOffsets2013Onwards</class_full_name>
 		<arguments>
 			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
-			<argument>/home/pablo/sandbag/EUTL_data/Auction data/AuctionDataFile.tsv</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/Offsets2013Onwards.tsv</argument>
+			<argument>all</argument>
 		</arguments>
 	</execution>
 
@@ -53,7 +55,17 @@
 		<class_full_name>org.sandbag.programs.ImportOffsets2013Onwards</class_full_name>
 		<arguments>
 			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
-			<argument>/home/pablo/sandbag/EUTL_data/Offsets2013Onwards.tsv</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/Offsets2013OnwardsAviation.tsv</argument>
+			<argument>aviation</argument>
+		</arguments>
+	</execution>
+
+	<execution>
+		<class_full_name>org.sandbag.programs.ImportOffsets2013Onwards</class_full_name>
+		<arguments>
+			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/Offsets2013OnwardsInstallations.tsv</argument>
+			<argument>installations</argument>
 		</arguments>
 	</execution>
 
@@ -70,6 +82,13 @@
 		<arguments>
 			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
 			<argument>/home/pablo/sandbag/EUTL_data/LegalCapAviationData.tsv</argument>
+		</arguments>
+	</execution>
+	<execution>
+		<class_full_name>org.sandbag.programs.ImportAuctionData</class_full_name>
+		<arguments>
+			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/Auction data/AuctionDataFile.tsv</argument>
 		</arguments>
 	</execution>
 

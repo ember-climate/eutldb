@@ -29,7 +29,7 @@ public class Import2012AllowancesCorrectionsForAviation implements Executable{
                 DatabaseManager databaseManager = new DatabaseManager(dbFolder);
                 Transaction tx = databaseManager.beginTransaction();
 
-                BufferedWriter writer = new BufferedWriter(new FileWriter(new File("/home/pablo/sandbag/EUTL_data/Import2012AviationCorrectionsErrors.txt")));
+                BufferedWriter writer = new BufferedWriter(new FileWriter(new File("Import2012AviationCorrectionsErrors.txt")));
 
                 BufferedReader reader = new BufferedReader(new FileReader(new File(inputFileSt)));
                 String line;

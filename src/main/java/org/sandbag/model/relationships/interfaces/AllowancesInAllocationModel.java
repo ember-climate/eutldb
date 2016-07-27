@@ -13,6 +13,9 @@ public interface AllowancesInAllocationModel extends RelationshipType {
     String NER_TYPE = "NER";
     String STANDARD_TYPE = "Standard";
     String LABEL = "ALLOWANCES_IN_ALLOCATION";
+    String FREE_ALLOCATION_TYPE_ALL = "all";
+    String FREE_ALLOCATION_TYPE_AVIATION = "aviation";
+    String FREE_ALLOCATION_TYPE_INSTALLATIONS = "installations";
 
     String value = "value";
     String type = "type";

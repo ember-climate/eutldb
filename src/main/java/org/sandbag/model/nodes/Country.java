@@ -3,9 +3,7 @@ package org.sandbag.model.nodes;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.sandbag.model.nodes.interfaces.CountryModel;
-import org.sandbag.model.relationships.Auctioned;
-import org.sandbag.model.relationships.LegalCap;
-import org.sandbag.model.relationships.Offsets2013Onwards;
+import org.sandbag.model.relationships.*;
 import org.sandbag.model.relationships.aircraft_ops.AircraftOperatorCountry;
 import org.sandbag.model.relationships.installations.InstallationCountry;
 
@@ -132,5 +130,42 @@ public class Country implements CountryModel {
         LegalCap legalCap = new LegalCap(node.createRelationshipTo(period.node, new LegalCap(null)));
         legalCap.setAmount(amount);
         legalCap.setSource(source);
+    }
+
+    public void setVerifiedEmissionsEUWide(Period period, double value, String type){
+        VerifiedEmissionsEUWide verifiedEmissionsEUWide = new VerifiedEmissionsEUWide(node.createRelationshipTo(period.node, new VerifiedEmissionsEUWide(null)));
+        verifiedEmissionsEUWide.setValue(value);
+        verifiedEmissionsEUWide.setType(type);
+    }
+
+
+    public void setAllowancesInAllocationEUWide(Period period, double value, String type) {
+        AllowancesInAllocationEUWide allowancesInAllocationEUWide = new AllowancesInAllocationEUWide(node.createRelationshipTo(period.node, new AllowancesInAllocationEUWide(null)));
+        allowancesInAllocationEUWide.setValue(value);
+        allowancesInAllocationEUWide.setType(type);
+    }
+
+    public void setOffsetsEUWide(Period period, double value, String type){
+        OffsetsEUWide offsetsEUWide = new OffsetsEUWide(node.createRelationshipTo(period.node, new OffsetsEUWide(null)));
+        offsetsEUWide.setValue(value);
+        offsetsEUWide.setType(type);
+    }
+
+    public void setLegalCapEUWide(Period period, double value, String type){
+        LegalCapEUWide legalCapEUWide = new LegalCapEUWide(node.createRelationshipTo(period.node, new LegalCapEUWide(null)));
+        legalCapEUWide.setValue(value);
+        legalCapEUWide.setType(type);
+    }
+
+    public void setOffsetEntitlementsEUWide(Period period, double value, String type){
+        OffsetEntitlementEUWide offsetEntitlementEUWide = new OffsetEntitlementEUWide(node.createRelationshipTo(period.node, new OffsetEntitlementEUWide(null)));
+        offsetEntitlementEUWide.setValue(value);
+        offsetEntitlementEUWide.setType(type);
+    }
+
+    public void setAuctionedEUWide(Period period, double value, String type){
+        AuctionedEUWide auctionedEUWide = new AuctionedEUWide(node.createRelationshipTo(period.node, new AuctionedEUWide(null)));
+        auctionedEUWide.setValue(value);
+        auctionedEUWide.setType(type);
     }
 }

@@ -42,14 +42,6 @@
 		</arguments>
 	</execution>
 	<execution>
-		<class_full_name>org.sandbag.programs.ImportAuctionData</class_full_name>
-		<arguments>
-			<argument>eutldb</argument>
-			<argument>AuctionDataFile.tsv</argument>
-		</arguments>
-	</execution>
-
-	<execution>
 		<class_full_name>org.sandbag.programs.ImportOffsets2013Onwards</class_full_name>
 		<arguments>
 			<argument>eutldb</argument>
@@ -91,10 +83,10 @@
 		</arguments>
 	</execution>
 	<execution>
-		<class_full_name>org.sandbag.programs.Import2012AllowancesCorrectionsForAviation</class_full_name>
+		<class_full_name>org.sandbag.programs.ImportAuctionData</class_full_name>
 		<arguments>
 			<argument>eutldb</argument>
-			<argument>2012_corrections_for_aviation_allowances.csv</argument>
+			<argument>AuctionDataFile.tsv</argument>
 		</arguments>
 	</execution>
 	<execution>
@@ -110,8 +102,7 @@
 			<argument>eutldb</argument>
 			<argument>coordinates</argument>
 		</arguments>
-	</execution>
-	<!--
+	</execution>	
 	<execution>
 		<class_full_name>org.sandbag.programs.ExportDBToMegaFiles</class_full_name>
 		<arguments>
@@ -121,5 +112,13 @@
 			<argument>OffsetEntitlementsMegaFile.tsv</argument>
 		</arguments>
 	</execution>
+	<execution>
+		<class_full_name>org.sandbag.programs.Import2012AllowancesCorrectionsForAviation</class_full_name>
+		<arguments>
+			<argument>eutldb</argument>
+			<argument>2012_corrections_for_aviation_allowances.csv</argument>
+		</arguments>
+	</execution>
+<!--
 	-->
 </scheduled_executions>

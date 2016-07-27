@@ -82,7 +82,7 @@ public class ImportAuctionData implements Executable{
                         Country country = null;
 
                         if(countryIdst.equals("ZZ")){
-                            countryIdst = "Eu";
+                            countryIdst = "EU";
                         }
 
                         country = databaseManager.getCountryById(countryIdst);

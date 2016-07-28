@@ -92,6 +92,34 @@
 		</arguments>
 	</execution>
 
+	<execution>
+		<class_full_name>org.sandbag.programs.ImportCountriesCoordinates</class_full_name>
+		<arguments>
+			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/countries-coordinates.tsv</argument>			
+		</arguments>
+	</execution>	
+	<execution>
+		<class_full_name>org.sandbag.programs.ImportGeocodingInfo</class_full_name>
+		<arguments>
+			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/coordinates</argument>
+		</arguments>
+	</execution>	
+	<execution>
+		<class_full_name>org.sandbag.programs.Import2012AllowancesCorrectionsForAviation</class_full_name>
+		<arguments>
+			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
+			<argument>/home/pablo/sandbag/EUTL_data/2012_corrections_for_aviation_allowances.csv</argument>
+		</arguments>
+	</execution>
+	<execution>
+		<class_full_name>org.sandbag.programs.PrecomputeEUWideValues</class_full_name>
+		<arguments>
+			<argument>/home/pablo/sandbag/EUTL_data/eutldb</argument>
+		</arguments>
+	</execution>
+
 <!-- 
 	<execution>
 		<class_full_name>org.sandbag.programs.ExportDBToMegaFiles</class_full_name>

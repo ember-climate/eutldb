@@ -119,6 +119,12 @@
 			<argument>2012_corrections_for_aviation_allowances.csv</argument>
 		</arguments>
 	</execution>
+	<execution>
+		<class_full_name>org.sandbag.programs.PrecomputeEUWideValues</class_full_name>
+		<arguments>
+			<argument>eutldb</argument>
+		</arguments>
+	</execution>
 <!--
 	-->
 </scheduled_executions>

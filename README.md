@@ -13,9 +13,9 @@ Prototype of the new EUTL graph database
 
 ## [Next resources to be integrated](/docs/NextResourcesToBeIntegrated.md)
 
-## Data browser online
+## EU ETS Data Dashboard online
 
-The current address is: [http://sandbag-climate.github.io/EUTLdbDashboard.html](http://sandbag-climate.github.io/EUTLdbDashboard.html)
+The current address is: [http://sandbag-climate.github.io/EU_ETS_Dashboard.html](http://sandbag-climate.github.io/EU_ETS_Dashboard.html)
 
 ## [How to import the database](/docs/HowToImportTheDatabase.md)
 

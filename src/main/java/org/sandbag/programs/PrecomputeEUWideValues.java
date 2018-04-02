@@ -22,7 +22,7 @@ public class PrecomputeEUWideValues implements Executable {
 
     @Override
     public void execute(List<String> args) {
-
+        main(args.toArray(new String[0]));
     }
 
     public static void main(String[] args){

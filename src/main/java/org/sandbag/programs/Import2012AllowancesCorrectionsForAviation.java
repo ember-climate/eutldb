@@ -57,7 +57,9 @@ public class Import2012AllowancesCorrectionsForAviation implements Executable{
                     if(uniqueCodeComissionSt.equals("8352")){
                         //bug with duplicated airline record, this is a specific fix for it
                         aircraftOperator = databaseManager.getAircraftOperatorById("GB202850");
-
+                    }else if(uniqueCodeComissionSt.equals("27210")){
+                        //bug with duplicated airline record, this is a specific fix for it
+                        aircraftOperator = databaseManager.getAircraftOperatorById("GB201549");
                     }else if(uniqueCodeComissionSt.equals("32631")){
                         //bug with duplicated airline record, this is a specific fix for it
                         aircraftOperator = databaseManager.getAircraftOperatorById("NL202833");

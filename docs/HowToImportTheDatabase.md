@@ -99,6 +99,16 @@ The follow example shows the different programs that must be executed in order t
 </scheduled_executions>
 ```
 
+### 6. Possible problems
+
+Some installation or aircraft operator IDs have double entries on the EUTL website. This is usually the case when a company was shut down and then launched with same/similar name at the same address etc. In such cases a fix has to be implemented in _(src/main/java/org/sandbag/programs/Import2012AllowancesCorrectionsForAviation.java)_ file. The fix has to have the following structure:
+```
+if(uniqueCodeComissionSt.equals("8352")){
+	//bug with duplicated airline record, this is a specific fix for it
+	aircraftOperator = databaseManager.getAircraftOperatorById("GB202850");
+}
+```
+So for a specific unique code, the installation or aircraft operator has to be retrieved by the ID.
 
 
 
